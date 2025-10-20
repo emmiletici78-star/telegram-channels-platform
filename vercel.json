@@ -4,17 +4,6 @@
   "github": {
     "silent": true
   },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    }
-  ],
-  "functions": {},
-  "builds": [
-    {
-      "src": "public/**/*",
-      "use": "@vercel/static"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
