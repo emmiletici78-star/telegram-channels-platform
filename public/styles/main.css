@@ -1,0 +1,100 @@
+:root{
+  --primary:#229ed9;
+  --primary-dark:#176b99;
+  --card-bg:#e9f5fb;
+  --muted:#555;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+  padding:0 1rem 2rem;
+  background:#6ed8a3;
+  color:#222;
+}
+header{
+  padding:1rem 0;
+  text-align:center;
+}
+.header-content{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.8rem;
+}
+.telegram-logo{ width:40px; height:40px; }
+header h1{ margin:0; font-size:1.4rem; }
+main{ max-width:1100px; margin:0 auto; padding-top:1rem; }
+
+/* auth */
+#auth-section{ text-align:center; margin-bottom:1rem; }
+#auth-section input{ padding:0.45rem; margin:0.25rem; border-radius:6px; border:1px solid #ddd; width:200px; }
+#auth-section button{ background:var(--primary); color:#fff; border:none; padding:0.45rem 0.8rem; border-radius:6px; cursor:pointer; }
+
+/* categories */
+.categories-menu{ display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem; margin-top:0.6rem; }
+.cat-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  padding:0.45rem 0.9rem;
+  font-weight:600;
+  cursor:pointer;
+}
+.cat-btn.active, .cat-btn:hover{ background:var(--primary-dark); }
+
+/* grid for first 6 */
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 900px) {
+  .channels-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .channels-grid { grid-template-columns: 1fr; }
+}
+
+/* card */
+.channel-card{
+  display:flex;
+  gap:0.8rem;
+  align-items:flex-start;
+  background:var(--card-bg);
+  border-radius:8px;
+  padding:0.8rem;
+  box-shadow:0 1px 4px rgba(34,158,217,0.06);
+}
+.channel-logo{
+  width:56px;
+  height:56px;
+  border-radius:8px;
+  object-fit:cover;
+  border:2px solid var(--primary);
+  background:#fff;
+}
+.channel-info{ flex:1; }
+.channel-title{ font-weight:700; margin-bottom:0.2rem; }
+.channel-desc{ color:var(--muted); font-size:0.95rem; margin-bottom:0.4rem; }
+.channel-link{ color:var(--primary); text-decoration:none; font-weight:600; }
+.channel-link:hover{ text-decoration:underline; }
+
+/* delete */
+.delete-btn{
+  background:#e74c3c;
+  color:#fff;
+  border:none;
+  padding:0.35rem 0.6rem;
+  border-radius:6px;
+  cursor:pointer;
+  margin-left:0.5rem;
+}
+.delete-btn:hover{ background:#c0392b; }
+
+/* add channel hints */
+.hint{ font-size:0.9rem; color:var(--muted); margin-top:0.4rem; }
+
+/* footer */
+footer{ text-align:center; margin-top:2rem; color:#666; font-size:0.9rem; }
