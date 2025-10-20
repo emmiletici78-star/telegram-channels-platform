@@ -106,6 +106,16 @@ function showCategory(category) {
   currentCategory = category;
   updateActiveCategoryButtons();
   renderChannelsByCategory();
+  
+  // Change background based on category
+  const body = document.body;
+  // Remove all category classes
+  body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo)-bg\b/g, '');
+  
+  // Add new category class
+  if (category !== 'all') {
+    body.classList.add(category + '-bg');
+  }
 }
 
 function updateActiveCategoryButtons() {
