@@ -232,4 +232,7 @@ function validateEmail(email) {
 }
 
 // initialize
-showUser();
+document.addEventListener('DOMContentLoaded', function() {
+  showUser();
+  showCategory('all'); // Show all channels on load
+});
