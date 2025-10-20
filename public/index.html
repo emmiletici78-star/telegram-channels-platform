@@ -28,43 +28,49 @@
 
   <section id="auth-section">
     <div id="register-form">
-      <h2>Creare cont</h2>
-      <input type="email" id="reg-email" placeholder="Email" />
-      <input type="password" id="reg-password" placeholder="Parolă" />
-      <button onclick="register()">Înregistrează-te</button>
+      <h2>🆕 Creează cont nou</h2>
+      <input type="email" id="reg-email" placeholder="📧 Adresa de email" />
+      <input type="password" id="reg-password" placeholder="🔒 Parolă sigură" />
+      <button onclick="register()">✨ Înregistrează-te gratuit</button>
     </div>
 
     <div id="login-form">
-      <h2>Autentificare</h2>
-      <input type="email" id="login-email" placeholder="Email" />
-      <input type="password" id="login-password" placeholder="Parolă" />
-      <button onclick="login()">Autentifică-te</button>
+      <h2>🔐 Conectează-te</h2>
+      <input type="email" id="login-email" placeholder="📧 Email-ul tău" />
+      <input type="password" id="login-password" placeholder="🔒 Parola ta" />
+      <button onclick="login()">🚀 Intră în cont</button>
     </div>
 
     <div id="user-info" style="display:none;">
-      <p>Bun venit, <span id="current-user"></span>!</p>
-      <button onclick="logout()">Logout</button>
+      <p style="font-size:1.1rem; color:var(--primary-dark); font-weight:600;">
+        👋 Bun venit, <span id="current-user" style="color:var(--primary);"></span>!
+      </p>
+      <button onclick="logout()" style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); margin-top:0.5rem;">
+        👋 Deconectează-te
+      </button>
     </div>
   </section>
 
   <main>
     <section id="add-channel-section" style="display:none; margin-bottom:1.5rem;">
-      <h2>Adaugă canal Telegram</h2>
-      <input type="text" id="channel-title" placeholder="Titlu canal" />
-      <input type="text" id="channel-desc" placeholder="Descriere" />
-      <input type="url" id="channel-url" placeholder="Link Telegram (https://t.me/...)" />
-      <input type="url" id="channel-logo" placeholder="Link logo (opțional)" />
+      <h2>✨ Adaugă canal Telegram</h2>
+      <input type="text" id="channel-title" placeholder="🏷️ Titlu canal (ex: Crypto România)" />
+      <input type="text" id="channel-desc" placeholder="📝 Descriere scurtă și atractivă" />
+      <input type="url" id="channel-url" placeholder="🔗 Link Telegram (https://t.me/numele-canalului)" />
+      <input type="url" id="channel-logo" placeholder="🖼️ Link logo/imagine (opțional)" />
       <select id="channel-category" multiple size="7">
-        <option value="crypto">Crypto</option>
-        <option value="gaming">Gaming</option>
-        <option value="adult">ADULT (+18)</option>
-        <option value="stiri">Știri</option>
-        <option value="retete">Rețete</option>
-        <option value="tehnologie">Tehnologie</option>
-        <option value="promo">Promo</option>
+        <option value="crypto">💰 Crypto</option>
+        <option value="gaming">🎮 Gaming</option>
+        <option value="adult">🔞 ADULT (+18)</option>
+        <option value="stiri">📰 Știri</option>
+        <option value="retete">🍳 Rețete</option>
+        <option value="tehnologie">💻 Tehnologie</option>
+        <option value="promo">🎁 Promo</option>
       </select>
-      <button onclick="addChannel()">Adaugă canal</button>
-      <div class="hint">Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii.</div>
+      <button onclick="addChannel()">🚀 Adaugă canalul</button>
+      <div class="hint">
+        💡 <strong>Sfat:</strong> Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii pentru canalul tău.
+      </div>
     </section>
 
     <section id="channels-list">
