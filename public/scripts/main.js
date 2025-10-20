@@ -1,75 +1,270 @@
 // Default channels (category is an array)
 const defaultChannels = [
-  // CRYPTO CHANNELS (50)
+  // CRYPTO CHANNELS (38) - Real channels with massive member counts
   {
-    title: "Crypto România Official",
-    desc: "Cea mai mare comunitate crypto din România cu analize zilnice.",
-    url: "https://t.me/cryptoromania_official",
+    title: "Money Channel",
+    desc: "Canal cu 5.136.824 membri - ultimele știri financiare",
+    url: "https://t.me/money",
     logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
     category: ["crypto"]
   },
   {
-    title: "Bitcoin Romania",
-    desc: "Totul despre Bitcoin - știri, analize, trading.",
-    url: "https://t.me/bitcoinromania",
-    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968260.png",
+    title: "Just Channel",
+    desc: "Canal cu 4.803.558 membri - discuții despre investiții",
+    url: "https://t.me/just",
+    logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
     category: ["crypto"]
   },
   {
-    title: "Ethereum România",
-    desc: "Comunitatea română dedicată Ethereum și DeFi.",
-    url: "https://t.me/ethereumromania",
-    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
-    category: ["crypto"]
-  },
-  {
-    title: "Crypto Signals RO",
-    desc: "Semnale de trading crypto gratuite pentru piața românească.",
-    url: "https://t.me/cryptosignalsro",
+    title: "Venture Capital",
+    desc: "Canal cu 3.565.116 membri - oportunități de investiții VC",
+    url: "https://t.me/venture",
     logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
     category: ["crypto"]
   },
   {
-    title: "NFT România",
-    desc: "Discuții despre NFT-uri și arte digitale românești.",
-    url: "https://t.me/nftromania",
-    logo: "https://cdn-icons-png.flaticon.com/512/8099/8099231.png",
-    category: ["crypto"]
-  },
-  // More crypto channels...
-  {
-    title: "Binance România",
-    desc: "Grupul oficial românesc pentru utilizatorii Binance.",
-    url: "https://t.me/binanceromania",
-    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    title: "Cheat Kott",
+    desc: "Canal cu 3.881.442 membri - strategii și hack-uri trading",
+    url: "https://t.me/cheatkott",
+    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968260.png",
     category: ["crypto"]
   },
   {
-    title: "DeFi România",
-    desc: "Învață despre finanțele descentralizate și yield farming.",
-    url: "https://t.me/defiromania",
+    title: "Trade Channel",
+    desc: "Canal cu 3.464.821 membri - semnale de trading premium",
+    url: "https://t.me/trade",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Alex No Sleep",
+    desc: "Canal cu 3.312.553 membri - analize crypto 24/7",
+    url: "https://t.me/alexnosleep",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Benefactor 0101",
+    desc: "Canal cu 2.382.433 membri - sfaturi premium investiții",
+    url: "https://t.me/benefactor0101",
+    logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Insider Politic",
+    desc: "Canal cu 2.931.308 membri - politică și economie insider",
+    url: "https://t.me/insiderr_politic",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Galactica Network",
+    desc: "Canal cu 1.578.094 membri - rețea crypto premium",
+    url: "https://t.me/galacticanetwork",
     logo: "https://cdn-icons-png.flaticon.com/512/8115/8115728.png",
     category: ["crypto"]
   },
   {
-    title: "Altcoins România",
-    desc: "Discuții despre altcoin-uri și gem-uri ascunse.",
-    url: "https://t.me/altcoinsromania",
+    title: "Cumber Tech",
+    desc: "Canal cu 1.362.965 membri - tehnologie și crypto",
+    url: "https://t.me/cumbertech",
+    logo: "https://cdn-icons-png.flaticon.com/512/1304/1304068.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Voice to V",
+    desc: "Canal cu 1.299.669 membri - voice trading signals",
+    url: "https://t.me/voicetov",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Movie Channel",
+    desc: "Canal cu 1.295.089 membri - entertainment și crypto",
+    url: "https://t.me/movie",
+    logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Crypto Sayer",
+    desc: "Canal cu 1.209.240 membri - predicții și analize crypto",
+    url: "https://t.me/cryptosayer",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
+    category: ["crypto"]
+  },
+  {
+    title: "AI Post",
+    desc: "Canal cu 1.085.808 membri - AI și crypto intersection",
+    url: "https://t.me/aipost",
+    logo: "https://cdn-icons-png.flaticon.com/512/8099/8099231.png",
+    category: ["crypto"]
+  },
+  {
+    title: "CoinGraph News",
+    desc: "Canal cu 1.057.208 membri - știri crypto actualizate",
+    url: "https://t.me/coingraphnews",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Coin Dot News Ann",
+    desc: "Canal cu 869.053 membri - anunțuri importante crypto",
+    url: "https://t.me/coindotnewsann",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Pump Crypto Bets",
+    desc: "Canal cu 722.787 membri - pump signals și bets",
+    url: "https://t.me/pumpcryptobets",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Cryptex Library",
+    desc: "Canal cu 684.241 membri - biblioteca crypto educațională",
+    url: "https://t.me/cryptex_library",
+    logo: "https://cdn-icons-png.flaticon.com/512/8115/8115728.png",
+    category: ["crypto"]
+  },
+  {
+    title: "America News Crypto",
+    desc: "Canal cu 580.716 membri - știri crypto din America",
+    url: "https://t.me/america_news_crypto",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    category: ["crypto"]
+  },
+  {
+    title: "American Crypto Channel",
+    desc: "Canal cu 586.681 membri - comunitatea crypto americană",
+    url: "https://t.me/americancryptochannel",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Crypto Miami",
+    desc: "Canal cu 565.193 membri - crypto scene din Miami",
+    url: "https://t.me/crypto_miami",
+    logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Watcher Guru",
+    desc: "Canal cu 549.855 membri - market watching și analize",
+    url: "https://t.me/watcherguru",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Alpha Trade News",
+    desc: "Canal cu 519.863 membri - știri trading premium alpha",
+    url: "https://t.me/alphattradenews",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Crypto Daily Headline",
+    desc: "Canal cu 512.247 membri - headline-uri crypto zilnice",
+    url: "https://t.me/cryptodailyheadline",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Crypto Mountains",
+    desc: "Canal cu 512.136 membri - high-level crypto discussions",
+    url: "https://t.me/crypto_mountains",
+    logo: "https://cdn-icons-png.flaticon.com/512/8115/8115728.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Cryptoz",
+    desc: "Canal cu 486.651 membri - tot despre lumea crypto",
+    url: "https://t.me/cryptoz",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
+    category: ["crypto"]
+  },
+  {
+    title: "The Yes Coin News",
+    desc: "Canal cu 484.123 membri - știri despre Yes Coin",
+    url: "https://t.me/theyescoin_news",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001982.png",
     category: ["crypto"]
   },
   {
-    title: "Mining România",
-    desc: "Tot ce trebuie să știi despre mining crypto în România.",
-    url: "https://t.me/miningromania",
-    logo: "https://cdn-icons-png.flaticon.com/512/2704/2704061.png",
+    title: "Gamedva Com",
+    desc: "Canal cu 462.227 membri - gaming meets crypto",
+    url: "https://t.me/gamedvacom",
+    logo: "https://cdn-icons-png.flaticon.com/512/8099/8099231.png",
     category: ["crypto"]
   },
   {
-    title: "Blockchain România",
-    desc: "Tehnologia blockchain explicată simplu în română.",
-    url: "https://t.me/blockchainromania",
+    title: "Crypto Retro",
+    desc: "Canal cu 454.444 membri - retrospective și analize crypto",
+    url: "https://t.me/crypto_retro",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Evan Luthra VIP",
+    desc: "Canal cu 454.006 membri - insights VIP de la Evan Luthra",
+    url: "https://t.me/evanluthravip",
+    logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Thing IO",
+    desc: "Canal cu 449.717 membri - IoT și blockchain technology",
+    url: "https://t.me/thing_io",
     logo: "https://cdn-icons-png.flaticon.com/512/1304/1304068.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Yousef Trader Official",
+    desc: "Canal cu 438.312 membri - trading oficial Yousef",
+    url: "https://t.me/yousefftraderofficial",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Telo News",
+    desc: "Canal cu 403.598 membri - știri rapide crypto",
+    url: "https://t.me/telonews",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Crypto PBM",
+    desc: "Canal cu 358.458 membri - Private Blockchain Members",
+    url: "https://t.me/cryptopbm",
+    logo: "https://cdn-icons-png.flaticon.com/512/8115/8115728.png",
+    category: ["crypto"]
+  },
+  {
+    title: "CoinMarketCap Announcements",
+    desc: "Canal cu 317.997 membri - anunțuri oficiale CMC",
+    url: "https://t.me/coinmarketcapannouncements",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Crypto Pumps P",
+    desc: "Canal cu 289.904 membri - pump signals premium",
+    url: "https://t.me/crypto_pumps_p",
+    logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Jacob Crypto Clan Discord",
+    desc: "Canal cu 244.184 membri - clan crypto Jacob",
+    url: "https://t.me/jacobcryptoclandiscord",
+    logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
+    category: ["crypto"]
+  },
+  {
+    title: "Bitcoin Official",
+    desc: "Canal cu 236.034 membri - canalul oficial Bitcoin",
+    url: "https://t.me/bitcoin",
+    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968260.png",
     category: ["crypto"]
   },
 
@@ -145,26 +340,341 @@ const defaultChannels = [
     category: ["gaming"]
   },
 
-  // ADULT CHANNELS (50) - Keep it tasteful
+  // ADULT CHANNELS (45) - Real channels with member counts
   {
-    title: "Adult Community RO",
-    desc: "Discuții mature pentru adulți +18 din România.",
-    url: "https://t.me/adultcommunityro",
+    title: "Alexis Mucci Official",
+    desc: "Canal oficial cu 321.77k membri - conținut exclusiv",
+    url: "https://t.me/alexismucciofficial",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
-    title: "Dating România",
-    desc: "Platforma de dating și întâlniri pentru românii singuri.",
-    url: "https://t.me/datingromania",
+    title: "Face Switcher",
+    desc: "Canal cu 285.49k membri - tehnologii AI și deepfake",
+    url: "https://t.me/faceswitcher",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Anime Mania XX",
+    desc: "Canal cu 108.81k membri - conținut anime pentru adulți",
+    url: "https://t.me/animemaniaxx",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Khyati Shree Channel",
+    desc: "Canal cu 99.47k membri - conținut exclusiv",
+    url: "https://t.me/khyatishreechannel",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Yailin La Mas Viral",
+    desc: "Canal cu 79.73k membri - conținut viral și exclusiv",
+    url: "https://t.me/yailin_la_mas_viral_yailinlamass",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Karel Ion Li",
+    desc: "Canal cu 74.3k membri - conținut premium",
+    url: "https://t.me/karelionli",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Rubi Rose Tele",
+    desc: "Canal cu 64.88k membri - conținut exclusiv",
+    url: "https://t.me/rubirosetele",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Utopian Leaks",
+    desc: "Canal cu 62.75k membri - leaks și conținut premium",
+    url: "https://t.me/utopianleaks",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Badoo Com",
+    desc: "Canal cu 60.99k membri - dating și întâlniri",
+    url: "https://t.me/badoocom",
     logo: "https://cdn-icons-png.flaticon.com/512/1077/1077035.png",
     category: ["adult"]
   },
   {
-    title: "Lifestyle Adult RO",
-    desc: "Stil de viață, relații și sfaturi pentru adulți.",
-    url: "https://t.me/lifestyleadultro",
+    title: "Tinder RU",
+    desc: "Canal cu 60.08k membri - dating și match-uri",
+    url: "https://t.me/tinderru",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077035.png",
+    category: ["adult"]
+  },
+  {
+    title: "Allinika PH",
+    desc: "Canal cu 60.05k membri - conținut premium",
+    url: "https://t.me/allinika_ph",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Rachel Cook",
+    desc: "Canal cu 54.08k membri - conținut exclusiv model",
+    url: "https://t.me/itsrachelc00k",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Best Chat Group",
+    desc: "Canal cu 44.63k membri - grupuri de chat premium",
+    url: "https://t.me/best_chat_group",
     logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "Voulez J Fans Only",
+    desc: "Canal cu 40.69k membri - conținut premium exclusive",
+    url: "https://t.me/voulezjfansonly",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Grace Charis",
+    desc: "Canal cu 38.32k membri - conținut exclusiv golf model",
+    url: "https://t.me/grace_charis_itsgracecharis",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Yus Lopez",
+    desc: "Canal cu 34.19k membri - conținut premium fitness",
+    url: "https://t.me/yus_lopez_yuslopez",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Joselis Boli",
+    desc: "Canal cu 22.71k membri - conținut exclusiv model",
+    url: "https://t.me/joselisboli",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Bronte B",
+    desc: "Canal cu 20.15k membri - conținut premium",
+    url: "https://t.me/bronteb",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "OnlyFans Leak VIP",
+    desc: "Canal cu 17.14k membri - leaks premium content",
+    url: "https://t.me/onlyfansleakvip",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Beast Leaks",
+    desc: "Canal cu 15.57k membri - content leaks premium",
+    url: "https://t.me/beastleaksss",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "TikTok Girls",
+    desc: "Canal cu 14.51k membri - TikTok content premium",
+    url: "https://t.me/tiktokgurls",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Cameltoe OnlyFans",
+    desc: "Canal cu 14.43k membri - conținut premium specific",
+    url: "https://t.me/cameltoe_only_fans",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Thai Friendly",
+    desc: "Canal cu 14.18k membri - dating Asia premium",
+    url: "https://t.me/thaifriendly",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077035.png",
+    category: ["adult"]
+  },
+  {
+    title: "Olivia Casta Fans",
+    desc: "Canal cu 13.72k membri - conținut exclusiv model",
+    url: "https://t.me/olivia_casta_fans",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Jacky's Lobby",
+    desc: "Canal cu 12.89k membri - chat premium lounge",
+    url: "https://t.me/jackys_lobby",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "Corinna Kopf Leaks",
+    desc: "Canal cu 11.82k membri - content leaks premium",
+    url: "https://t.me/corinnakopfleaks0",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Emily Black Leaks",
+    desc: "Canal cu 11.82k membri - content leaks exclusive",
+    url: "https://t.me/emilyblackleakss",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Bella Thorne Leaks",
+    desc: "Canal cu 11.82k membri - celebrity content leaks",
+    url: "https://t.me/bellathorneleaks1",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Naughty Dream",
+    desc: "Canal cu 11.3k membri - conținut premium pentru adulți",
+    url: "https://t.me/naughtydream",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Top Models VIP",
+    desc: "Canal cu 11.23k membri - modele premium exclusive",
+    url: "https://t.me/topmodels_vip",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "OnlyFans Premium 4 Free",
+    desc: "Canal cu 10.57k membri - conținut premium gratuit",
+    url: "https://t.me/onlyfanspremium4free",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Rebelote TG",
+    desc: "Canal cu 10.4k membri - conținut premium rebel",
+    url: "https://t.me/rebelotetg",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "NSFW Premium",
+    desc: "Canal cu 10.12k membri - conținut NSFW premium",
+    url: "https://t.me/nsfw_premium",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Gooning Paradise",
+    desc: "Canal cu 9.94k membri - comunitate premium adults",
+    url: "https://t.me/gooningparadise",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "RSLD Forever",
+    desc: "Canal cu 118.156k membri - conținut premium vast",
+    url: "https://t.me/rsldforever",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Premium Group VIP",
+    desc: "Canal cu 52.327k membri - grup premium exclusiv",
+    url: "https://t.me/+8m2N5-BokkZjNDk9",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "All Internet Girls",
+    desc: "Canal cu 36.087k membri - colecție modele internet",
+    url: "https://t.me/all_internet_girls",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Eman Fan Base",
+    desc: "Canal cu 30.962k membri - fan club premium",
+    url: "https://t.me/emanfanbase",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Webcam Hunks",
+    desc: "Canal cu 26.343k membri - modele webcam masculine",
+    url: "https://t.me/webcam_hunks",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Elite Private Group",
+    desc: "Canal cu 25.694k membri - grup privat elite",
+    url: "https://t.me/+l4XR0WJ-_lYxOGQ1",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "Buns Shaking",
+    desc: "Canal cu 25.686k membri - conținut premium specific",
+    url: "https://t.me/Buns_shaking",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Nude Center Leaks",
+    desc: "Canal cu 24.707k membri - leaks premium center",
+    url: "https://t.me/nudecenterleaks",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "VIP Secret Group",
+    desc: "Canal cu 18.840k membri - grup secret VIP",
+    url: "https://t.me/+lv4g_WmUdYE1YTE0",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "PornHub Sex Videos",
+    desc: "Canal cu 11.432k membri - conținut video premium",
+    url: "https://t.me/PornHubb_SexVideos_PornVideos",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "My Super Hot",
+    desc: "Canal cu 11.003k membri - conținut premium hot",
+    url: "https://t.me/mysuperhot",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
+    category: ["adult"]
+  },
+  {
+    title: "Elite Premium Chat",
+    desc: "Canal cu 9.905k membri - chat premium elite",
+    url: "https://t.me/+zNiwVFYIEL03ODYy",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "Exclusive VIP Group",
+    desc: "Canal cu 8.570k membri - grup exclusiv VIP",
+    url: "https://t.me/+BSdnIuEOIuRlZWFl",
+    logo: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+    category: ["adult"]
+  },
+  {
+    title: "OnlyFans TGM",
+    desc: "Canal cu 37.067k membri - OnlyFans telegram premium",
+    url: "https://t.me/OnlyFansTGM",
+    logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
 
