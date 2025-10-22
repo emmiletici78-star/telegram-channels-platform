@@ -830,8 +830,8 @@ const defaultChannels = [
 // Continue adding more channels to reach 50 for each category...
 
 function getChannels() {
-  const saved = localStorage.getItem('channels');
-  return saved ? JSON.parse(saved) : defaultChannels.slice();
+  // Always return the updated defaultChannels instead of localStorage
+  return defaultChannels.slice();
 }
 function saveChannels(channels) {
   localStorage.setItem('channels', JSON.stringify(channels));
