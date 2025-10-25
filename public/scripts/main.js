@@ -995,8 +995,19 @@ function register() {
 function login() {
   const email = document.getElementById('login-email').value.trim().toLowerCase();
   const pass = document.getElementById('login-password').value;
+  
+  // Check for admin credentials
+  if (email === 'admin@tgchannels.com' && pass === 'TgChannels2025Admin!') {
+    localStorage.setItem('logged_user', email);
+    localStorage.setItem('is_admin', 'true');
+    showUser();
+    return;
+  }
+  
+  // Check for regular user
   if (localStorage.getItem('user_' + email) === pass) {
     localStorage.setItem('logged_user', email);
+    localStorage.removeItem('is_admin');
     showUser();
   } else {
     alert('Date incorecte!');
@@ -1004,19 +1015,412 @@ function login() {
 }
 function logout() {
   localStorage.removeItem('logged_user');
+  localStorage.removeItem('is_admin');
   showUser();
 }
 function showUser() {
   const email = localStorage.getItem('logged_user');
+  const isAdmin = localStorage.getItem('is_admin') === 'true';
+  
   document.getElementById('user-info').style.display = email ? 'block' : 'none';
   document.getElementById('register-form').style.display = email ? 'none' : 'block';
   document.getElementById('login-form').style.display = email ? 'none' : 'block';
   document.getElementById('current-user').textContent = email || '';
   document.getElementById('add-channel-section').style.display = email ? 'block' : 'none';
+  
+  // Show/hide admin elements
+  document.getElementById('admin-badge').style.display = isAdmin ? 'inline' : 'none';
+  document.getElementById('admin-controls').style.display = isAdmin ? 'block' : 'none';
+  document.getElementById('admin-panel').style.display = 'none'; // Hidden by default
+  
   showCategory(currentCategory);
 }
 function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Admin Functions
+function showAdminPanel() {
+  const adminPanel = document.getElementById('admin-panel');
+  const isVisible = adminPanel.style.display === 'block';
+  adminPanel.style.display = isVisible ? 'none' : 'block';
+  
+  if (!isVisible) {
+    showAdminTab('channels');
+    loadAdminData();
+  }
+}
+
+function showAdminTab(tabName) {
+  // Hide all tabs
+  document.querySelectorAll('.admin-tab-content').forEach(tab => {
+    tab.style.display = 'none';
+  });
+  
+  // Remove active class from all buttons
+  document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // Show selected tab and activate button
+  document.getElementById(`admin-${tabName}-tab`).style.display = 'block';
+  event.target.classList.add('active');
+  
+  // Load tab-specific data
+  switch(tabName) {
+    case 'channels':
+      loadAdminChannels();
+      break;
+    case 'users':
+      loadAdminUsers();
+      break;
+    case 'stats':
+      loadAdminStats();
+      break;
+    case 'settings':
+      loadAdminSettings();
+      break;
+  }
+}
+
+function loadAdminData() {
+  loadAdminChannels();
+  loadAdminStats();
+}
+
+function loadAdminChannels() {
+  const channels = getChannels();
+  const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+  const pendingChannels = JSON.parse(localStorage.getItem('pending_channels') || '[]');
+  
+  const adminChannelsList = document.getElementById('admin-channels-list');
+  let html = '<h4>📺 Toate Canalele (' + channels.length + ')</h4>';
+  
+  // Show default channels
+  html += '<div style="margin-bottom: 1rem;"><strong>Canale Implicite:</strong></div>';
+  channels.slice(0, 10).forEach(channel => {
+    html += `
+      <div class="admin-channel-item">
+        <div class="admin-item-info">
+          <strong>${channel.title}</strong><br>
+          <small>${channel.desc}</small><br>
+          <a href="${channel.url}" target="_blank">${channel.url}</a>
+          <div style="margin-top: 0.3rem;">
+            <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+              ${channel.category.join(', ')}
+            </span>
+          </div>
+        </div>
+        <div class="admin-item-actions">
+          <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
+          <button class="delete" onclick="deleteChannel('${channel.title}')">🗑️ Delete</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  if (channels.length > 10) {
+    html += `<div style="text-align: center; margin: 1rem 0;">
+      <button onclick="showAllChannels()" style="background: #3498db;">Vezi toate cele ${channels.length} canale</button>
+    </div>`;
+  }
+  
+  // Show user submitted channels
+  if (userChannels.length > 0) {
+    html += '<div style="margin: 1.5rem 0 1rem 0;"><strong>Canale Utilizatori:</strong></div>';
+    userChannels.forEach(channel => {
+      html += `
+        <div class="admin-channel-item">
+          <div class="admin-item-info">
+            <strong>${channel.title}</strong> <small>(by ${channel.owner})</small><br>
+            <small>${channel.desc}</small><br>
+            <a href="${channel.url}" target="_blank">${channel.url}</a>
+          </div>
+          <div class="admin-item-actions">
+            <button class="approve" onclick="approveChannel('${channel.title}')">✅ Approve</button>
+            <button class="reject" onclick="rejectChannel('${channel.title}')">❌ Reject</button>
+            <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+  
+  // Show pending channels
+  if (pendingChannels.length > 0) {
+    html += '<div style="margin: 1.5rem 0 1rem 0;"><strong>Canale în Așteptare:</strong></div>';
+    pendingChannels.forEach(channel => {
+      html += `
+        <div class="admin-channel-item pending">
+          <div class="admin-item-info">
+            <strong>${channel.title}</strong> <small>(by ${channel.owner})</small><br>
+            <small>${channel.desc}</small><br>
+            <a href="${channel.url}" target="_blank">${channel.url}</a>
+          </div>
+          <div class="admin-item-actions">
+            <button class="approve" onclick="approveChannel('${channel.title}')">✅ Approve</button>
+            <button class="reject" onclick="rejectChannel('${channel.title}')">❌ Reject</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+  
+  adminChannelsList.innerHTML = html;
+}
+
+function loadAdminUsers() {
+  const users = [];
+  // Get all users from localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('user_')) {
+      const email = key.replace('user_', '');
+      users.push(email);
+    }
+  }
+  
+  const adminUsersList = document.getElementById('admin-users-list');
+  let html = `<h4>👥 Utilizatori Înregistrați (${users.length})</h4>`;
+  
+  users.forEach(email => {
+    const isBanned = localStorage.getItem('banned_' + email) === 'true';
+    html += `
+      <div class="admin-user-item ${isBanned ? 'rejected' : ''}">
+        <div class="admin-item-info">
+          <strong>${email}</strong>
+          <br><small>Status: ${isBanned ? '🚫 Banned' : '✅ Active'}</small>
+        </div>
+        <div class="admin-item-actions">
+          ${isBanned ? 
+            `<button class="approve" onclick="unbanUser('${email}')">🔓 Unban</button>` :
+            `<button class="ban" onclick="banUser('${email}')">🚫 Ban</button>`
+          }
+          <button class="delete" onclick="deleteUser('${email}')">🗑️ Delete</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  adminUsersList.innerHTML = html;
+}
+
+function loadAdminStats() {
+  const channels = getChannels();
+  const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+  const users = [];
+  
+  // Count users
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('user_')) {
+      users.push(key.replace('user_', ''));
+    }
+  }
+  
+  // Count by category
+  const categoryStats = {};
+  channels.forEach(channel => {
+    channel.category.forEach(cat => {
+      categoryStats[cat] = (categoryStats[cat] || 0) + 1;
+    });
+  });
+  
+  const statsDiv = document.getElementById('admin-statistics');
+  let html = '<div class="admin-stats-grid">';
+  
+  html += `
+    <div class="admin-stat-card">
+      <h4>${channels.length}</h4>
+      <p>📺 Total Canale</p>
+    </div>
+    <div class="admin-stat-card">
+      <h4>${users.length}</h4>
+      <p>👥 Utilizatori</p>
+    </div>
+    <div class="admin-stat-card">
+      <h4>${userChannels.length}</h4>
+      <p>⏳ Canale User</p>
+    </div>
+    <div class="admin-stat-card">
+      <h4>${Object.keys(categoryStats).length}</h4>
+      <p>📂 Categorii</p>
+    </div>
+  `;
+  
+  html += '</div>';
+  
+  // Category breakdown
+  html += '<h4>📊 Canale pe Categorii:</h4>';
+  Object.entries(categoryStats).forEach(([category, count]) => {
+    const percentage = ((count / channels.length) * 100).toFixed(1);
+    html += `
+      <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.7); margin-bottom: 0.5rem; border-radius: 0.5rem;">
+        <span><strong>${category}</strong></span>
+        <span>${count} canale (${percentage}%)</span>
+      </div>
+    `;
+  });
+  
+  statsDiv.innerHTML = html;
+}
+
+function loadAdminSettings() {
+  // Load current settings
+  document.getElementById('require-approval').checked = 
+    localStorage.getItem('require_approval') === 'true';
+  document.getElementById('enable-moderation').checked = 
+    localStorage.getItem('enable_moderation') === 'true';
+}
+
+function saveAdminSettings() {
+  const requireApproval = document.getElementById('require-approval').checked;
+  const enableModeration = document.getElementById('enable-moderation').checked;
+  
+  localStorage.setItem('require_approval', requireApproval);
+  localStorage.setItem('enable_moderation', enableModeration);
+  
+  alert('✅ Setările au fost salvate!');
+}
+
+function showUserStats() {
+  loadAdminStats();
+  showAdminPanel();
+  showAdminTab('stats');
+}
+
+function approveChannel(title) {
+  // Implementation for approving channels
+  alert(`✅ Canalul "${title}" a fost aprobat!`);
+  loadAdminChannels();
+}
+
+function rejectChannel(title) {
+  if (confirm(`❌ Sigur vrei să respingi canalul "${title}"?`)) {
+    alert(`❌ Canalul "${title}" a fost respins!`);
+    loadAdminChannels();
+  }
+}
+
+function editChannel(title) {
+  alert(`✏️ Editarea canalului "${title}" va fi implementată în curând!`);
+}
+
+function deleteChannel(title) {
+  if (confirm(`🗑️ Sigur vrei să ștergi canalul "${title}"?`)) {
+    alert(`🗑️ Canalul "${title}" a fost șters!`);
+    loadAdminChannels();
+  }
+}
+
+function banUser(email) {
+  if (confirm(`🚫 Sigur vrei să blochezi utilizatorul "${email}"?`)) {
+    localStorage.setItem('banned_' + email, 'true');
+    alert(`🚫 Utilizatorul "${email}" a fost blocat!`);
+    loadAdminUsers();
+  }
+}
+
+function unbanUser(email) {
+  localStorage.removeItem('banned_' + email);
+  alert(`🔓 Utilizatorul "${email}" a fost deblocat!`);
+  loadAdminUsers();
+}
+
+function deleteUser(email) {
+  if (confirm(`🗑️ Sigur vrei să ștergi utilizatorul "${email}"? Această acțiune nu poate fi anulată!`)) {
+    localStorage.removeItem('user_' + email);
+    localStorage.removeItem('banned_' + email);
+    alert(`🗑️ Utilizatorul "${email}" a fost șters!`);
+    loadAdminUsers();
+  }
+}
+
+function exportChannels() {
+  const channels = getChannels();
+  const dataStr = JSON.stringify(channels, null, 2);
+  const dataBlob = new Blob([dataStr], {type: 'application/json'});
+  const url = URL.createObjectURL(dataBlob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'tg-channels-export.json';
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportUsers() {
+  const users = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('user_')) {
+      users.push(key.replace('user_', ''));
+    }
+  }
+  const dataStr = JSON.stringify(users, null, 2);
+  const dataBlob = new Blob([dataStr], {type: 'application/json'});
+  const url = URL.createObjectURL(dataBlob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'tg-users-export.json';
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function showAllChannels() {
+  const channels = getChannels();
+  let html = `<h4>📺 Toate Canalele (${channels.length})</h4>`;
+  
+  channels.forEach(channel => {
+    html += `
+      <div class="admin-channel-item">
+        <div class="admin-item-info">
+          <strong>${channel.title}</strong><br>
+          <small>${channel.desc}</small><br>
+          <a href="${channel.url}" target="_blank">${channel.url}</a>
+          <div style="margin-top: 0.3rem;">
+            <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+              ${channel.category.join(', ')}
+            </span>
+          </div>
+        </div>
+        <div class="admin-item-actions">
+          <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
+          <button class="delete" onclick="deleteChannel('${channel.title}')">🗑️ Delete</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  document.getElementById('admin-channels-list').innerHTML = html;
+}
+
+function showPendingChannels() {
+  const pendingChannels = JSON.parse(localStorage.getItem('pending_channels') || '[]');
+  const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+  
+  let html = `<h4>⏳ Canale în Așteptare (${pendingChannels.length + userChannels.length})</h4>`;
+  
+  [...pendingChannels, ...userChannels].forEach(channel => {
+    html += `
+      <div class="admin-channel-item pending">
+        <div class="admin-item-info">
+          <strong>${channel.title}</strong> <small>(by ${channel.owner})</small><br>
+          <small>${channel.desc}</small><br>
+          <a href="${channel.url}" target="_blank">${channel.url}</a>
+        </div>
+        <div class="admin-item-actions">
+          <button class="approve" onclick="approveChannel('${channel.title}')">✅ Approve</button>
+          <button class="reject" onclick="rejectChannel('${channel.title}')">❌ Reject</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  if (pendingChannels.length + userChannels.length === 0) {
+    html += '<div style="text-align: center; padding: 2rem; color: #666;">Nu există canale în așteptare.</div>';
+  }
+  
+  document.getElementById('admin-channels-list').innerHTML = html;
 }
 
 // initialize

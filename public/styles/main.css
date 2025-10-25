@@ -480,5 +480,159 @@ main{ max-width:1100px; margin:0 auto; padding-top:1rem; }
   border-left: 4px solid var(--primary);
 }
 
+/* Admin Panel Styles */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin-tab-btn {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.admin-tab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.admin-tab-btn.active {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+}
+
+.admin-tab-content {
+  background: rgba(255,255,255,0.9);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  margin-top: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.admin-actions button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.admin-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.admin-channel-item, .admin-user-item {
+  background: rgba(255,255,255,0.8);
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 0.8rem;
+  border-left: 4px solid #3498db;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-channel-item.pending {
+  border-left-color: #f39c12;
+  background: rgba(243,156,18,0.1);
+}
+
+.admin-channel-item.rejected {
+  border-left-color: #e74c3c;
+  background: rgba(231,76,60,0.1);
+}
+
+.admin-item-info {
+  flex: 1;
+}
+
+.admin-item-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.admin-item-actions button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 0.4rem;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.admin-item-actions button:hover {
+  transform: scale(1.05);
+}
+
+.admin-item-actions .approve { background: #27ae60; }
+.admin-item-actions .reject { background: #e74c3c; }
+.admin-item-actions .edit { background: #3498db; }
+.admin-item-actions .delete { background: #e67e22; }
+.admin-item-actions .ban { background: #8e44ad; }
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.admin-stat-card h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.admin-stat-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.admin-settings label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-settings input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
+
 /* footer */
 footer{ text-align:center; margin-top:2rem; color:#666; font-size:0.9rem; }
