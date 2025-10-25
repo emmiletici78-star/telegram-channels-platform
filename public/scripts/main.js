@@ -999,11 +999,15 @@ function login() {
   const email = document.getElementById('login-email').value.trim().toLowerCase();
   const pass = document.getElementById('login-password').value;
   
+  console.log('Login attempt:', email, pass); // Debug
+  
   // Check for admin credentials
   if (email === 'admin@tgchannels.com' && pass === 'TgChannels2025Admin!') {
+    console.log('Admin login successful'); // Debug
     localStorage.setItem('logged_user', email);
     localStorage.setItem('is_admin', 'true');
     showUser();
+    alert('✅ Logat ca ADMIN cu succes!');
     return;
   }
   
@@ -1012,6 +1016,7 @@ function login() {
     localStorage.setItem('logged_user', email);
     localStorage.removeItem('is_admin');
     showUser();
+    alert('✅ Logat ca utilizator normal!');
   } else {
     alert('Date incorecte!');
   }
@@ -1025,6 +1030,8 @@ function showUser() {
   const email = localStorage.getItem('logged_user');
   const isAdmin = localStorage.getItem('is_admin') === 'true';
   
+  console.log('showUser:', email, 'isAdmin:', isAdmin); // Debug
+  
   document.getElementById('user-info').style.display = email ? 'block' : 'none';
   document.getElementById('register-form').style.display = email ? 'none' : 'block';
   document.getElementById('login-form').style.display = email ? 'none' : 'block';
@@ -1032,13 +1039,21 @@ function showUser() {
   document.getElementById('add-channel-section').style.display = email ? 'block' : 'none';
   
   // Show/hide admin elements
-  document.getElementById('admin-badge').style.display = isAdmin ? 'inline' : 'none';
-  document.getElementById('admin-controls').style.display = isAdmin ? 'block' : 'none';
+  const adminBadge = document.getElementById('admin-badge');
+  const adminControls = document.getElementById('admin-controls');
+  const adminStatsSection = document.getElementById('admin-stats-section');
+  
+  console.log('Admin elements found:', !!adminBadge, !!adminControls, !!adminStatsSection); // Debug
+  
+  if (adminBadge) adminBadge.style.display = isAdmin ? 'inline' : 'none';
+  if (adminControls) adminControls.style.display = isAdmin ? 'block' : 'none';
+  if (adminStatsSection) adminStatsSection.style.display = isAdmin ? 'block' : 'none';
+  
   document.getElementById('admin-panel').style.display = 'none'; // Hidden by default
-  document.getElementById('admin-stats-section').style.display = isAdmin ? 'block' : 'none';
   
   // Update admin stats if admin is logged in
   if (isAdmin) {
+    console.log('Updating admin stats...'); // Debug
     updateAdminStats();
   }
   
