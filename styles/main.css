@@ -81,6 +81,16 @@ body.promo-bg {
   background-size: 100% 100%, 100px 100px, 120px 120px, 80px 80px, 300px 300px;
 }
 
+body.featured-bg {
+  background: 
+    linear-gradient(135deg, rgba(243, 156, 18, 0.25) 0%, rgba(230, 126, 34, 0.25) 100%),
+    radial-gradient(circle at 25% 25%, rgba(255, 193, 7, 0.6) 0%, transparent 20%),
+    radial-gradient(circle at 75% 75%, rgba(243, 156, 18, 0.6) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(230, 126, 34, 0.4) 0%, transparent 35%),
+    repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(243, 156, 18, 0.1) 30px, rgba(243, 156, 18, 0.1) 32px);
+  background-size: 100% 100%, 80px 80px, 100px 100px, 150px 150px, 60px 60px;
+}
+
 body::before {
   content: '';
   position: fixed;

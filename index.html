@@ -16,6 +16,7 @@
   </header>
 
   <nav id="categories-menu" class="categories-menu">
+    <button class="cat-btn" onclick="showCategory('featured')" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; font-weight: bold;">⭐ Featured</button>
     <button class="cat-btn" onclick="showCategory('all')">Toate</button>
     <button class="cat-btn" onclick="showCategory('crypto')">Crypto</button>
     <button class="cat-btn" onclick="showCategory('gaming')">Gaming</button>
@@ -81,6 +82,7 @@
         <div class="admin-actions" style="margin-bottom: 1rem;">
           <button onclick="showAllChannels()" style="background: #3498db;">📋 Vezi Toate Canalele</button>
           <button onclick="showPendingChannels()" style="background: #f39c12;">⏳ Canale în Așteptare</button>
+          <button onclick="showFeaturedManager()" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;">⭐ Gestiune Featured</button>
           <button onclick="exportChannels()" style="background: #27ae60;">💾 Export Date</button>
         </div>
         <div id="admin-channels-list">

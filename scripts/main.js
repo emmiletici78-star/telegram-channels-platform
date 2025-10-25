@@ -891,7 +891,7 @@ function showCategory(category) {
   // Change background based on category
   const body = document.body;
   // Remove all category classes
-  body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo)-bg\b/g, '');
+  body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo|featured)-bg\b/g, '');
   
   // Add new category class
   if (category !== 'all') {
@@ -926,6 +926,8 @@ function renderChannelsByCategory() {
 
   const filtered = currentCategory === 'all'
     ? channelsWithIdx
+    : currentCategory === 'featured'
+    ? channelsWithIdx.filter(c => c.featured === true)
     : channelsWithIdx.filter(c =>
         Array.isArray(c.category)
           ? c.category.includes(currentCategory)
@@ -1539,6 +1541,97 @@ function showPendingChannels() {
   document.getElementById('admin-channels-list').innerHTML = html;
 }
 
+// Featured Channels Management
+function showFeaturedManager() {
+  const channels = getChannels();
+  const featuredChannels = channels.filter(c => c.featured === true);
+  const regularChannels = channels.filter(c => !c.featured);
+  
+  let html = `
+    <h4>⭐ Gestiune Canale Featured</h4>
+    <div style="margin-bottom: 1rem; padding: 1rem; background: #fff3cd; border-radius: 0.5rem; border-left: 4px solid #f39c12;">
+      <strong>💡 Info:</strong> Canalele Featured vor apărea în categoria "⭐ Featured" și vor fi evidențiate pe site.
+    </div>
+    
+    <h5>🌟 Canale Featured Actuale (${featuredChannels.length})</h5>
+    <div class="featured-channels-list">
+  `;
+  
+  if (featuredChannels.length === 0) {
+    html += '<div style="text-align: center; padding: 1rem; color: #666;">Nu există canale featured.</div>';
+  } else {
+    featuredChannels.forEach((channel, idx) => {
+      html += `
+        <div class="admin-channel-item featured" style="border-left: 4px solid #f39c12;">
+          <div class="admin-item-info">
+            <strong>⭐ ${channel.title}</strong><br>
+            <small>${channel.desc}</small><br>
+            <a href="${channel.url}" target="_blank">${channel.url}</a>
+            <div style="margin-top: 0.3rem;">
+              <span style="background: #f39c12; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+                ${Array.isArray(channel.category) ? channel.category.join(', ') : channel.category}
+              </span>
+            </div>
+          </div>
+          <div class="admin-item-actions">
+            <button class="delete" onclick="toggleFeatured('${channel.title}', false)" style="background: #e74c3c;">❌ Remove Featured</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+  
+  html += `
+    </div>
+    
+    <h5>📺 Canale Disponibile pentru Featured (${regularChannels.length})</h5>
+    <div class="regular-channels-list">
+  `;
+  
+  regularChannels.forEach(channel => {
+    html += `
+      <div class="admin-channel-item">
+        <div class="admin-item-info">
+          <strong>${channel.title}</strong><br>
+          <small>${channel.desc}</small><br>
+          <a href="${channel.url}" target="_blank">${channel.url}</a>
+          <div style="margin-top: 0.3rem;">
+            <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+              ${Array.isArray(channel.category) ? channel.category.join(', ') : channel.category}
+            </span>
+          </div>
+        </div>
+        <div class="admin-item-actions">
+          <button class="approve" onclick="toggleFeatured('${channel.title}', true)" style="background: #f39c12;">⭐ Make Featured</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  
+  document.getElementById('admin-channels-list').innerHTML = html;
+}
+
+function toggleFeatured(channelTitle, isFeatured) {
+  const channels = getChannels();
+  const channelIndex = channels.findIndex(c => c.title === channelTitle);
+  
+  if (channelIndex !== -1) {
+    channels[channelIndex].featured = isFeatured;
+    localStorage.setItem('channels', JSON.stringify(channels));
+    
+    // Refresh the featured manager view
+    showFeaturedManager();
+    
+    // Show success message
+    const action = isFeatured ? 'adăugat la' : 'eliminat din';
+    alert(`✅ Canalul "${channelTitle}" a fost ${action} Featured!`);
+    
+    console.log(`⭐ Channel "${channelTitle}" featured status changed to:`, isFeatured);
+  }
+}
+
 // Admin Stats Functions
 function trackChannelClick(channelTitle, channelUrl) {
   // Track click data
@@ -1634,6 +1727,6 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('🎯 DOM loaded, initializing app...'); // Debug
   trackPageView(); // Track page view
   showUser();
-  showCategory('all'); // Show all channels on load
+  showCategory('featured'); // Show featured channels on load first
   console.log('✅ App initialized'); // Debug
 });
