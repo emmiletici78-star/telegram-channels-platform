@@ -891,7 +891,7 @@ function showCategory(category) {
   // Change background based on category
   const body = document.body;
   // Remove all category classes
-  body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo|featured)-bg\b/g, '');
+  body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo|featured|promoted)-bg\b/g, '');
   
   // Add new category class
   if (category !== 'all') {
@@ -926,6 +926,8 @@ function renderChannelsByCategory() {
 
   const filtered = currentCategory === 'all'
     ? channelsWithIdx
+    : currentCategory === 'promoted'
+    ? channelsWithIdx.filter(c => c.promoted === true && c.promotedUntil && new Date(c.promotedUntil) > new Date())
     : currentCategory === 'featured'
     ? channelsWithIdx.filter(c => c.featured === true)
     : channelsWithIdx.filter(c =>
@@ -1265,6 +1267,7 @@ function loadAdminUsers() {
 function loadAdminStats() {
   const channels = getChannels();
   const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+  const promotedPayments = JSON.parse(localStorage.getItem('promoted_payments') || '[]');
   const users = [];
   
   // Count users
@@ -1274,6 +1277,15 @@ function loadAdminStats() {
       users.push(key.replace('user_', ''));
     }
   }
+  
+  // Count promoted channels
+  const activePromoted = channels.filter(c => c.promoted === true && c.promotedUntil && new Date(c.promotedUntil) > new Date());
+  const expiredPromoted = channels.filter(c => c.promoted === true && c.promotedUntil && new Date(c.promotedUntil) <= new Date());
+  const featuredChannels = channels.filter(c => c.featured === true);
+  
+  // Calculate revenue
+  const totalRevenue = promotedPayments.reduce((sum, payment) => sum + payment.price, 0);
+  const monthlyRevenue = activePromoted.length * 50; // 50 RON per active promoted channel
   
   // Count by category
   const categoryStats = {};
@@ -1286,6 +1298,7 @@ function loadAdminStats() {
   const statsDiv = document.getElementById('admin-statistics');
   let html = '<div class="admin-stats-grid">';
   
+  // First row - main stats
   html += `
     <div class="admin-stat-card">
       <h4>${channels.length}</h4>
@@ -1303,9 +1316,52 @@ function loadAdminStats() {
       <h4>${Object.keys(categoryStats).length}</h4>
       <p>📂 Categorii</p>
     </div>
+    
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); color: white;">
+      <h4>${activePromoted.length}</h4>
+      <p>💰 Promoted Active</p>
+    </div>
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;">
+      <h4>${featuredChannels.length}</h4>
+      <p>⭐ Featured</p>
+    </div>
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white;">
+      <h4>${expiredPromoted.length}</h4>
+      <p>⏰ Promoted Expirate</p>
+    </div>
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); color: white;">
+      <h4>${totalRevenue} RON</h4>
+      <p>💸 Venit Total</p>
+    </div>
   `;
   
   html += '</div>';
+  
+  // Revenue breakdown
+  html += `
+    <div style="margin-top: 2rem;">
+      <h4>💰 Detalii Venituri</h4>
+      <div class="revenue-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="background: #d1f2eb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #27ae60;">
+          <h5 style="margin: 0; color: #27ae60;">💰 Venit Lunar Curent</h5>
+          <p style="margin: 0.5rem 0 0 0; font-size: 1.5rem; font-weight: bold; color: #27ae60;">${monthlyRevenue} RON</p>
+          <small style="color: #666;">${activePromoted.length} canale × 50 RON/lună</small>
+        </div>
+        <div style="background: #fef9e7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f39c12;">
+          <h5 style="margin: 0; color: #f39c12;">📊 Total Plăți</h5>
+          <p style="margin: 0.5rem 0 0 0; font-size: 1.5rem; font-weight: bold; color: #f39c12;">${promotedPayments.length}</p>
+          <small style="color: #666;">plăți procesate</small>
+        </div>
+        <div style="background: #eaf2ff; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #3498db;">
+          <h5 style="margin: 0; color: #3498db;">📈 Rata Conversie</h5>
+          <p style="margin: 0.5rem 0 0 0; font-size: 1.5rem; font-weight: bold; color: #3498db;">
+            ${channels.length > 0 ? Math.round((activePromoted.length / channels.length) * 100) : 0}%
+          </p>
+          <small style="color: #666;">canale promoted din total</small>
+        </div>
+      </div>
+    </div>
+  `;
   
   // Category breakdown
   html += '<h4>📊 Canale pe Categorii:</h4>';
@@ -1541,6 +1597,251 @@ function showPendingChannels() {
   document.getElementById('admin-channels-list').innerHTML = html;
 }
 
+// Promoted Channels Management
+function showPromotedManager() {
+  const channels = getChannels();
+  const promotedChannels = channels.filter(c => c.promoted === true);
+  const expiredPromoted = promotedChannels.filter(c => c.promotedUntil && new Date(c.promotedUntil) <= new Date());
+  const activePromoted = promotedChannels.filter(c => c.promotedUntil && new Date(c.promotedUntil) > new Date());
+  const regularChannels = channels.filter(c => !c.promoted);
+  
+  let html = `
+    <h4>💰 Gestiune Canale Promoted</h4>
+    <div style="margin-bottom: 1rem; padding: 1rem; background: #d1f2eb; border-radius: 0.5rem; border-left: 4px solid #27ae60;">
+      <strong>💡 Info:</strong> Canalele Promoted plătesc pentru a fi afișate pe prima pagină. Prețul standard: <strong style="color: #27ae60;">50 RON/lună</strong>
+    </div>
+    
+    <div class="promoted-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: #27ae60; color: white; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+        <h5 style="margin: 0; font-size: 1.5rem;">💰 ${activePromoted.length}</h5>
+        <p style="margin: 0.5rem 0 0 0;">Active Promoted</p>
+      </div>
+      <div style="background: #e74c3c; color: white; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+        <h5 style="margin: 0; font-size: 1.5rem;">⏰ ${expiredPromoted.length}</h5>
+        <p style="margin: 0.5rem 0 0 0;">Expired</p>
+      </div>
+      <div style="background: #3498db; color: white; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+        <h5 style="margin: 0; font-size: 1.5rem;">💸 ${activePromoted.length * 50} RON</h5>
+        <p style="margin: 0.5rem 0 0 0;">Venit Lunar</p>
+      </div>
+    </div>
+    
+    <h5>🟢 Canale Promoted Active (${activePromoted.length})</h5>
+    <div class="active-promoted-list">
+  `;
+  
+  if (activePromoted.length === 0) {
+    html += '<div style="text-align: center; padding: 1rem; color: #666;">Nu există canale promoted active.</div>';
+  } else {
+    activePromoted.forEach(channel => {
+      const daysLeft = Math.ceil((new Date(channel.promotedUntil) - new Date()) / (1000 * 60 * 60 * 24));
+      html += `
+        <div class="admin-channel-item promoted-active" style="border-left: 4px solid #27ae60; background: #f8fff8;">
+          <div class="admin-item-info">
+            <strong>💰 ${channel.title}</strong>
+            <span style="background: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.5rem;">
+              ${daysLeft} zile rămase
+            </span><br>
+            <small>${channel.desc}</small><br>
+            <a href="${channel.url}" target="_blank">${channel.url}</a><br>
+            <small><strong>Plătit până:</strong> ${new Date(channel.promotedUntil).toLocaleDateString('ro-RO')}</small>
+            <div style="margin-top: 0.3rem;">
+              <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+                ${Array.isArray(channel.category) ? channel.category.join(', ') : channel.category}
+              </span>
+            </div>
+          </div>
+          <div class="admin-item-actions">
+            <button class="edit" onclick="extendPromoted('${channel.title}')" style="background: #f39c12;">⏰ Extinde</button>
+            <button class="delete" onclick="removePromoted('${channel.title}')" style="background: #e74c3c;">❌ Remove</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+  
+  if (expiredPromoted.length > 0) {
+    html += `
+      <h5>🔴 Canale Promoted Expirate (${expiredPromoted.length})</h5>
+      <div class="expired-promoted-list">
+    `;
+    
+    expiredPromoted.forEach(channel => {
+      const daysExpired = Math.ceil((new Date() - new Date(channel.promotedUntil)) / (1000 * 60 * 60 * 24));
+      html += `
+        <div class="admin-channel-item promoted-expired" style="border-left: 4px solid #e74c3c; background: #fff8f8;">
+          <div class="admin-item-info">
+            <strong>⏰ ${channel.title}</strong>
+            <span style="background: #e74c3c; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.5rem;">
+              Expirat ${daysExpired} zile
+            </span><br>
+            <small>${channel.desc}</small><br>
+            <small><strong>Expirat la:</strong> ${new Date(channel.promotedUntil).toLocaleDateString('ro-RO')}</small>
+          </div>
+          <div class="admin-item-actions">
+            <button class="approve" onclick="renewPromoted('${channel.title}')" style="background: #27ae60;">🔄 Reînnoiește</button>
+            <button class="delete" onclick="removePromoted('${channel.title}')" style="background: #95a5a6;">🗑️ Șterge</button>
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+  }
+  
+  html += `
+    <h5>📺 Canale Disponibile pentru Promoted (${regularChannels.length})</h5>
+    <div class="regular-channels-list">
+  `;
+  
+  regularChannels.forEach(channel => {
+    html += `
+      <div class="admin-channel-item">
+        <div class="admin-item-info">
+          <strong>${channel.title}</strong><br>
+          <small>${channel.desc}</small><br>
+          <a href="${channel.url}" target="_blank">${channel.url}</a>
+          <div style="margin-top: 0.3rem;">
+            <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+              ${Array.isArray(channel.category) ? channel.category.join(', ') : channel.category}
+            </span>
+          </div>
+        </div>
+        <div class="admin-item-actions">
+          <button class="approve" onclick="makePromoted('${channel.title}')" style="background: #27ae60;">💰 Make Promoted</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  
+  document.getElementById('admin-channels-list').innerHTML = html;
+}
+
+function makePromoted(channelTitle) {
+  const duration = prompt('💰 Câte luni să fie promoted? (ex: 1, 2, 3)', '1');
+  if (!duration || isNaN(duration) || duration < 1) return;
+  
+  const months = parseInt(duration);
+  const price = months * 50; // 50 RON per month
+  
+  if (!confirm(`💰 Confirmați promovarea pentru ${months} luni?\n\nCanal: ${channelTitle}\nDurată: ${months} luni\nPreț: ${price} RON`)) return;
+  
+  const channels = getChannels();
+  const channelIndex = channels.findIndex(c => c.title === channelTitle);
+  
+  if (channelIndex !== -1) {
+    const promotedUntil = new Date();
+    promotedUntil.setMonth(promotedUntil.getMonth() + months);
+    
+    channels[channelIndex].promoted = true;
+    channels[channelIndex].promotedUntil = promotedUntil.toISOString();
+    channels[channelIndex].promotedPrice = price;
+    channels[channelIndex].promotedDuration = months;
+    
+    localStorage.setItem('channels', JSON.stringify(channels));
+    
+    // Track payment
+    trackPromotedPayment(channelTitle, price, months);
+    
+    showPromotedManager();
+    alert(`✅ Canalul "${channelTitle}" a fost promovat pentru ${months} luni!\n💰 Preț: ${price} RON`);
+    
+    console.log(`💰 Channel "${channelTitle}" promoted for ${months} months, price: ${price} RON`);
+  }
+}
+
+function extendPromoted(channelTitle) {
+  const duration = prompt('⏰ Cu câte luni să extindem? (ex: 1, 2, 3)', '1');
+  if (!duration || isNaN(duration) || duration < 1) return;
+  
+  const months = parseInt(duration);
+  const price = months * 50;
+  
+  if (!confirm(`💰 Confirmați extinderea pentru ${months} luni?\n\nCanal: ${channelTitle}\nDurată suplimentară: ${months} luni\nPreț: ${price} RON`)) return;
+  
+  const channels = getChannels();
+  const channelIndex = channels.findIndex(c => c.title === channelTitle);
+  
+  if (channelIndex !== -1) {
+    const currentEnd = new Date(channels[channelIndex].promotedUntil);
+    currentEnd.setMonth(currentEnd.getMonth() + months);
+    
+    channels[channelIndex].promotedUntil = currentEnd.toISOString();
+    localStorage.setItem('channels', JSON.stringify(channels));
+    
+    trackPromotedPayment(channelTitle, price, months);
+    
+    showPromotedManager();
+    alert(`✅ Promoted extins pentru "${channelTitle}"!\n⏰ Nou până la: ${currentEnd.toLocaleDateString('ro-RO')}\n💰 Preț: ${price} RON`);
+  }
+}
+
+function renewPromoted(channelTitle) {
+  const duration = prompt('🔄 Reînnoiește pentru câte luni? (ex: 1, 2, 3)', '1');
+  if (!duration || isNaN(duration) || duration < 1) return;
+  
+  const months = parseInt(duration);
+  const price = months * 50;
+  
+  if (!confirm(`💰 Confirmați reînnoirea pentru ${months} luni?\n\nCanal: ${channelTitle}\nDurată: ${months} luni\nPreț: ${price} RON`)) return;
+  
+  const channels = getChannels();
+  const channelIndex = channels.findIndex(c => c.title === channelTitle);
+  
+  if (channelIndex !== -1) {
+    const promotedUntil = new Date();
+    promotedUntil.setMonth(promotedUntil.getMonth() + months);
+    
+    channels[channelIndex].promoted = true;
+    channels[channelIndex].promotedUntil = promotedUntil.toISOString();
+    channels[channelIndex].promotedPrice = price;
+    channels[channelIndex].promotedDuration = months;
+    
+    localStorage.setItem('channels', JSON.stringify(channels));
+    
+    trackPromotedPayment(channelTitle, price, months);
+    
+    showPromotedManager();
+    alert(`✅ Canalul "${channelTitle}" a fost reînnoit pentru ${months} luni!\n💰 Preț: ${price} RON`);
+  }
+}
+
+function removePromoted(channelTitle) {
+  if (!confirm(`❌ Sigur vrei să elimini "${channelTitle}" din Promoted?`)) return;
+  
+  const channels = getChannels();
+  const channelIndex = channels.findIndex(c => c.title === channelTitle);
+  
+  if (channelIndex !== -1) {
+    channels[channelIndex].promoted = false;
+    delete channels[channelIndex].promotedUntil;
+    delete channels[channelIndex].promotedPrice;
+    delete channels[channelIndex].promotedDuration;
+    
+    localStorage.setItem('channels', JSON.stringify(channels));
+    showPromotedManager();
+    alert(`✅ Canalul "${channelTitle}" a fost eliminat din Promoted!`);
+  }
+}
+
+function trackPromotedPayment(channelTitle, price, months) {
+  const payments = JSON.parse(localStorage.getItem('promoted_payments') || '[]');
+  const payment = {
+    id: Date.now(),
+    channelTitle,
+    price,
+    months,
+    date: new Date().toISOString(),
+    status: 'paid'
+  };
+  
+  payments.push(payment);
+  localStorage.setItem('promoted_payments', JSON.stringify(payments));
+  
+  console.log('💰 Payment tracked:', payment);
+}
+
 // Featured Channels Management
 function showFeaturedManager() {
   const channels = getChannels();
@@ -1727,6 +2028,6 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('🎯 DOM loaded, initializing app...'); // Debug
   trackPageView(); // Track page view
   showUser();
-  showCategory('featured'); // Show featured channels on load first
+  showCategory('promoted'); // Show promoted channels on load first - monetization priority
   console.log('✅ App initialized'); // Debug
 });

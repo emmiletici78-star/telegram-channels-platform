@@ -81,6 +81,26 @@ body.promo-bg {
   background-size: 100% 100%, 100px 100px, 120px 120px, 80px 80px, 300px 300px;
 }
 
+body.promoted-bg {
+  background: 
+    linear-gradient(135deg, rgba(39, 174, 96, 0.25) 0%, rgba(46, 204, 113, 0.25) 100%),
+    radial-gradient(circle at 25% 25%, rgba(39, 174, 96, 0.6) 0%, transparent 20%),
+    radial-gradient(circle at 75% 75%, rgba(46, 204, 113, 0.6) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(22, 160, 133, 0.4) 0%, transparent 35%),
+    repeating-linear-gradient(45deg, transparent, transparent 25px, rgba(39, 174, 96, 0.1) 25px, rgba(39, 174, 96, 0.1) 27px);
+  background-size: 100% 100%, 90px 90px, 110px 110px, 160px 160px, 50px 50px;
+  animation: promotedPulse 4s ease-in-out infinite;
+}
+
+@keyframes promotedPulse {
+  0%, 100% {
+    background-size: 100% 100%, 90px 90px, 110px 110px, 160px 160px, 50px 50px;
+  }
+  50% {
+    background-size: 100% 100%, 95px 95px, 115px 115px, 170px 170px, 55px 55px;
+  }
+}
+
 body.featured-bg {
   background: 
     linear-gradient(135deg, rgba(243, 156, 18, 0.25) 0%, rgba(230, 126, 34, 0.25) 100%),
