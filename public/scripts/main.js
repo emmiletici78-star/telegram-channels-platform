@@ -947,7 +947,7 @@ function renderChannelsByCategory() {
         <div class="channel-info">
           <div class="channel-title">${channel.title}</div>
           <div class="channel-desc">${channel.desc}</div>
-          <a class="channel-link" href="${channel.url}" target="_blank">Vezi canalul</a>
+          <a class="channel-link" onclick="openChannel('${channel.url}', '${channel.title}'); return false;" href="#">Vezi canalul</a>
           ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">Șterge</button>` : ''}
         </div>
       `;
@@ -972,7 +972,7 @@ function renderChannelsByCategory() {
       <div class="channel-info">
         <div class="channel-title">${channel.title}</div>
         <div class="channel-desc">${channel.desc}</div>
-        <a class="channel-link" href="${channel.url}" target="_blank">Vezi canalul</a>
+        <a class="channel-link" onclick="openChannel('${channel.url}', '${channel.title}'); return false;" href="#">Vezi canalul</a>
         ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">Șterge</button>` : ''}
       </div>
     `;
@@ -1032,6 +1032,12 @@ function showUser() {
   document.getElementById('admin-badge').style.display = isAdmin ? 'inline' : 'none';
   document.getElementById('admin-controls').style.display = isAdmin ? 'block' : 'none';
   document.getElementById('admin-panel').style.display = 'none'; // Hidden by default
+  document.getElementById('admin-stats-section').style.display = isAdmin ? 'block' : 'none';
+  
+  // Update admin stats if admin is logged in
+  if (isAdmin) {
+    updateAdminStats();
+  }
   
   showCategory(currentCategory);
 }
@@ -1436,8 +1442,99 @@ function showPendingChannels() {
   document.getElementById('admin-channels-list').innerHTML = html;
 }
 
+// Admin Stats Functions
+function trackChannelClick(channelTitle, channelUrl) {
+  // Track click data
+  const clicks = JSON.parse(localStorage.getItem('admin_clicks') || '{}');
+  const today = new Date().toDateString();
+  
+  if (!clicks[today]) clicks[today] = {};
+  if (!clicks[today][channelTitle]) clicks[today][channelTitle] = 0;
+  clicks[today][channelTitle]++;
+  
+  localStorage.setItem('admin_clicks', JSON.stringify(clicks));
+  localStorage.setItem('admin_last_click', new Date().toLocaleString() + ' - ' + channelTitle);
+  
+  // Update stats if admin is logged in
+  if (localStorage.getItem('is_admin') === 'true') {
+    updateAdminStats();
+  }
+}
+
+function trackPageView() {
+  const views = JSON.parse(localStorage.getItem('admin_views') || '{}');
+  const today = new Date().toDateString();
+  
+  if (!views[today]) views[today] = 0;
+  views[today]++;
+  
+  localStorage.setItem('admin_views', JSON.stringify(views));
+}
+
+function updateAdminStats() {
+  const channels = getChannels();
+  const users = JSON.parse(localStorage.getItem('registered_users') || '[]');
+  const clicks = JSON.parse(localStorage.getItem('admin_clicks') || '{}');
+  const views = JSON.parse(localStorage.getItem('admin_views') || '{}');
+  const today = new Date().toDateString();
+  
+  // Calculate totals
+  let totalClicks = 0;
+  let mostClickedChannel = '';
+  let maxClicks = 0;
+  
+  Object.values(clicks).forEach(dayClicks => {
+    Object.entries(dayClicks).forEach(([channel, count]) => {
+      totalClicks += count;
+      if (count > maxClicks) {
+        maxClicks = count;
+        mostClickedChannel = channel;
+      }
+    });
+  });
+  
+  const totalViews = Object.values(views).reduce((a, b) => a + b, 0);
+  const todayVisits = views[today] || 0;
+  
+  // Calculate total members
+  let totalMembers = 0;
+  channels.forEach(channel => {
+    const match = channel.desc.match(/(\d+[\.,]?\d*)\s*[KMk]?\s+membri/i);
+    if (match) {
+      let num = parseFloat(match[1].replace(',', '.'));
+      if (channel.desc.toLowerCase().includes('k membri')) num *= 1000;
+      if (channel.desc.toLowerCase().includes('m membri')) num *= 1000000;
+      totalMembers += num;
+    }
+  });
+  
+  // Format numbers
+  const formatNumber = (num) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  };
+  
+  // Update UI
+  document.getElementById('admin-total-channels').textContent = channels.length;
+  document.getElementById('admin-total-members').textContent = formatNumber(totalMembers);
+  document.getElementById('admin-total-clicks').textContent = totalClicks;
+  document.getElementById('admin-total-views').textContent = totalViews;
+  document.getElementById('admin-total-users').textContent = users.length;
+  document.getElementById('admin-today-visits').textContent = todayVisits;
+  document.getElementById('admin-last-click').textContent = localStorage.getItem('admin_last_click') || 'Niciodată';
+  document.getElementById('admin-most-clicked').textContent = mostClickedChannel || 'Niciunul';
+}
+
+// Override channel link clicks to track them
+function openChannel(url, title) {
+  trackChannelClick(title, url);
+  window.open(url, '_blank');
+}
+
 // initialize
 document.addEventListener('DOMContentLoaded', function() {
+  trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
 });
