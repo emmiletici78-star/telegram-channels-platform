@@ -1,3 +1,5 @@
+console.log('🚀 JavaScript loaded successfully!'); // Debug
+
 // Default channels (category is an array)
 const defaultChannels = [
   // CRYPTO CHANNELS (38) - Real channels with massive member counts
@@ -881,6 +883,7 @@ function deleteChannel(realIdx) {
 let currentCategory = 'all';
 
 function showCategory(category) {
+  console.log('📺 Showing category:', category); // Debug
   currentCategory = category;
   updateActiveCategoryButtons();
   renderChannelsByCategory();
@@ -904,9 +907,18 @@ function updateActiveCategoryButtons() {
 }
 
 function renderChannelsByCategory() {
+  console.log('🔄 Rendering channels for category:', currentCategory); // Debug
+  
   const list = document.getElementById('channels-list');
+  if (!list) {
+    console.error('❌ channels-list element not found!');
+    return;
+  }
+  
   list.innerHTML = '';
   const channels = getChannels();
+  console.log('📋 Total channels:', channels.length); // Debug
+  
   const logged = localStorage.getItem('logged_user');
 
   // attach global index so delete can use it
@@ -919,6 +931,8 @@ function renderChannelsByCategory() {
           ? c.category.includes(currentCategory)
           : (c.category || '').toLowerCase() === currentCategory
       );
+  
+  console.log('🎯 Filtered channels:', filtered.length); // Debug
 
   // order: user's channels first
   const userChannels = [];
@@ -1617,7 +1631,9 @@ function openChannel(url, title) {
 
 // initialize
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('🎯 DOM loaded, initializing app...'); // Debug
   trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
+  console.log('✅ App initialized'); // Debug
 });
