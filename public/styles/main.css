@@ -700,3 +700,42 @@ footer{
   backdrop-filter: blur(20px);
   padding: 2rem;
 }
+/* Modal styles for admin dialogs */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal-content {
+  background: linear-gradient(135deg,#ffffff 0%, #f7f7f8 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+.modal-content input[type="email"], .modal-content input[type="text"], .modal-content input[type="password"] {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Verified badge */
+.verified-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  background: linear-gradient(135deg,#2ecc71 0%, #27ae60 100%);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+}

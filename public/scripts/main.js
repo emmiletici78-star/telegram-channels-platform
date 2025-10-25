@@ -988,6 +988,9 @@ function register() {
   if (!validateEmail(email)) return alert('Email invalid!');
   if (localStorage.getItem('user_' + email)) return alert('Emailul există deja!');
   localStorage.setItem('user_' + email, pass);
+  // store metadata for the user (verified flag)
+  const meta = { verified: false, createdAt: new Date().toISOString() };
+  localStorage.setItem('user_meta_' + email, JSON.stringify(meta));
   alert('Cont creat! Acum te poți loga.');
   document.getElementById('reg-email').value = '';
   document.getElementById('reg-password').value = '';
@@ -1204,10 +1207,13 @@ function loadAdminUsers() {
   
   users.forEach(email => {
     const isBanned = localStorage.getItem('banned_' + email) === 'true';
+    const meta = JSON.parse(localStorage.getItem('user_meta_' + email) || '{}');
+    const verified = meta.verified === true;
     html += `
       <div class="admin-user-item ${isBanned ? 'rejected' : ''}">
         <div class="admin-item-info">
           <strong>${email}</strong>
+          ${verified ? `<span class="verified-badge">✔ Verificat</span>` : ''}
           <br><small>Status: ${isBanned ? '🚫 Banned' : '✅ Active'}</small>
         </div>
         <div class="admin-item-actions">
@@ -1215,6 +1221,7 @@ function loadAdminUsers() {
             `<button class="approve" onclick="unbanUser('${email}')">🔓 Unban</button>` :
             `<button class="ban" onclick="banUser('${email}')">🚫 Ban</button>`
           }
+          ${verified ? '' : `<button class="approve" onclick="adminVerifyUser('${email}')">🔒 Verifică</button>`}
           <button class="delete" onclick="deleteUser('${email}')">🗑️ Delete</button>
         </div>
       </div>
@@ -1350,9 +1357,70 @@ function deleteUser(email) {
   if (confirm(`🗑️ Sigur vrei să ștergi utilizatorul "${email}"? Această acțiune nu poate fi anulată!`)) {
     localStorage.removeItem('user_' + email);
     localStorage.removeItem('banned_' + email);
+    localStorage.removeItem('user_meta_' + email);
     alert(`🗑️ Utilizatorul "${email}" a fost șters!`);
     loadAdminUsers();
   }
+}
+
+// Admin add-user modal functions
+function showAddUserModal() {
+  if (localStorage.getItem('is_admin') !== 'true') return alert('Acces restricționat.');
+  document.getElementById('admin-new-email').value = '';
+  document.getElementById('admin-new-password').value = '';
+  document.getElementById('add-user-modal').style.display = 'flex';
+}
+
+function closeAddUserModal() {
+  document.getElementById('add-user-modal').style.display = 'none';
+}
+
+function adminCreateUser() {
+  const email = document.getElementById('admin-new-email').value.trim().toLowerCase();
+  const pass = document.getElementById('admin-new-password').value;
+  if (!email || !pass) return alert('Completează toate câmpurile!');
+  if (!validateEmail(email)) return alert('Email invalid!');
+  if (localStorage.getItem('user_' + email)) return alert('Emailul există deja!');
+
+  // For ANY email, ask for confirmation by typing the email exactly
+  window._pendingAdminNewUser = { email, pass };
+  // show confirmation modal
+  document.getElementById('confirm-email-text').textContent = `Confirmă că adresa ${email} este un email real și valid. Scrie adresa completă mai jos pentru a confirma:`;
+  document.getElementById('confirm-email-input').value = '';
+  document.getElementById('confirm-email-modal').style.display = 'flex';
+}
+
+function closeConfirmEmailModal() {
+  document.getElementById('confirm-email-modal').style.display = 'none';
+  window._pendingAdminNewUser = null;
+}
+
+function confirmEmailCheck() {
+  const typed = document.getElementById('confirm-email-input').value.trim().toLowerCase();
+  const pending = window._pendingAdminNewUser;
+  if (!pending) return closeConfirmEmailModal();
+  if (typed !== pending.email) return alert('Confirmarea nu s-a potrivit. Introdu adresa exactă pentru a confirma că este un email real.');
+
+  // create verified user
+  localStorage.setItem('user_' + pending.email, pending.pass);
+  const meta = { verified: true, verifiedAt: new Date().toISOString(), verifiedByAdmin: true };
+  localStorage.setItem('user_meta_' + pending.email, JSON.stringify(meta));
+  alert(`✅ Utilizatorul ${pending.email} a fost creat și verificat ca email real.`);
+  window._pendingAdminNewUser = null;
+  closeConfirmEmailModal();
+  closeAddUserModal();
+  loadAdminUsers();
+}
+
+function adminVerifyUser(email) {
+  if (!confirm(`🔒 Confirmi că utilizatorul ${email} este verificat?`)) return;
+  const meta = JSON.parse(localStorage.getItem('user_meta_' + email) || '{}');
+  meta.verified = true;
+  meta.verifiedAt = new Date().toISOString();
+  meta.verifiedByAdmin = true;
+  localStorage.setItem('user_meta_' + email, JSON.stringify(meta));
+  alert(`🔒 Utilizatorul ${email} a fost marcat ca verificat.`);
+  loadAdminUsers();
 }
 
 function exportChannels() {

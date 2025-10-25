@@ -92,7 +92,8 @@
       <div id="admin-users-tab" class="admin-tab-content" style="display:none;">
         <h3>👥 Gestiune Utilizatori</h3>
         <div class="admin-actions" style="margin-bottom: 1rem;">
-          <button onclick="loadAllUsers()" style="background: #3498db;">👥 Vezi Toți Utilizatorii</button>
+          <button onclick="loadAdminUsers()" style="background: #3498db;">👥 Vezi Toți Utilizatorii</button>
+          <button onclick="showAddUserModal()" style="background: #2ecc71;">➕ Adaugă Utilizator</button>
           <button onclick="exportUsers()" style="background: #27ae60;">💾 Export Utilizatori</button>
         </div>
         <div id="admin-users-list">
@@ -187,6 +188,34 @@
       </div>
     </div>
   </section>
+
+  <!-- Add User Modal (Admin only) -->
+  <div id="add-user-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>➕ Adaugă Utilizator</h3>
+      <input type="email" id="admin-new-email" placeholder="📧 Email (ex: user@gmail.com)" />
+      <input type="password" id="admin-new-password" placeholder="🔒 Parolă" />
+      <div style="margin-top:0.5rem; display:flex; gap:0.5rem; justify-content:flex-end;">
+        <button onclick="closeAddUserModal()" style="background:#95a5a6;">Anulează</button>
+        <button onclick="adminCreateUser()" style="background:#2ecc71;">Adaugă</button>
+      </div>
+      <p style="font-size:0.85rem; color:#666; margin-top:0.5rem;">Pentru orice email, vei fi rugat să confirmi că este un cont real prin tastarea exactă a adresei.</p>
+    </div>
+  </div>
+
+  <!-- Email Confirm Modal (admin confirmation for any email) -->
+  <div id="confirm-email-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>🔒 Confirmare Email Real</h3>
+      <p id="confirm-email-text">Pentru a confirma că acest email este real, scrie adresa completă mai jos:</p>
+      <input type="text" id="confirm-email-input" placeholder="Tastează emailul exact pentru confirmare" />
+      <div style="margin-top:0.5rem; display:flex; gap:0.5rem; justify-content:flex-end;">
+        <button onclick="closeConfirmEmailModal()" style="background:#95a5a6;">Anulează</button>
+        <button onclick="confirmEmailCheck()" style="background:#e74c3c;">Confirmă Email Real</button>
+      </div>
+      <p style="font-size:0.8rem; color:#666; margin-top:0.5rem;">💡 Aceasta este o verificare de securitate pentru a confirma că emailul este valid și real.</p>
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2025 Promo Canale Telegram</p>
