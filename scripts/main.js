@@ -2024,10 +2024,354 @@ function openChannel(url, title) {
 }
 
 // initialize
+// New Navigation System
+function showSection(sectionId) {
+  // Hide all sections
+  const sections = ['home', 'channels', 'propose', 'admin'];
+  sections.forEach(section => {
+    const element = document.getElementById(section);
+    if (element) element.style.display = 'none';
+  });
+  
+  // Show selected section
+  const selectedSection = document.getElementById(sectionId);
+  if (selectedSection) selectedSection.style.display = 'block';
+  
+  // Update navigation
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => link.classList.remove('active'));
+  
+  const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+  if (activeLink) activeLink.classList.add('active');
+  
+  // Special handling for channels section
+  if (sectionId === 'channels') {
+    renderChannelsGrid();
+  }
+  
+  console.log('🔄 Switched to section:', sectionId);
+}
+
+function showAuthTab(tabId) {
+  const forms = document.querySelectorAll('.auth-form');
+  forms.forEach(form => form.style.display = 'none');
+  
+  const selectedForm = document.getElementById(tabId);
+  if (selectedForm) selectedForm.style.display = 'block';
+  
+  const tabs = document.querySelectorAll('.auth-tab');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  
+  const activeTab = document.querySelector(`[onclick="showAuthTab('${tabId}')"]`);
+  if (activeTab) activeTab.classList.add('active');
+}
+
+function renderChannelsGrid() {
+  const channels = getChannels();
+  const grid = document.getElementById('channels-grid');
+  
+  if (!grid) return;
+  
+  let filteredChannels = channels;
+  if (currentCategory !== 'all') {
+    if (currentCategory === 'promoted') {
+      filteredChannels = channels.filter(c => c.promoted === true && c.promotedUntil && new Date(c.promotedUntil) > new Date());
+    } else if (currentCategory === 'featured') {
+      filteredChannels = channels.filter(c => c.featured === true);
+    } else {
+      filteredChannels = channels.filter(c =>
+        Array.isArray(c.category)
+          ? c.category.includes(currentCategory)
+          : (c.category || '').toLowerCase() === currentCategory
+      );
+    }
+  }
+  
+  grid.innerHTML = '';
+  
+  filteredChannels.forEach(channel => {
+    const channelCard = createChannelCard(channel);
+    grid.appendChild(channelCard);
+  });
+}
+
+function createChannelCard(channel) {
+  const card = document.createElement('div');
+  card.className = 'channel-card';
+  
+  if (channel.promoted) card.className += ' promoted';
+  if (channel.featured) card.className += ' featured';
+  
+  const memberCount = typeof channel.members === 'string' ? channel.members : formatMemberCount(channel.members);
+  const categories = Array.isArray(channel.category) ? channel.category.join(', ') : channel.category;
+  
+  card.innerHTML = `
+    <div class="channel-header">
+      <div class="channel-avatar">
+        <img src="https://via.placeholder.com/60x60/3498db/ffffff?text=${channel.title.charAt(0)}" alt="${channel.title}">
+      </div>
+      <div class="channel-badges">
+        ${channel.promoted ? '<span class="badge promoted">💰 Promoted</span>' : ''}
+        ${channel.featured ? '<span class="badge featured">⭐ Featured</span>' : ''}
+      </div>
+    </div>
+    <div class="channel-content">
+      <h3 class="channel-title">${channel.title}</h3>
+      <p class="channel-description">${channel.desc}</p>
+      <div class="channel-stats">
+        <span class="stat">👥 ${memberCount}</span>
+        <span class="stat">📂 ${categories}</span>
+      </div>
+    </div>
+    <div class="channel-actions">
+      <a href="${channel.url}" target="_blank" class="join-btn" onclick="trackChannelClick('${channel.title}', '${channel.url}')">
+        📱 Join Channel
+      </a>
+    </div>
+  `;
+  
+  return card;
+}
+
+function formatMemberCount(count) {
+  if (count >= 1000000) {
+    return (count / 1000000).toFixed(1) + 'M';
+  } else if (count >= 1000) {
+    return (count / 1000).toFixed(1) + 'K';
+  }
+  return count.toString();
+}
+
+// Updated category handling for new design
+function showCategory(category) {
+  console.log('📺 Showing category:', category);
+  currentCategory = category;
+  
+  // Update filter buttons
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => btn.classList.remove('active'));
+  
+  const activeBtn = document.querySelector(`[onclick="showCategory('${category}')"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  
+  // Render channels
+  renderChannelsGrid();
+  
+  // Change background
+  const body = document.body;
+  body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo|featured|promoted)-bg\b/g, '');
+  
+  if (category !== 'all') {
+    body.classList.add(category + '-bg');
+  }
+}
+
+// Form submission handlers
+function submitChannelProposal(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('propose-name').value;
+  const link = document.getElementById('propose-link').value;
+  const description = document.getElementById('propose-description').value;
+  const category = document.getElementById('propose-category').value;
+  const email = document.getElementById('propose-email').value;
+  
+  // Store proposal
+  const proposals = JSON.parse(localStorage.getItem('channel_proposals') || '[]');
+  const proposal = {
+    id: Date.now(),
+    name,
+    link,
+    description,
+    category,
+    email,
+    status: 'pending',
+    date: new Date().toISOString()
+  };
+  
+  proposals.push(proposal);
+  localStorage.setItem('channel_proposals', JSON.stringify(proposals));
+  
+  alert('✅ Propunerea a fost trimisă cu succes! Vei primi un răspuns în 1-3 zile lucrătoare.');
+  
+  // Reset form
+  event.target.reset();
+  document.querySelector('.char-counter').textContent = '0/200 caractere';
+}
+
+// Character counter for description
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('🎯 DOM loaded, initializing app...'); // Debug
+  const descTextarea = document.getElementById('propose-description');
+  if (descTextarea) {
+    descTextarea.addEventListener('input', function() {
+      const counter = document.querySelector('.char-counter');
+      if (counter) {
+        counter.textContent = `${this.value.length}/200 caractere`;
+      }
+    });
+  }
+});
+
+// Admin functions
+function adminLogin() {
+  const email = document.getElementById('admin-email').value;
+  const password = document.getElementById('admin-password').value;
+  
+  if (!email || !password) {
+    alert('❌ Te rog să completezi toate câmpurile!');
+    return;
+  }
+  
+  // Super Admin check
+  if (email === 'admin@tgchannels.com' && password === 'TgChannels2025Admin!') {
+    localStorage.setItem('admin_user', email);
+    localStorage.setItem('admin_type', 'super');
+    showAdminPanel('super');
+    return;
+  }
+  
+  // Regular admin check
+  const admins = JSON.parse(localStorage.getItem('regular_admins') || '[]');
+  const admin = admins.find(a => a.email === email && a.password === password);
+  
+  if (admin) {
+    localStorage.setItem('admin_user', email);
+    localStorage.setItem('admin_type', 'regular');
+    showAdminPanel('regular');
+  } else {
+    alert('❌ Date de conectare incorecte!');
+  }
+}
+
+function userRegister() {
+  const email = document.getElementById('user-reg-email').value;
+  const password = document.getElementById('user-reg-password').value;
+  
+  if (!email || !password) {
+    alert('❌ Te rog să completezi toate câmpurile!');
+    return;
+  }
+  
+  // Store user
+  localStorage.setItem(`user_${email}`, JSON.stringify({
+    email,
+    password,
+    created: new Date().toISOString()
+  }));
+  
+  alert('✅ Contul a fost creat cu succes!');
+  
+  // Clear form
+  document.getElementById('user-reg-email').value = '';
+  document.getElementById('user-reg-password').value = '';
+}
+
+function showAdminPanel(adminType) {
+  document.getElementById('admin-auth').style.display = 'none';
+  const panelContent = document.getElementById('admin-panel-content');
+  panelContent.style.display = 'block';
+  
+  // Update navigation
+  const navUser = document.getElementById('nav-user-info');
+  const navCurrentUser = document.getElementById('nav-current-user');
+  if (navUser && navCurrentUser) {
+    navCurrentUser.textContent = localStorage.getItem('admin_user');
+    navUser.style.display = 'block';
+  }
+  
+  // Generate admin panel based on type
+  if (adminType === 'super') {
+    panelContent.innerHTML = generateSuperAdminPanel();
+  } else {
+    panelContent.innerHTML = generateRegularAdminPanel();
+  }
+}
+
+function generateSuperAdminPanel() {
+  return `
+    <div class="admin-panel">
+      <h2>👑 Super Admin Panel</h2>
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" onclick="showAdminTab('channels')">📺 Gestiune Canale</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('users')">👥 Utilizatori</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('admins')">👑 Admini</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('stats')">📊 Statistici</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('settings')">⚙️ Setări</button>
+      </div>
+      <div id="admin-content">
+        ${generateChannelsTab()}
+      </div>
+    </div>
+  `;
+}
+
+function generateRegularAdminPanel() {
+  return `
+    <div class="admin-panel">
+      <h2>👤 Regular Admin Panel</h2>
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" onclick="showAdminTab('promote')">💰 Promovează Canale</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('manage')">📺 Gestiune Proprii</button>
+      </div>
+      <div id="admin-content">
+        ${generatePromoteTab()}
+      </div>
+    </div>
+  `;
+}
+
+function generateChannelsTab() {
+  return `
+    <div class="admin-tab-content">
+      <div class="admin-actions">
+        <button onclick="showAllChannels()">📋 Vezi Toate</button>
+        <button onclick="showPromotedManager()">💰 Promoted</button>
+        <button onclick="showFeaturedManager()">⭐ Featured</button>
+        <button onclick="showPendingChannels()">⏳ În Așteptare</button>
+      </div>
+      <div id="admin-channels-list"></div>
+    </div>
+  `;
+}
+
+function generatePromoteTab() {
+  return `
+    <div class="admin-tab-content">
+      <p>📢 <strong>Permisiuni Regular Admin:</strong></p>
+      <ul>
+        <li>✅ Promovează canale pe feed (cu aprobare)</li>
+        <li>✅ Gestionează propriile canale</li>
+        <li>❌ Nu poate șterge canale ale altora</li>
+        <li>❌ Nu poate crea admini</li>
+      </ul>
+      <div id="regular-admin-content">
+        <h4>💰 Canale Disponibile pentru Promovare</h4>
+        <div id="promote-channels-list"></div>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🎯 DOM loaded, initializing new app...'); // Debug
   trackPageView(); // Track page view
-  showUser();
-  showCategory('promoted'); // Show promoted channels on load first - monetization priority
-  console.log('✅ App initialized'); // Debug
+  
+  // Check if admin is logged in
+  const adminUser = localStorage.getItem('admin_user');
+  const adminType = localStorage.getItem('admin_type');
+  
+  if (adminUser && adminType) {
+    // Auto-login admin
+    showSection('admin');
+    showAdminPanel(adminType);
+  } else {
+    // Show home by default
+    showSection('home');
+  }
+  
+  // Initialize channels grid
+  renderChannelsGrid();
+  currentCategory = 'promoted'; // Default to promoted
+  
+  console.log('✅ New app initialized'); // Debug
 });

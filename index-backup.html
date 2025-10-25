@@ -64,7 +64,7 @@
     </div>
   </header>
 
-  <!-- Channels Section -->
+    <!-- Channels Section -->
   <section id="channels" class="channels-section" style="display:none;">
     <div class="section-container">
       <div class="section-header">
@@ -206,32 +206,177 @@
     </div>
   </section>
 
-  <!-- Legacy Hidden Elements (for compatibility) -->
-  <div style="display:none;">
-    <div id="register-form"></div>
-    <div id="login-form"></div>
-    <div id="user-info"></div>
-    <div id="current-user"></div>
-    <div id="admin-badge"></div>
-    <div id="admin-controls"></div>
-    <div id="admin-panel"></div>
-    <div id="admin-channels-tab"></div>
-    <div id="admin-users-tab"></div>
-    <div id="admin-stats-tab"></div>
-    <div id="admin-settings-tab"></div>
-    <div id="admin-channels-list"></div>
-    <div id="admin-users-list"></div>
-    <div id="admin-statistics"></div>
-    <div id="channels-list"></div>
-    <div id="add-channel"></div>
-  </div>
+  <section id="auth-section">
+    <div id="register-form">
+      <h2>🆕 Creează cont nou</h2>
+      <input type="email" id="reg-email" placeholder="📧 Adresa de email" />
+      <input type="password" id="reg-password" placeholder="🔒 Parolă sigură" />
+      <button onclick="register()">✨ Înregistrează-te gratuit</button>
+    </div>
 
-  <!-- Add User Modal (admin only) -->
+    <div id="login-form">
+      <h2>🔐 Conectează-te</h2>
+      <input type="email" id="login-email" placeholder="📧 Email-ul tău" />
+      <input type="password" id="login-password" placeholder="🔒 Parola ta" />
+      <button onclick="login()">🚀 Intră în cont</button>
+      <div class="hint" style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
+        💡 Admin: folosește credentialele speciale pentru acces administrativ
+      </div>
+    </div>
+
+    <div id="user-info" style="display:none;">
+      <p style="font-size:1.1rem; color:var(--primary-dark); font-weight:600;">
+        👋 Bun venit, <span id="current-user" style="color:var(--primary);"></span>!
+        <span id="admin-badge" style="display:none; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.5rem;">👑 ADMIN</span>
+      </p>
+      <div id="admin-controls" style="display:none; margin-top: 1rem;">
+        <button onclick="showAdminPanel()" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; margin-right: 0.5rem;">
+          ⚙️ Panel Admin
+        </button>
+        <button onclick="showUserStats()" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; margin-right: 0.5rem;">
+          📊 Statistici
+        </button>
+      </div>
+      <button onclick="logout()" style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); margin-top:0.5rem;">
+        👋 Deconectează-te
+      </button>
+    </div>
+  </section>
+
+  <main>
+    <!-- Admin Panel -->
+    <section id="admin-panel" style="display:none; margin-bottom:2rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1.5rem; border-radius: 1rem; border: 2px solid #e74c3c;">
+      <h2 style="color: #e74c3c; margin-bottom: 1rem;">👑 Panel de Administrare</h2>
+      
+      <div class="admin-tabs" style="margin-bottom: 1rem;">
+        <button class="admin-tab-btn active" onclick="showAdminTab('channels')">📺 Gestiune Canale</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('users')">👥 Utilizatori</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('stats')">📊 Statistici</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('settings')">⚙️ Setări</button>
+      </div>
+
+      <!-- Channels Management Tab -->
+      <div id="admin-channels-tab" class="admin-tab-content">
+        <h3>📺 Gestiune Canale</h3>
+        <div class="admin-actions" style="margin-bottom: 1rem;">
+          <button onclick="showAllChannels()" style="background: #3498db;">📋 Vezi Toate Canalele</button>
+          <button onclick="showPendingChannels()" style="background: #f39c12;">⏳ Canale în Așteptare</button>
+          <button onclick="showPromotedManager()" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); color: white; box-shadow: 0 0 15px rgba(39, 174, 96, 0.4);">💰 Gestiune Promoted</button>
+          <button onclick="showFeaturedManager()" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;">⭐ Gestiune Featured</button>
+          <button onclick="exportChannels()" style="background: #27ae60;">💾 Export Date</button>
+        </div>
+        <div id="admin-channels-list">
+          <!-- Channel management will be populated here -->
+        </div>
+      </div>
+
+      <!-- Users Management Tab -->
+      <div id="admin-users-tab" class="admin-tab-content" style="display:none;">
+        <h3>👥 Gestiune Utilizatori</h3>
+        <div class="admin-actions" style="margin-bottom: 1rem;">
+          <button onclick="loadAdminUsers()" style="background: #3498db;">👥 Vezi Toți Utilizatorii</button>
+          <button onclick="showAddUserModal()" style="background: #2ecc71;">➕ Adaugă Utilizator</button>
+          <button onclick="exportUsers()" style="background: #27ae60;">💾 Export Utilizatori</button>
+        </div>
+        <div id="admin-users-list">
+          <!-- Users management will be populated here -->
+        </div>
+      </div>
+
+      <!-- Statistics Tab -->
+      <div id="admin-stats-tab" class="admin-tab-content" style="display:none;">
+        <h3>📊 Statistici Platform</h3>
+        <div id="admin-statistics">
+          <!-- Statistics will be populated here -->
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="admin-settings-tab" class="admin-tab-content" style="display:none;">
+        <h3>⚙️ Setări Sistem</h3>
+        <div class="admin-settings">
+          <label>
+            <input type="checkbox" id="require-approval"> Necesită aprobare pentru canale noi
+          </label>
+          <label>
+            <input type="checkbox" id="enable-moderation"> Activează moderare automată
+          </label>
+          <button onclick="saveAdminSettings()" style="background: #27ae60; margin-top: 1rem;">💾 Salvează Setări</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="add-channel-section" style="display:none; margin-bottom:1.5rem;">
+      <h2>✨ Adaugă canal Telegram</h2>
+      <input type="text" id="channel-title" placeholder="🏷️ Titlu canal (ex: Crypto România)" />
+      <input type="text" id="channel-desc" placeholder="📝 Descriere scurtă și atractivă" />
+      <input type="url" id="channel-url" placeholder="🔗 Link Telegram (https://t.me/numele-canalului)" />
+      <input type="url" id="channel-logo" placeholder="🖼️ Link logo/imagine (opțional)" />
+      <select id="channel-category" multiple size="7">
+        <option value="crypto">💰 Crypto</option>
+        <option value="gaming">🎮 Gaming</option>
+        <option value="adult">🔞 ADULT (+18)</option>
+        <option value="stiri">📰 Știri</option>
+        <option value="retete">🍳 Rețete</option>
+        <option value="tehnologie">💻 Tehnologie</option>
+        <option value="promo">🎁 Promo</option>
+      </select>
+      <button onclick="addChannel()">🚀 Adaugă canalul</button>
+      <div class="hint">
+        💡 <strong>Sfat:</strong> Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii pentru canalul tău.
+      </div>
+    </section>
+
+    <section id="channels-list">
+      <!-- Canalele filtrate vor fi afișate aici -->
+    </section>
+  </main>
+
+  <!-- Admin Only Stats Section -->
+  <section class="admin-only-stats" id="admin-stats-section" style="display: none;">
+    <h2>📊 Statistici Admin</h2>
+    <div class="admin-stats-overview">
+      <div class="admin-stat-card">
+        <h3>📺 Canale Totale</h3>
+        <p class="admin-stat-number" id="admin-total-channels">83</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>👥 Membri Totali</h3>
+        <p class="admin-stat-number" id="admin-total-members">45.2M</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>🔗 Clickuri Totale</h3>
+        <p class="admin-stat-number" id="admin-total-clicks">0</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>📈 Vizualizări</h3>
+        <p class="admin-stat-number" id="admin-total-views">0</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>👤 Utilizatori Înregistrați</h3>
+        <p class="admin-stat-number" id="admin-total-users">0</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>📅 Vizite Azi</h3>
+        <p class="admin-stat-number" id="admin-today-visits">0</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>🕐 Ultimul Click</h3>
+        <p class="admin-stat-number" id="admin-last-click">Niciodată</p>
+      </div>
+      <div class="admin-stat-card">
+        <h3>🎯 Canalul Cel Mai Accesat</h3>
+        <p class="admin-stat-number" id="admin-most-clicked">-</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add User Modal (Admin only) -->
   <div id="add-user-modal" class="modal" style="display:none;">
     <div class="modal-content">
-      <h3>➕ Adaugă Utilizator Nou (Admin)</h3>
-      <input type="email" id="new-user-email" placeholder="📧 Email utilizator nou" />
-      <input type="password" id="new-user-password" placeholder="🔒 Parolă temporară" />
+      <h3>➕ Adaugă Utilizator</h3>
+      <input type="email" id="admin-new-email" placeholder="📧 Email (ex: user@gmail.com)" />
+      <input type="password" id="admin-new-password" placeholder="🔒 Parolă" />
       <div style="margin-top:0.5rem; display:flex; gap:0.5rem; justify-content:flex-end;">
         <button onclick="closeAddUserModal()" style="background:#95a5a6;">Anulează</button>
         <button onclick="adminCreateUser()" style="background:#2ecc71;">Adaugă</button>
@@ -254,57 +399,8 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>TG Channels</h3>
-          <p>Platforma ta de încredere pentru descoperirea canalelor Telegram de calitate.</p>
-          <div class="footer-social">
-            <a href="#" class="social-link">📧</a>
-            <a href="#" class="social-link">💬</a>
-            <a href="#" class="social-link">📱</a>
-          </div>
-        </div>
-        
-        <div class="footer-section">
-          <h4>Legături Rapide</h4>
-          <ul class="footer-links">
-            <li><a href="#home" onclick="showSection('home')">🏠 Acasă</a></li>
-            <li><a href="#channels" onclick="showSection('channels')">📺 Canale</a></li>
-            <li><a href="#propose" onclick="showSection('propose')">➕ Propune Canal</a></li>
-            <li><a href="#admin" onclick="showSection('admin')">🔐 Admin</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h4>Informații</h4>
-          <ul class="footer-links">
-            <li><a href="#about">ℹ️ Despre Noi</a></li>
-            <li><a href="#contact">📞 Contact</a></li>
-            <li><a href="#privacy">🔒 Politica de Confidențialitate</a></li>
-            <li><a href="#terms">📋 Termeni și Condiții</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h4>Contact</h4>
-          <p>📧 contact@tgchannels.com</p>
-          <p>💬 @tgchannels_support</p>
-          <p>🌐 tg-channels.com</p>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 TG Channels. Toate drepturile rezervate.</p>
-        <div class="footer-stats">
-          <span id="footer-channels-count">83 Canale</span> •
-          <span id="footer-members-count">15M+ Membri</span> •
-          <span>Verificat și Sigur</span>
-        </div>
-      </div>
-    </div>
+  <footer>
+    <p>&copy; 2025 Promo Canale Telegram</p>
   </footer>
 
   <script src="scripts/main.js"></script>
