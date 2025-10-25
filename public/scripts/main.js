@@ -1064,7 +1064,20 @@ function showAdminTab(tabName) {
   
   // Show selected tab and activate button
   document.getElementById(`admin-${tabName}-tab`).style.display = 'block';
-  event.target.classList.add('active');
+  
+  // Find and activate the correct button
+  const tabMapping = {
+    'channels': 'Gestiune Canale',
+    'users': 'Utilizatori', 
+    'stats': 'Statistici',
+    'settings': 'Setări'
+  };
+  
+  document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+    if (btn.textContent.includes(tabMapping[tabName])) {
+      btn.classList.add('active');
+    }
+  });
   
   // Load tab-specific data
   switch(tabName) {
