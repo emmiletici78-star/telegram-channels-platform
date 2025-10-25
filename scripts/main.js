@@ -1480,23 +1480,100 @@ function adminCreateUser() {
 function closeConfirmEmailModal() {
   document.getElementById('confirm-email-modal').style.display = 'none';
   window._pendingAdminNewUser = null;
+  window._pendingUserRegistration = null;
+  window._pendingChannelProposal = null;
 }
 
 function confirmEmailCheck() {
   const typed = document.getElementById('confirm-email-input').value.trim().toLowerCase();
-  const pending = window._pendingAdminNewUser;
-  if (!pending) return closeConfirmEmailModal();
-  if (typed !== pending.email) return alert('Confirmarea nu s-a potrivit. Introdu adresa exactă pentru a confirma că este un email real.');
-
-  // create verified user
-  localStorage.setItem('user_' + pending.email, pending.pass);
-  const meta = { verified: true, verifiedAt: new Date().toISOString(), verifiedByAdmin: true };
-  localStorage.setItem('user_meta_' + pending.email, JSON.stringify(meta));
-  alert(`✅ Utilizatorul ${pending.email} a fost creat și verificat ca email real.`);
-  window._pendingAdminNewUser = null;
+  
+  // Check for admin user creation
+  const pendingAdmin = window._pendingAdminNewUser;
+  if (pendingAdmin) {
+    if (typed !== pendingAdmin.email) {
+      return alert('❌ Confirmarea nu s-a potrivit. Introdu adresa exactă pentru a confirma că este un email real.');
+    }
+    
+    // Create verified admin user
+    localStorage.setItem('user_' + pendingAdmin.email, pendingAdmin.pass);
+    const meta = { verified: true, verifiedAt: new Date().toISOString(), verifiedByAdmin: true };
+    localStorage.setItem('user_meta_' + pendingAdmin.email, JSON.stringify(meta));
+    alert(`✅ Utilizatorul ${pendingAdmin.email} a fost creat și verificat ca email real.`);
+    
+    window._pendingAdminNewUser = null;
+    closeConfirmEmailModal();
+    closeAddUserModal();
+    loadAdminUsers();
+    return;
+  }
+  
+  // Check for regular user registration
+  const pendingUser = window._pendingUserRegistration;
+  if (pendingUser) {
+    if (typed !== pendingUser.email) {
+      return alert('❌ Confirmarea nu s-a potrivit. Introdu adresa exactă pentru a confirma că este un email real și valid.');
+    }
+    
+    // Create verified user
+    localStorage.setItem(`user_${pendingUser.email}`, JSON.stringify({
+      email: pendingUser.email,
+      password: pendingUser.password,
+      created: new Date().toISOString(),
+      verified: true,
+      verifiedAt: new Date().toISOString()
+    }));
+    
+    alert(`✅ Contul pentru ${pendingUser.email} a fost creat cu succes!\n🔒 Email-ul a fost verificat ca fiind real și valid.`);
+    
+    // Clear form
+    document.getElementById('user-reg-email').value = '';
+    document.getElementById('user-reg-password').value = '';
+    
+    window._pendingUserRegistration = null;
+    closeConfirmEmailModal();
+    return;
+  }
+  
+  // Check for channel proposal submission
+  const pendingProposal = window._pendingChannelProposal;
+  if (pendingProposal) {
+    if (typed !== pendingProposal.email) {
+      return alert('❌ Confirmarea nu s-a potrivit. Introdu adresa exactă pentru a confirma că este un email real și valid.');
+    }
+    
+    // Store verified proposal
+    const proposals = JSON.parse(localStorage.getItem('channel_proposals') || '[]');
+    const proposal = {
+      id: Date.now(),
+      name: pendingProposal.name,
+      link: pendingProposal.link,
+      description: pendingProposal.description,
+      category: pendingProposal.category,
+      email: pendingProposal.email,
+      status: 'pending',
+      date: new Date().toISOString(),
+      emailVerified: true,
+      verifiedAt: new Date().toISOString()
+    };
+    
+    proposals.push(proposal);
+    localStorage.setItem('channel_proposals', JSON.stringify(proposals));
+    
+    alert(`✅ Propunerea pentru canalul "${pendingProposal.name}" a fost trimisă cu succes!\n🔒 Email-ul ${pendingProposal.email} a fost verificat ca fiind real.\n⏱️ Vei primi un răspuns în 1-3 zile lucrătoare.`);
+    
+    // Reset form
+    pendingProposal.formElement.reset();
+    const charCounter = document.querySelector('.char-counter');
+    if (charCounter) charCounter.textContent = '0/200 caractere';
+    
+    window._pendingChannelProposal = null;
+    closeConfirmEmailModal();
+    return;
+  }
+  
+  // No pending action found
+  alert('❌ Nu există o acțiune în curs de procesare.');
   closeConfirmEmailModal();
-  closeAddUserModal();
-  loadAdminUsers();
 }
 
 function adminVerifyUser(email) {
@@ -2170,33 +2247,41 @@ function showCategory(category) {
 function submitChannelProposal(event) {
   event.preventDefault();
   
-  const name = document.getElementById('propose-name').value;
-  const link = document.getElementById('propose-link').value;
-  const description = document.getElementById('propose-description').value;
+  const name = document.getElementById('propose-name').value.trim();
+  const link = document.getElementById('propose-link').value.trim();
+  const description = document.getElementById('propose-description').value.trim();
   const category = document.getElementById('propose-category').value;
-  const email = document.getElementById('propose-email').value;
+  const email = document.getElementById('propose-email').value.trim().toLowerCase();
   
-  // Store proposal
-  const proposals = JSON.parse(localStorage.getItem('channel_proposals') || '[]');
-  const proposal = {
-    id: Date.now(),
+  // Validate email format
+  if (!validateEmail(email)) {
+    alert('❌ Formatul email-ului este invalid!');
+    return;
+  }
+  
+  // Validate Telegram link
+  if (!link.includes('t.me/') && !link.includes('telegram.me/')) {
+    alert('❌ Link-ul trebuie să fie un link valid de Telegram (ex: https://t.me/nume_canal)!');
+    return;
+  }
+  
+  // For ANY email domain, require confirmation
+  window._pendingChannelProposal = {
     name,
-    link,
+    link, 
     description,
     category,
     email,
-    status: 'pending',
-    date: new Date().toISOString()
+    formElement: event.target
   };
   
-  proposals.push(proposal);
-  localStorage.setItem('channel_proposals', JSON.stringify(proposals));
+  // Show confirmation modal
+  document.getElementById('confirm-email-text').textContent = 
+    `🔒 Pentru a confirma că adresa ${email} este un email real și valid, scrie adresa completă exact mai jos:`;
+  document.getElementById('confirm-email-input').value = '';
+  document.getElementById('confirm-email-modal').style.display = 'flex';
   
-  alert('✅ Propunerea a fost trimisă cu succes! Vei primi un răspuns în 1-3 zile lucrătoare.');
-  
-  // Reset form
-  event.target.reset();
-  document.querySelector('.char-counter').textContent = '0/200 caractere';
+  console.log('📧 Email verification required for channel proposal:', email);
 }
 
 // Character counter for description
@@ -2244,7 +2329,7 @@ function adminLogin() {
 }
 
 function userRegister() {
-  const email = document.getElementById('user-reg-email').value;
+  const email = document.getElementById('user-reg-email').value.trim().toLowerCase();
   const password = document.getElementById('user-reg-password').value;
   
   if (!email || !password) {
@@ -2252,18 +2337,28 @@ function userRegister() {
     return;
   }
   
-  // Store user
-  localStorage.setItem(`user_${email}`, JSON.stringify({
-    email,
-    password,
-    created: new Date().toISOString()
-  }));
+  // Validate email format
+  if (!validateEmail(email)) {
+    alert('❌ Formatul email-ului este invalid!');
+    return;
+  }
   
-  alert('✅ Contul a fost creat cu succes!');
+  // Check if email already exists
+  if (localStorage.getItem(`user_${email}`)) {
+    alert('❌ Acest email este deja înregistrat!');
+    return;
+  }
   
-  // Clear form
-  document.getElementById('user-reg-email').value = '';
-  document.getElementById('user-reg-password').value = '';
+  // For ANY email domain, require confirmation by typing email exactly
+  window._pendingUserRegistration = { email, password };
+  
+  // Show confirmation modal
+  document.getElementById('confirm-email-text').textContent = 
+    `🔒 Pentru a confirma că adresa ${email} este un email real și valid, scrie adresa completă exact mai jos:`;
+  document.getElementById('confirm-email-input').value = '';
+  document.getElementById('confirm-email-modal').style.display = 'flex';
+  
+  console.log('📧 Email verification required for:', email);
 }
 
 function showAdminPanel(adminType) {
