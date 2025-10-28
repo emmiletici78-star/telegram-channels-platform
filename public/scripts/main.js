@@ -1532,34 +1532,48 @@ function exportUsers() {
 }
 
 function showAllChannels() {
+  console.log('🔍 showAllChannels called'); // Debug
   const channels = getChannels();
-  let html = `<h4>📺 Toate Canalele (${channels.length})</h4>`;
+  console.log('📺 Total channels:', channels.length); // Debug
   
-  channels.forEach(channel => {
-    html += `
-      <div class="admin-channel-item">
-        <div class="admin-item-info">
-          <strong>${channel.title}</strong><br>
-          <small>${channel.desc}</small><br>
-          <a href="${channel.url}" target="_blank">${channel.url}</a>
-          <div style="margin-top: 0.3rem;">
-            <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
-              ${channel.category.join(', ')}
-            </span>
+  let html = `<h4>📺 Toate Canalele (${channels.length})</h4>`;
+
+  channels.forEach((channel, index) => {
+    try {
+      // Asigură-te că category este array
+      const categoryStr = Array.isArray(channel.category) 
+        ? channel.category.join(', ') 
+        : channel.category || 'necategorizat';
+        
+      html += `
+        <div class="admin-channel-item" style="border: 1px solid #ddd; margin: 0.5rem 0; padding: 0.8rem; border-radius: 0.5rem; background: white;">
+          <div class="admin-item-info">
+            <strong>${channel.title || 'Fără titlu'}</strong><br>
+            <small>${channel.desc || 'Fără descriere'}</small><br>
+            <a href="${channel.url || '#'}" target="_blank">${channel.url || 'Fără URL'}</a>
+            <div style="margin-top: 0.3rem;">
+              <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
+                ${categoryStr}
+              </span>
+            </div>
           </div>
         </div>
-        <div class="admin-item-actions">
-          <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
-          <button class="delete" onclick="deleteChannel('${channel.title}')">🗑️ Delete</button>
-        </div>
-      </div>
-    `;
+      `;
+    } catch (error) {
+      console.error('Error processing channel:', channel, error);
+      html += `<div style="color: red; padding: 0.5rem;">Error la canalul ${index}: ${error.message}</div>`;
+    }
   });
-  
-  document.getElementById('admin-channels-list').innerHTML = html;
-}
 
-function showPendingChannels() {
+  const listElement = document.getElementById('admin-channels-list');
+  if (listElement) {
+    listElement.innerHTML = html;
+    console.log('✅ HTML updated successfully'); // Debug
+  } else {
+    console.error('❌ Element admin-channels-list not found!');
+    alert('Eroare: Nu găsesc elementul pentru afișarea canalelor!');
+  }
+}function showPendingChannels() {
   const pendingChannels = JSON.parse(localStorage.getItem('pending_channels') || '[]');
   const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
   
