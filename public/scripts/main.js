@@ -1,4 +1,4 @@
-﻿console.log('ðŸš€ JavaScript loaded successfully!'); // Debug
+﻿console.log('🚀 JavaScript loaded successfully!'); // Debug
 console.log('defaultChannels length:', defaultChannels.length);
 
 // Default channels (category is an array)
@@ -6,28 +6,28 @@ const defaultChannels = [
   // CRYPTO CHANNELS (38) - Real channels with massive member counts
   {
     title: "Money Channel",
-    desc: "Canal cu 5.136.824 membri - ultimele È™tiri financiare",
+    desc: "Canal cu 5.136.824 membri - ultimele știri financiare",
     url: "https://t.me/money",
     logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
     category: ["crypto"]
   },
   {
     title: "Just Channel",
-    desc: "Canal cu 4.803.558 membri - discuÈ›ii despre investiÈ›ii",
+    desc: "Canal cu 4.803.558 membri - discuții despre investiții",
     url: "https://t.me/just",
     logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
     category: ["crypto"]
   },
   {
     title: "Venture Capital",
-    desc: "Canal cu 3.565.116 membri - oportunitÄƒÈ›i de investiÈ›ii VC",
+    desc: "Canal cu 3.565.116 membri - oportunități de investiții VC",
     url: "https://t.me/venture",
     logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
     category: ["crypto"]
   },
   {
     title: "Cheat Kott",
-    desc: "Canal cu 3.881.442 membri - strategii È™i hack-uri trading",
+    desc: "Canal cu 3.881.442 membri - strategii și hack-uri trading",
     url: "https://t.me/cheatkott",
     logo: "https://cdn-icons-png.flaticon.com/512/5968/5968260.png",
     category: ["crypto"]
@@ -48,28 +48,28 @@ const defaultChannels = [
   },
   {
     title: "Benefactor 0101",
-    desc: "Canal cu 2.382.433 membri - sfaturi premium investiÈ›ii",
+    desc: "Canal cu 2.382.433 membri - sfaturi premium investiții",
     url: "https://t.me/benefactor0101",
     logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
     category: ["crypto"]
   },
   {
     title: "Insider Politic",
-    desc: "Canal cu 2.931.308 membri - politicÄƒ È™i economie insider",
+    desc: "Canal cu 2.931.308 membri - politică și economie insider",
     url: "https://t.me/insiderr_politic",
     logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
     category: ["crypto"]
   },
   {
     title: "Galactica Network",
-    desc: "Canal cu 1.578.094 membri - reÈ›ea crypto premium",
+    desc: "Canal cu 1.578.094 membri - rețea crypto premium",
     url: "https://t.me/galacticanetwork",
     logo: "https://cdn-icons-png.flaticon.com/512/8115/8115728.png",
     category: ["crypto"]
   },
   {
     title: "Cumber Tech",
-    desc: "Canal cu 1.362.965 membri - tehnologie È™i crypto",
+    desc: "Canal cu 1.362.965 membri - tehnologie și crypto",
     url: "https://t.me/cumbertech",
     logo: "https://cdn-icons-png.flaticon.com/512/1304/1304068.png",
     category: ["crypto"]
@@ -83,63 +83,63 @@ const defaultChannels = [
   },
   {
     title: "Movie Channel",
-    desc: "Canal cu 1.295.089 membri - entertainment È™i crypto",
+    desc: "Canal cu 1.295.089 membri - entertainment și crypto",
     url: "https://t.me/movie",
     logo: "https://cdn-icons-png.flaticon.com/512/825/825519.png",
     category: ["crypto"]
   },
   {
     title: "Crypto Sayer",
-    desc: "Canal cu 1.209.240 membri - predicÈ›ii È™i analize crypto",
+    desc: "Canal cu 1.209.240 membri - predicții și analize crypto",
     url: "https://t.me/cryptosayer",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
     category: ["crypto"]
   },
   {
     title: "AI Post",
-    desc: "Canal cu 1.085.808 membri - AI È™i crypto intersection",
+    desc: "Canal cu 1.085.808 membri - AI și crypto intersection",
     url: "https://t.me/aipost",
     logo: "https://cdn-icons-png.flaticon.com/512/8099/8099231.png",
     category: ["crypto"]
   },
   {
     title: "CoinGraph News",
-    desc: "Canal cu 1.057.208 membri - È™tiri crypto actualizate",
+    desc: "Canal cu 1.057.208 membri - știri crypto actualizate",
     url: "https://t.me/coingraphnews",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
     category: ["crypto"]
   },
   {
     title: "Coin Dot News Ann",
-    desc: "Canal cu 869.053 membri - anunÈ›uri importante crypto",
+    desc: "Canal cu 869.053 membri - anunțuri importante crypto",
     url: "https://t.me/coindotnewsann",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
     category: ["crypto"]
   },
   {
     title: "Pump Crypto Bets",
-    desc: "Canal cu 722.787 membri - pump signals È™i bets",
+    desc: "Canal cu 722.787 membri - pump signals și bets",
     url: "https://t.me/pumpcryptobets",
     logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
     category: ["crypto"]
   },
   {
     title: "Cryptex Library",
-    desc: "Canal cu 684.241 membri - biblioteca crypto educaÈ›ionalÄƒ",
+    desc: "Canal cu 684.241 membri - biblioteca crypto educațională",
     url: "https://t.me/cryptex_library",
     logo: "https://cdn-icons-png.flaticon.com/512/8115/8115728.png",
     category: ["crypto"]
   },
   {
     title: "America News Crypto",
-    desc: "Canal cu 580.716 membri - È™tiri crypto din America",
+    desc: "Canal cu 580.716 membri - știri crypto din America",
     url: "https://t.me/america_news_crypto",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
     category: ["crypto"]
   },
   {
     title: "American Crypto Channel",
-    desc: "Canal cu 586.681 membri - comunitatea crypto americanÄƒ",
+    desc: "Canal cu 586.681 membri - comunitatea crypto americană",
     url: "https://t.me/americancryptochannel",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
     category: ["crypto"]
@@ -153,14 +153,14 @@ const defaultChannels = [
   },
   {
     title: "Watcher Guru",
-    desc: "Canal cu 549.855 membri - market watching È™i analize",
+    desc: "Canal cu 549.855 membri - market watching și analize",
     url: "https://t.me/watcherguru",
     logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
     category: ["crypto"]
   },
   {
     title: "Alpha Trade News",
-    desc: "Canal cu 519.863 membri - È™tiri trading premium alpha",
+    desc: "Canal cu 519.863 membri - știri trading premium alpha",
     url: "https://t.me/alphattradenews",
     logo: "https://cdn-icons-png.flaticon.com/512/2920/2920349.png",
     category: ["crypto"]
@@ -188,7 +188,7 @@ const defaultChannels = [
   },
   {
     title: "The Yes Coin News",
-    desc: "Canal cu 484.123 membri - È™tiri despre Yes Coin",
+    desc: "Canal cu 484.123 membri - știri despre Yes Coin",
     url: "https://t.me/theyescoin_news",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001982.png",
     category: ["crypto"]
@@ -202,7 +202,7 @@ const defaultChannels = [
   },
   {
     title: "Crypto Retro",
-    desc: "Canal cu 454.444 membri - retrospective È™i analize crypto",
+    desc: "Canal cu 454.444 membri - retrospective și analize crypto",
     url: "https://t.me/crypto_retro",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001368.png",
     category: ["crypto"]
@@ -216,7 +216,7 @@ const defaultChannels = [
   },
   {
     title: "Thing IO",
-    desc: "Canal cu 449.717 membri - IoT È™i blockchain technology",
+    desc: "Canal cu 449.717 membri - IoT și blockchain technology",
     url: "https://t.me/thing_io",
     logo: "https://cdn-icons-png.flaticon.com/512/1304/1304068.png",
     category: ["crypto"]
@@ -230,7 +230,7 @@ const defaultChannels = [
   },
   {
     title: "Telo News",
-    desc: "Canal cu 403.598 membri - È™tiri rapide crypto",
+    desc: "Canal cu 403.598 membri - știri rapide crypto",
     url: "https://t.me/telonews",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
     category: ["crypto"]
@@ -244,7 +244,7 @@ const defaultChannels = [
   },
   {
     title: "CoinMarketCap Announcements",
-    desc: "Canal cu 317.997 membri - anunÈ›uri oficiale CMC",
+    desc: "Canal cu 317.997 membri - anunțuri oficiale CMC",
     url: "https://t.me/coinmarketcapannouncements",
     logo: "https://cdn-icons-png.flaticon.com/512/6001/6001527.png",
     category: ["crypto"]
@@ -273,71 +273,71 @@ const defaultChannels = [
 
   // GAMING CHANNELS (50)
   {
-    title: "Gamers RomÃ¢nia Official",
-    desc: "Cea mai mare comunitate de gameri din RomÃ¢nia.",
+    title: "Gamers România Official",
+    desc: "Cea mai mare comunitate de gameri din România.",
     url: "https://t.me/gamersromania_official",
     logo: "https://cdn-icons-png.flaticon.com/512/1055/1055687.png",
     category: ["gaming"]
   },
   {
-    title: "CS2 RomÃ¢nia",
-    desc: "Counter-Strike 2 - turnee, echipe È™i discuÈ›ii.",
+    title: "CS2 România",
+    desc: "Counter-Strike 2 - turnee, echipe și discuții.",
     url: "https://t.me/cs2romania",
     logo: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
     category: ["gaming"]
   },
   {
-    title: "FIFA RomÃ¢nia",
-    desc: "FIFA 24 - Ultimate Team, turnee È™i sfaturi.",
+    title: "FIFA România",
+    desc: "FIFA 24 - Ultimate Team, turnee și sfaturi.",
     url: "https://t.me/fifaromania",
     logo: "https://cdn-icons-png.flaticon.com/512/53/53283.png",
     category: ["gaming"]
   },
   {
-    title: "Dota 2 RomÃ¢nia",
-    desc: "Comunitatea romÃ¢neascÄƒ de Dota 2 È™i eSports.",
+    title: "Dota 2 România",
+    desc: "Comunitatea românească de Dota 2 și eSports.",
     url: "https://t.me/dota2romania",
     logo: "https://cdn-icons-png.flaticon.com/512/588/588267.png",
     category: ["gaming"]
   },
   {
     title: "League of Legends RO",
-    desc: "LoL RomÃ¢nia - ranked, turnee È™i echipe.",
+    desc: "LoL România - ranked, turnee și echipe.",
     url: "https://t.me/lolromania",
     logo: "https://cdn-icons-png.flaticon.com/512/588/588275.png",
     category: ["gaming"]
   },
   {
     title: "Mobile Gaming RO",
-    desc: "Jocuri mobile populare Ã®n RomÃ¢nia - PUBG, Clash Royale.",
+    desc: "Jocuri mobile populare în România - PUBG, Clash Royale.",
     url: "https://t.me/mobilegamingromania",
     logo: "https://cdn-icons-png.flaticon.com/512/3659/3659898.png",
     category: ["gaming"]
   },
   {
-    title: "Steam RomÃ¢nia",
-    desc: "Oferte Steam, jocuri noi È™i recomandÄƒri.",
+    title: "Steam România",
+    desc: "Oferte Steam, jocuri noi și recomandări.",
     url: "https://t.me/steamromania",
     logo: "https://cdn-icons-png.flaticon.com/512/888/888859.png",
     category: ["gaming"]
   },
   {
-    title: "PC Gaming RomÃ¢nia",
-    desc: "Hardware gaming, build-uri PC È™i benchmark-uri.",
+    title: "PC Gaming România",
+    desc: "Hardware gaming, build-uri PC și benchmark-uri.",
     url: "https://t.me/pcgamingromania",
     logo: "https://cdn-icons-png.flaticon.com/512/2991/2991620.png",
     category: ["gaming"]
   },
   {
-    title: "Valorant RomÃ¢nia",
-    desc: "Valorant competitive È™i casual gaming Ã®n RomÃ¢nia.",
+    title: "Valorant România",
+    desc: "Valorant competitive și casual gaming în România.",
     url: "https://t.me/valorantromania",
     logo: "https://cdn-icons-png.flaticon.com/512/2991/2991158.png",
     category: ["gaming"]
   },
   {
-    title: "Minecraft RomÃ¢nia",
-    desc: "Servere romÃ¢neÈ™ti È™i construcÈ›ii creative Ã®n Minecraft.",
+    title: "Minecraft România",
+    desc: "Servere românești și construcții creative în Minecraft.",
     url: "https://t.me/minecraftromania",
     logo: "https://cdn-icons-png.flaticon.com/512/588/588267.png",
     category: ["gaming"]
@@ -346,84 +346,84 @@ const defaultChannels = [
   // ADULT CHANNELS (45) - Real channels with member counts
   {
     title: "Alexis Mucci Official",
-    desc: "Canal oficial cu 321.77k membri - conÈ›inut exclusiv",
+    desc: "Canal oficial cu 321.77k membri - conținut exclusiv",
     url: "https://t.me/alexismucciofficial",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Face Switcher",
-    desc: "Canal cu 285.49k membri - tehnologii AI È™i deepfake",
+    desc: "Canal cu 285.49k membri - tehnologii AI și deepfake",
     url: "https://t.me/faceswitcher",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Anime Mania XX",
-    desc: "Canal cu 108.81k membri - conÈ›inut anime pentru adulÈ›i",
+    desc: "Canal cu 108.81k membri - conținut anime pentru adulți",
     url: "https://t.me/animemaniaxx",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Khyati Shree Channel",
-    desc: "Canal cu 99.47k membri - conÈ›inut exclusiv",
+    desc: "Canal cu 99.47k membri - conținut exclusiv",
     url: "https://t.me/khyatishreechannel",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Yailin La Mas Viral",
-    desc: "Canal cu 79.73k membri - conÈ›inut viral È™i exclusiv",
+    desc: "Canal cu 79.73k membri - conținut viral și exclusiv",
     url: "https://t.me/yailin_la_mas_viral_yailinlamass",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Karel Ion Li",
-    desc: "Canal cu 74.3k membri - conÈ›inut premium",
+    desc: "Canal cu 74.3k membri - conținut premium",
     url: "https://t.me/karelionli",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Rubi Rose Tele",
-    desc: "Canal cu 64.88k membri - conÈ›inut exclusiv",
+    desc: "Canal cu 64.88k membri - conținut exclusiv",
     url: "https://t.me/rubirosetele",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Utopian Leaks",
-    desc: "Canal cu 62.75k membri - leaks È™i conÈ›inut premium",
+    desc: "Canal cu 62.75k membri - leaks și conținut premium",
     url: "https://t.me/utopianleaks",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Badoo Com",
-    desc: "Canal cu 60.99k membri - dating È™i Ã®ntÃ¢lniri",
+    desc: "Canal cu 60.99k membri - dating și întâlniri",
     url: "https://t.me/badoocom",
     logo: "https://cdn-icons-png.flaticon.com/512/1077/1077035.png",
     category: ["adult"]
   },
   {
     title: "Tinder RU",
-    desc: "Canal cu 60.08k membri - dating È™i match-uri",
+    desc: "Canal cu 60.08k membri - dating și match-uri",
     url: "https://t.me/tinderru",
     logo: "https://cdn-icons-png.flaticon.com/512/1077/1077035.png",
     category: ["adult"]
   },
   {
     title: "Allinika PH",
-    desc: "Canal cu 60.05k membri - conÈ›inut premium",
+    desc: "Canal cu 60.05k membri - conținut premium",
     url: "https://t.me/allinika_ph",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Rachel Cook",
-    desc: "Canal cu 54.08k membri - conÈ›inut exclusiv model",
+    desc: "Canal cu 54.08k membri - conținut exclusiv model",
     url: "https://t.me/itsrachelc00k",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -437,35 +437,35 @@ const defaultChannels = [
   },
   {
     title: "Voulez J Fans Only",
-    desc: "Canal cu 40.69k membri - conÈ›inut premium exclusive",
+    desc: "Canal cu 40.69k membri - conținut premium exclusive",
     url: "https://t.me/voulezjfansonly",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Grace Charis",
-    desc: "Canal cu 38.32k membri - conÈ›inut exclusiv golf model",
+    desc: "Canal cu 38.32k membri - conținut exclusiv golf model",
     url: "https://t.me/grace_charis_itsgracecharis",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Yus Lopez",
-    desc: "Canal cu 34.19k membri - conÈ›inut premium fitness",
+    desc: "Canal cu 34.19k membri - conținut premium fitness",
     url: "https://t.me/yus_lopez_yuslopez",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Joselis Boli",
-    desc: "Canal cu 22.71k membri - conÈ›inut exclusiv model",
+    desc: "Canal cu 22.71k membri - conținut exclusiv model",
     url: "https://t.me/joselisboli",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Bronte B",
-    desc: "Canal cu 20.15k membri - conÈ›inut premium",
+    desc: "Canal cu 20.15k membri - conținut premium",
     url: "https://t.me/bronteb",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -493,7 +493,7 @@ const defaultChannels = [
   },
   {
     title: "Cameltoe OnlyFans",
-    desc: "Canal cu 14.43k membri - conÈ›inut premium specific",
+    desc: "Canal cu 14.43k membri - conținut premium specific",
     url: "https://t.me/cameltoe_only_fans",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -507,7 +507,7 @@ const defaultChannels = [
   },
   {
     title: "Olivia Casta Fans",
-    desc: "Canal cu 13.72k membri - conÈ›inut exclusiv model",
+    desc: "Canal cu 13.72k membri - conținut exclusiv model",
     url: "https://t.me/olivia_casta_fans",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -542,7 +542,7 @@ const defaultChannels = [
   },
   {
     title: "Naughty Dream",
-    desc: "Canal cu 11.3k membri - conÈ›inut premium pentru adulÈ›i",
+    desc: "Canal cu 11.3k membri - conținut premium pentru adulți",
     url: "https://t.me/naughtydream",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -556,21 +556,21 @@ const defaultChannels = [
   },
   {
     title: "OnlyFans Premium 4 Free",
-    desc: "Canal cu 10.57k membri - conÈ›inut premium gratuit",
+    desc: "Canal cu 10.57k membri - conținut premium gratuit",
     url: "https://t.me/onlyfanspremium4free",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "Rebelote TG",
-    desc: "Canal cu 10.4k membri - conÈ›inut premium rebel",
+    desc: "Canal cu 10.4k membri - conținut premium rebel",
     url: "https://t.me/rebelotetg",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "NSFW Premium",
-    desc: "Canal cu 10.12k membri - conÈ›inut NSFW premium",
+    desc: "Canal cu 10.12k membri - conținut NSFW premium",
     url: "https://t.me/nsfw_premium",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -584,7 +584,7 @@ const defaultChannels = [
   },
   {
     title: "RSLD Forever",
-    desc: "Canal cu 118.156k membri - conÈ›inut premium vast",
+    desc: "Canal cu 118.156k membri - conținut premium vast",
     url: "https://t.me/rsldforever",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -598,7 +598,7 @@ const defaultChannels = [
   },
   {
     title: "All Internet Girls",
-    desc: "Canal cu 36.087k membri - colecÈ›ie modele internet",
+    desc: "Canal cu 36.087k membri - colecție modele internet",
     url: "https://t.me/all_internet_girls",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -626,7 +626,7 @@ const defaultChannels = [
   },
   {
     title: "Buns Shaking",
-    desc: "Canal cu 25.686k membri - conÈ›inut premium specific",
+    desc: "Canal cu 25.686k membri - conținut premium specific",
     url: "https://t.me/Buns_shaking",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -647,14 +647,14 @@ const defaultChannels = [
   },
   {
     title: "PornHub Sex Videos",
-    desc: "Canal cu 11.432k membri - conÈ›inut video premium",
+    desc: "Canal cu 11.432k membri - conținut video premium",
     url: "https://t.me/PornHubb_SexVideos_PornVideos",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
   },
   {
     title: "My Super Hot",
-    desc: "Canal cu 11.003k membri - conÈ›inut premium hot",
+    desc: "Canal cu 11.003k membri - conținut premium hot",
     url: "https://t.me/mysuperhot",
     logo: "https://cdn-icons-png.flaticon.com/512/3524/3524752.png",
     category: ["adult"]
@@ -681,10 +681,10 @@ const defaultChannels = [
     category: ["adult"]
   },
 
-  // È˜TIRI CHANNELS (50)
+  // ȘTIRI CHANNELS (50)
   {
-    title: "È˜tiri RomÃ¢nia Live",
-    desc: "Ultimele È™tiri din RomÃ¢nia actualizate Ã®n timp real.",
+    title: "Știri România Live",
+    desc: "Ultimele știri din România actualizate în timp real.",
     url: "https://t.me/stiriromanialive",
     logo: "https://cdn-icons-png.flaticon.com/512/1828/1828919.png",
     category: ["stiri"]
@@ -698,14 +698,14 @@ const defaultChannels = [
   },
   {
     title: "Pro TV News",
-    desc: "È˜tirile Pro TV direct pe Telegram.",
+    desc: "Știrile Pro TV direct pe Telegram.",
     url: "https://t.me/protvnews",
     logo: "https://cdn-icons-png.flaticon.com/512/174/174876.png",
     category: ["stiri"]
   },
   {
-    title: "RomÃ¢nia LiberÄƒ",
-    desc: "Jurnalism independent È™i investigaÈ›ii Ã®n RomÃ¢nia.",
+    title: "România Liberă",
+    desc: "Jurnalism independent și investigații în România.",
     url: "https://t.me/romanialibera",
     logo: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
     category: ["stiri"]
@@ -718,38 +718,38 @@ const defaultChannels = [
     category: ["stiri"]
   },
 
-  // REÈšETE CHANNELS (50)
+  // REȚETE CHANNELS (50)
   {
-    title: "ReÈ›ete RomÃ¢neÈ™ti",
-    desc: "Cele mai gustoase reÈ›ete tradiÈ›ionale romÃ¢neÈ™ti.",
+    title: "Rețete Românești",
+    desc: "Cele mai gustoase rețete tradiționale românești.",
     url: "https://t.me/reteteromanesti",
     logo: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png",
     category: ["retete"]
   },
   {
-    title: "BucÄƒtÄƒria Bunicii",
-    desc: "ReÈ›ete de la bunica, gÄƒtit tradiÈ›ional romÃ¢nesc.",
+    title: "Bucătăria Bunicii",
+    desc: "Rețete de la bunica, gătit tradițional românesc.",
     url: "https://t.me/bucatariabunicii",
     logo: "https://cdn-icons-png.flaticon.com/512/2771/2771401.png",
     category: ["retete"]
   },
   {
     title: "Deserturi Delicioase",
-    desc: "ReÈ›ete de prÄƒjituri, torturi È™i deserturi romÃ¢neÈ™ti.",
+    desc: "Rețete de prăjituri, torturi și deserturi românești.",
     url: "https://t.me/deserturidelicioase",
     logo: "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",
     category: ["retete"]
   },
   {
-    title: "MÃ¢ncare SÄƒnÄƒtoasÄƒ",
-    desc: "ReÈ›ete healthy È™i nutriÈ›ie echilibratÄƒ.",
+    title: "Mâncare Sănătoasă",
+    desc: "Rețete healthy și nutriție echilibrată.",
     url: "https://t.me/mancaresanatoasa",
     logo: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png",
     category: ["retete"]
   },
   {
-    title: "GÄƒtit Rapid",
-    desc: "ReÈ›ete rapide pentru persoanele ocupate.",
+    title: "Gătit Rapid",
+    desc: "Rețete rapide pentru persoanele ocupate.",
     url: "https://t.me/gatitrapid",
     logo: "https://cdn-icons-png.flaticon.com/512/1046/1046747.png",
     category: ["retete"]
@@ -757,36 +757,36 @@ const defaultChannels = [
 
   // TEHNOLOGIE CHANNELS (50)
   {
-    title: "IT RomÃ¢nia News",
-    desc: "Ultimele noutÄƒÈ›i din tehnologie È™i IT din RomÃ¢nia.",
+    title: "IT România News",
+    desc: "Ultimele noutăți din tehnologie și IT din România.",
     url: "https://t.me/itromanianews",
     logo: "https://cdn-icons-png.flaticon.com/512/2111/2111646.png",
     category: ["tehnologie"]
   },
   {
-    title: "Android RomÃ¢nia",
-    desc: "Tot despre Android - aplicaÈ›ii, ROM-uri, sfaturi.",
+    title: "Android România",
+    desc: "Tot despre Android - aplicații, ROM-uri, sfaturi.",
     url: "https://t.me/androidromania",
     logo: "https://cdn-icons-png.flaticon.com/512/174/174836.png",
     category: ["tehnologie"]
   },
   {
-    title: "iPhone RomÃ¢nia",
-    desc: "Comunitatea iPhone din RomÃ¢nia È™i iOS tips.",
+    title: "iPhone România",
+    desc: "Comunitatea iPhone din România și iOS tips.",
     url: "https://t.me/iphoneromania",
     logo: "https://cdn-icons-png.flaticon.com/512/174/174841.png",
     category: ["tehnologie"]
   },
   {
-    title: "Programare RomÃ¢nia",
-    desc: "ÃŽnvaÈ›Äƒ programare È™i development Ã®n RomÃ¢nia.",
+    title: "Programare România",
+    desc: "Învață programare și development în România.",
     url: "https://t.me/programareromania",
     logo: "https://cdn-icons-png.flaticon.com/512/1055/1055666.png",
     category: ["tehnologie"]
   },
   {
-    title: "AI RomÃ¢nia",
-    desc: "InteligenÈ›a artificialÄƒ È™i machine learning Ã®n romÃ¢nÄƒ.",
+    title: "AI România",
+    desc: "Inteligența artificială și machine learning în română.",
     url: "https://t.me/airomania",
     logo: "https://cdn-icons-png.flaticon.com/512/4712/4712027.png",
     category: ["tehnologie"]
@@ -794,36 +794,36 @@ const defaultChannels = [
 
   // PROMO CHANNELS (50)
   {
-    title: "Oferte RomÃ¢nia",
-    desc: "Cele mai bune oferte È™i reduceri din RomÃ¢nia.",
+    title: "Oferte România",
+    desc: "Cele mai bune oferte și reduceri din România.",
     url: "https://t.me/oferteromania",
     logo: "https://cdn-icons-png.flaticon.com/512/726/726476.png",
     category: ["promo"]
   },
   {
     title: "Reduceri Online",
-    desc: "Coduri de reducere È™i promoÈ›ii pentru magazine online.",
+    desc: "Coduri de reducere și promoții pentru magazine online.",
     url: "https://t.me/reducerionline",
     logo: "https://cdn-icons-png.flaticon.com/512/2331/2331970.png",
     category: ["promo"]
   },
   {
     title: "Black Friday RO",
-    desc: "Cele mai mari reduceri de Black Friday din RomÃ¢nia.",
+    desc: "Cele mai mari reduceri de Black Friday din România.",
     url: "https://t.me/blackfridayro",
     logo: "https://cdn-icons-png.flaticon.com/512/726/726488.png",
     category: ["promo"]
   },
   {
     title: "Cupoane de Reducere",
-    desc: "Cupoane exclusive pentru magazinele romÃ¢neÈ™ti.",
+    desc: "Cupoane exclusive pentru magazinele românești.",
     url: "https://t.me/cupoanedereducere",
     logo: "https://cdn-icons-png.flaticon.com/512/2331/2331966.png",
     category: ["promo"]
   },
   {
-    title: "Concursuri RomÃ¢nia",
-    desc: "Concursuri cu premii organizate Ã®n RomÃ¢nia.",
+    title: "Concursuri România",
+    desc: "Concursuri cu premii organizate în România.",
     url: "https://t.me/concursuriRomania",
     logo: "https://cdn-icons-png.flaticon.com/512/3176/3176366.png",
     category: ["promo"]
@@ -833,7 +833,7 @@ const defaultChannels = [
 // Continue adding more channels to reach 50 for each category...
 
 function getChannels() {
-  // ReturneazÄƒ direct defaultChannels - simplu È™i funcÈ›ional
+  // Returnează direct defaultChannels - simplu și funcțional
   return defaultChannels;
 }
 function saveChannels(channels) {
@@ -849,12 +849,12 @@ function addChannel() {
   const category = Array.from(categorySelect.selectedOptions).map(opt => opt.value);
   const owner = localStorage.getItem('logged_user');
 
-  if (!title || !desc || !url) return alert('CompleteazÄƒ toate cÃ¢mpurile obligatorii!');
-  if (!/^https:\/\/t\.me\//.test(url)) return alert('Linkul trebuie sÄƒ fie de forma https://t.me/...');
-  if (!owner) return alert('Trebuie sÄƒ fii logat pentru a adÄƒuga canal!');
-  if (category.length === 0) return alert('SelecteazÄƒ cel puÈ›in o categorie!');
+  if (!title || !desc || !url) return alert('Completează toate câmpurile obligatorii!');
+  if (!/^https:\/\/t\.me\//.test(url)) return alert('Linkul trebuie să fie de forma https://t.me/...');
+  if (!owner) return alert('Trebuie să fii logat pentru a adăuga canal!');
+  if (category.length === 0) return alert('Selectează cel puțin o categorie!');
 
-  // SalveazÄƒ doar Ã®n user_channels pentru a evita duplicatele
+  // Salvează doar în user_channels pentru a evita duplicatele
   const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
   userChannels.unshift({ title, desc, url, logo, owner, category });
   localStorage.setItem('user_channels', JSON.stringify(userChannels));
@@ -873,10 +873,10 @@ function deleteChannel(realIdx) {
   const channel = channels[realIdx];
   if (!channel) return;
   if (channel.owner !== logged) {
-    alert('PoÈ›i È™terge doar canalele adÄƒugate de tine!');
+    alert('Poți șterge doar canalele adăugate de tine!');
     return;
   }
-  if (!confirm('Sigur vrei sÄƒ È™tergi acest canal?')) return;
+  if (!confirm('Sigur vrei să ștergi acest canal?')) return;
   channels.splice(realIdx, 1);
   saveChannels(channels);
   showCategory(currentCategory);
@@ -885,14 +885,14 @@ function deleteChannel(realIdx) {
 let currentCategory = 'all';
 
 function showCategory(category) {
-  console.log('ðŸ“º Showing category:', category); // Debug
+  console.log('📺 Showing category:', category); // Debug
   currentCategory = category;
   updateActiveCategoryButtons();
   
-  // Debug - verificÄƒm canalele
+  // Debug - verificăm canalele
   const channels = getChannels();
-  console.log('ðŸ” Total channels:', channels.length);
-  console.log('ðŸ” First 3 channels:', channels.slice(0, 3));
+  console.log('🔍 Total channels:', channels.length);
+  console.log('🔍 First 3 channels:', channels.slice(0, 3));
   renderChannelsByCategory();
   
   // Change background based on category
@@ -914,17 +914,17 @@ function updateActiveCategoryButtons() {
 }
 
 function renderChannelsByCategory() {
-  console.log('ðŸ”„ Rendering channels for category:', currentCategory); // Debug
+  console.log('🔄 Rendering channels for category:', currentCategory); // Debug
   
   const list = document.getElementById('channels-list');
   if (!list) {
-    console.error('âŒ channels-list element not found!');
+    console.error('❌ channels-list element not found!');
     return;
   }
   
   list.innerHTML = '';
   const channels = getChannels();
-  console.log('ðŸ“‹ Total channels:', channels.length); // Debug
+  console.log('📋 Total channels:', channels.length); // Debug
   
   const logged = localStorage.getItem('logged_user');
 
@@ -939,7 +939,7 @@ function renderChannelsByCategory() {
           : (c.category || '').toLowerCase() === currentCategory
       );
   
-  console.log('ðŸŽ¯ Filtered channels:', filtered.length); // Debug
+  console.log('🎯 Filtered channels:', filtered.length); // Debug
 
   // order: user's channels first
   const userChannels = [];
@@ -950,13 +950,13 @@ function renderChannelsByCategory() {
   });
   const sorted = getSortedChannels(filtered, category);
 
-  // For 'all' display featured channels set by admin
+  // For 'all' display first 6 channels directly from defaultChannels
   if (currentCategory === 'all') {
     const grid = document.createElement('div');
     grid.className = 'channels-grid';
     const toShow = getHomepageFeaturedChannels(); // Use featured channels function
     if (toShow.length === 0) {
-      list.innerHTML = '<p style="text-align:center;">Nu existÄƒ canale de afiÈ™at.</p>';
+      list.innerHTML = '<p style="text-align:center;">Nu există canale de afișat.</p>';
       return;
     }
     toShow.forEach(channel => {
@@ -969,7 +969,7 @@ function renderChannelsByCategory() {
           <div class="channel-title">${channel.title}</div>
           <div class="channel-desc">${channel.desc}</div>
           <a class="channel-link" onclick="openChannel('${channel.url}', '${channel.title}'); return false;" href="#">Vezi canalul</a>
-          ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">È˜terge</button>` : ''}
+          ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">Șterge</button>` : ''}
         </div>
       `;
       grid.appendChild(card);
@@ -980,7 +980,7 @@ function renderChannelsByCategory() {
 
   // For other categories - list view
   if (sorted.length === 0) {
-    list.innerHTML = '<p style="text-align:center;">Nu existÄƒ canale Ã®n aceastÄƒ categorie.</p>';
+    list.innerHTML = '<p style="text-align:center;">Nu există canale în această categorie.</p>';
     return;
   }
 
@@ -994,27 +994,27 @@ function renderChannelsByCategory() {
         <div class="channel-title">${channel.title}</div>
         <div class="channel-desc">${channel.desc}</div>
         <a class="channel-link" onclick="openChannel('${channel.url}', '${channel.title}'); return false;" href="#">Vezi canalul</a>
-        ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">È˜terge</button>` : ''}
+        ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">Șterge</button>` : ''}
       </div>
     `;
     list.appendChild(card);
   });
   
-  console.log('ðŸŽ¯ renderChannelsByCategory finished - channels rendered:', sorted.length);
+  console.log('🎯 renderChannelsByCategory finished - channels rendered:', sorted.length);
 }
 
 // --- Auth ---
 function register() {
   const email = document.getElementById('reg-email').value.trim().toLowerCase();
   const pass = document.getElementById('reg-password').value;
-  if (!email || !pass) return alert('CompleteazÄƒ toate cÃ¢mpurile!');
-  if (!validateEmail(email)) return alert('âŒ Email invalid!\n\nâœ… FoloseÈ™te un email REAL:\nâ€¢ nume.prenume@gmail.com\nâ€¢ contact@yahoo.com\nâ€¢ admin@company.ro\n\nâŒ NU acceptÄƒm:\nâ€¢ 1111@gmail.com (doar cifre)\nâ€¢ test@fake.com (domenii fake)');
-  if (localStorage.getItem('user_' + email)) return alert('Emailul existÄƒ deja!');
+  if (!email || !pass) return alert('Completează toate câmpurile!');
+  if (!validateEmail(email)) return alert('❌ Email invalid!\n\n✅ Folosește un email REAL:\n• nume.prenume@gmail.com\n• contact@yahoo.com\n• admin@company.ro\n\n❌ NU acceptăm:\n• 1111@gmail.com (doar cifre)\n• test@fake.com (domenii fake)');
+  if (localStorage.getItem('user_' + email)) return alert('Emailul există deja!');
   localStorage.setItem('user_' + email, pass);
   // store metadata for the user (verified flag)
   const meta = { verified: false, createdAt: new Date().toISOString() };
   localStorage.setItem('user_meta_' + email, JSON.stringify(meta));
-  alert('Cont creat! Acum te poÈ›i loga.');
+  alert('Cont creat! Acum te poți loga.');
   document.getElementById('reg-email').value = '';
   document.getElementById('reg-password').value = '';
 }
@@ -1030,7 +1030,7 @@ function login() {
     localStorage.setItem('logged_user', email);
     localStorage.setItem('is_admin', 'true');
     showUser();
-    alert('âœ… Logat ca ADMIN cu succes!');
+    alert('✅ Logat ca ADMIN cu succes!');
     return;
   }
   
@@ -1039,7 +1039,7 @@ function login() {
     localStorage.setItem('logged_user', email);
     localStorage.removeItem('is_admin');
     showUser();
-    alert('âœ… Logat ca utilizator normal!');
+    alert('✅ Logat ca utilizator normal!');
   } else {
     alert('Date incorecte!');
   }
@@ -1083,14 +1083,14 @@ function showUser() {
   showCategory(currentCategory);
 }
 function validateEmail(email) {
-  // VerificÄƒ format complet de email valid
+  // Verifică format complet de email valid
   const basicFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!basicFormat) return false;
   
   const [localPart, domain] = email.split('@');
   const domainLower = domain.toLowerCase();
   
-  // Nu permite doar cifre Ã®n partea localÄƒ (1111@gmail.com)
+  // Nu permite doar cifre în partea locală (1111@gmail.com)
   if (/^\d+$/.test(localPart)) {
     return false;
   }
@@ -1103,7 +1103,7 @@ function validateEmail(email) {
     }
   }
   
-  // Lista de domenii acceptate (reale È™i cunoscute)
+  // Lista de domenii acceptate (reale și cunoscute)
   const validDomains = [
     'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
     'icloud.com', 'protonmail.com', 'aol.com', 'mail.com',
@@ -1111,7 +1111,7 @@ function validateEmail(email) {
     'company.com', 'business.ro', 'firma.com', 'work.com'
   ];
   
-  // VerificÄƒ dacÄƒ domeniul este Ã®n lista acceptatÄƒ SAU are format corporativ valid
+  // Verifică dacă domeniul este în lista acceptată SAU are format corporativ valid
   const isCorporateEmail = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domainLower) && 
                           !domainLower.includes('test') && 
                           !domainLower.includes('fake') &&
@@ -1120,7 +1120,7 @@ function validateEmail(email) {
                           
   const isValidDomain = validDomains.includes(domainLower) || isCorporateEmail;
   
-  // Partea localÄƒ trebuie sÄƒ aibÄƒ cel puÈ›in 3 caractere È™i sÄƒ nu fie doar cifre
+  // Partea locală trebuie să aibă cel puțin 3 caractere și să nu fie doar cifre
   const isValidLocalPart = localPart.length >= 3 && !/^\d+$/.test(localPart);
   
   return isValidDomain && isValidLocalPart;
@@ -1157,7 +1157,7 @@ function showAdminTab(tabName) {
     'channels': 'Gestiune Canale',
     'users': 'Utilizatori', 
     'stats': 'Statistici',
-    'settings': 'SetÄƒri'
+    'settings': 'Setări'
   };
   
   document.querySelectorAll('.admin-tab-btn').forEach(btn => {
@@ -1194,7 +1194,7 @@ function loadAdminChannels() {
   const pendingChannels = JSON.parse(localStorage.getItem('pending_channels') || '[]');
   
   const adminChannelsList = document.getElementById('admin-channels-list');
-  let html = '<h4>ðŸ“º Toate Canalele (' + channels.length + ')</h4>';
+  let html = '<h4>📺 Toate Canalele (' + channels.length + ')</h4>';
   
   // Show default channels
   html += '<div style="margin-bottom: 1rem;"><strong>Canale Implicite:</strong></div>';
@@ -1212,8 +1212,8 @@ function loadAdminChannels() {
           </div>
         </div>
         <div class="admin-item-actions">
-          <button class="edit" onclick="editChannel('${channel.title}')">âœï¸ Edit</button>
-          <button class="delete" onclick="deleteChannel('${channel.title}')">ðŸ—‘ï¸ Delete</button>
+          <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
+          <button class="delete" onclick="deleteChannel('${channel.title}')">🗑️ Delete</button>
         </div>
       </div>
     `;
@@ -1237,9 +1237,9 @@ function loadAdminChannels() {
             <a href="${channel.url}" target="_blank">${channel.url}</a>
           </div>
           <div class="admin-item-actions">
-            <button class="approve" onclick="approveChannel('${channel.title}')">âœ… Approve</button>
-            <button class="reject" onclick="rejectChannel('${channel.title}')">âŒ Reject</button>
-            <button class="edit" onclick="editChannel('${channel.title}')">âœï¸ Edit</button>
+            <button class="approve" onclick="approveChannel('${channel.title}')">✅ Approve</button>
+            <button class="reject" onclick="rejectChannel('${channel.title}')">❌ Reject</button>
+            <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
           </div>
         </div>
       `;
@@ -1248,7 +1248,7 @@ function loadAdminChannels() {
   
   // Show pending channels
   if (pendingChannels.length > 0) {
-    html += '<div style="margin: 1.5rem 0 1rem 0;"><strong>Canale Ã®n AÈ™teptare:</strong></div>';
+    html += '<div style="margin: 1.5rem 0 1rem 0;"><strong>Canale în Așteptare:</strong></div>';
     pendingChannels.forEach(channel => {
       html += `
         <div class="admin-channel-item pending">
@@ -1258,8 +1258,8 @@ function loadAdminChannels() {
             <a href="${channel.url}" target="_blank">${channel.url}</a>
           </div>
           <div class="admin-item-actions">
-            <button class="approve" onclick="approveChannel('${channel.title}')">âœ… Approve</button>
-            <button class="reject" onclick="rejectChannel('${channel.title}')">âŒ Reject</button>
+            <button class="approve" onclick="approveChannel('${channel.title}')">✅ Approve</button>
+            <button class="reject" onclick="rejectChannel('${channel.title}')">❌ Reject</button>
           </div>
         </div>
       `;
@@ -1281,7 +1281,7 @@ function loadAdminUsers() {
   }
   
   const adminUsersList = document.getElementById('admin-users-list');
-  let html = `<h4>ðŸ‘¥ Utilizatori ÃŽnregistraÈ›i (${users.length})</h4>`;
+  let html = `<h4>👥 Utilizatori Înregistrați (${users.length})</h4>`;
   
   users.forEach(email => {
     const isBanned = localStorage.getItem('banned_' + email) === 'true';
@@ -1291,16 +1291,16 @@ function loadAdminUsers() {
       <div class="admin-user-item ${isBanned ? 'rejected' : ''}">
         <div class="admin-item-info">
           <strong>${email}</strong>
-          ${verified ? `<span class="verified-badge">âœ” Verificat</span>` : ''}
-          <br><small>Status: ${isBanned ? 'ðŸš« Banned' : 'âœ… Active'}</small>
+          ${verified ? `<span class="verified-badge">✔ Verificat</span>` : ''}
+          <br><small>Status: ${isBanned ? '🚫 Banned' : '✅ Active'}</small>
         </div>
         <div class="admin-item-actions">
           ${isBanned ? 
-            `<button class="approve" onclick="unbanUser('${email}')">ðŸ”“ Unban</button>` :
-            `<button class="ban" onclick="banUser('${email}')">ðŸš« Ban</button>`
+            `<button class="approve" onclick="unbanUser('${email}')">🔓 Unban</button>` :
+            `<button class="ban" onclick="banUser('${email}')">🚫 Ban</button>`
           }
-          ${verified ? '' : `<button class="approve" onclick="adminVerifyUser('${email}')">ðŸ”’ VerificÄƒ</button>`}
-          <button class="delete" onclick="deleteUser('${email}')">ðŸ—‘ï¸ Delete</button>
+          ${verified ? '' : `<button class="approve" onclick="adminVerifyUser('${email}')">🔒 Verifică</button>`}
+          <button class="delete" onclick="deleteUser('${email}')">🗑️ Delete</button>
         </div>
       </div>
     `;
@@ -1336,26 +1336,26 @@ function loadAdminStats() {
   html += `
     <div class="admin-stat-card">
       <h4>${channels.length}</h4>
-      <p>ðŸ“º Total Canale</p>
+      <p>📺 Total Canale</p>
     </div>
     <div class="admin-stat-card">
       <h4>${users.length}</h4>
-      <p>ðŸ‘¥ Utilizatori</p>
+      <p>👥 Utilizatori</p>
     </div>
     <div class="admin-stat-card">
       <h4>${userChannels.length}</h4>
-      <p>â³ Canale User</p>
+      <p>⏳ Canale User</p>
     </div>
     <div class="admin-stat-card">
       <h4>${Object.keys(categoryStats).length}</h4>
-      <p>ðŸ“‚ Categorii</p>
+      <p>📂 Categorii</p>
     </div>
   `;
   
   html += '</div>';
   
   // Category breakdown
-  html += '<h4>ðŸ“Š Canale pe Categorii:</h4>';
+  html += '<h4>📊 Canale pe Categorii:</h4>';
   Object.entries(categoryStats).forEach(([category, count]) => {
     const percentage = ((count / channels.length) * 100).toFixed(1);
     html += `
@@ -1384,7 +1384,7 @@ function saveAdminSettings() {
   localStorage.setItem('require_approval', requireApproval);
   localStorage.setItem('enable_moderation', enableModeration);
   
-  alert('âœ… SetÄƒrile au fost salvate!');
+  alert('✅ Setările au fost salvate!');
 }
 
 function showUserStats() {
@@ -1395,55 +1395,55 @@ function showUserStats() {
 
 function approveChannel(title) {
   // Implementation for approving channels
-  alert(`âœ… Canalul "${title}" a fost aprobat!`);
+  alert(`✅ Canalul "${title}" a fost aprobat!`);
   loadAdminChannels();
 }
 
 function rejectChannel(title) {
-  if (confirm(`âŒ Sigur vrei sÄƒ respingi canalul "${title}"?`)) {
-    alert(`âŒ Canalul "${title}" a fost respins!`);
+  if (confirm(`❌ Sigur vrei să respingi canalul "${title}"?`)) {
+    alert(`❌ Canalul "${title}" a fost respins!`);
     loadAdminChannels();
   }
 }
 
 function editChannel(title) {
-  alert(`âœï¸ Editarea canalului "${title}" va fi implementatÄƒ Ã®n curÃ¢nd!`);
+  alert(`✏️ Editarea canalului "${title}" va fi implementată în curând!`);
 }
 
 function deleteChannel(title) {
-  if (confirm(`ðŸ—‘ï¸ Sigur vrei sÄƒ È™tergi canalul "${title}"?`)) {
-    alert(`ðŸ—‘ï¸ Canalul "${title}" a fost È™ters!`);
+  if (confirm(`🗑️ Sigur vrei să ștergi canalul "${title}"?`)) {
+    alert(`🗑️ Canalul "${title}" a fost șters!`);
     loadAdminChannels();
   }
 }
 
 function banUser(email) {
-  if (confirm(`ðŸš« Sigur vrei sÄƒ blochezi utilizatorul "${email}"?`)) {
+  if (confirm(`🚫 Sigur vrei să blochezi utilizatorul "${email}"?`)) {
     localStorage.setItem('banned_' + email, 'true');
-    alert(`ðŸš« Utilizatorul "${email}" a fost blocat!`);
+    alert(`🚫 Utilizatorul "${email}" a fost blocat!`);
     loadAdminUsers();
   }
 }
 
 function unbanUser(email) {
   localStorage.removeItem('banned_' + email);
-  alert(`ðŸ”“ Utilizatorul "${email}" a fost deblocat!`);
+  alert(`🔓 Utilizatorul "${email}" a fost deblocat!`);
   loadAdminUsers();
 }
 
 function deleteUser(email) {
-  if (confirm(`ðŸ—‘ï¸ Sigur vrei sÄƒ È™tergi utilizatorul "${email}"? AceastÄƒ acÈ›iune nu poate fi anulatÄƒ!`)) {
+  if (confirm(`🗑️ Sigur vrei să ștergi utilizatorul "${email}"? Această acțiune nu poate fi anulată!`)) {
     localStorage.removeItem('user_' + email);
     localStorage.removeItem('banned_' + email);
     localStorage.removeItem('user_meta_' + email);
-    alert(`ðŸ—‘ï¸ Utilizatorul "${email}" a fost È™ters!`);
+    alert(`🗑️ Utilizatorul "${email}" a fost șters!`);
     loadAdminUsers();
   }
 }
 
 // Admin add-user modal functions
 function showAddUserModal() {
-  if (localStorage.getItem('is_admin') !== 'true') return alert('Acces restricÈ›ionat.');
+  if (localStorage.getItem('is_admin') !== 'true') return alert('Acces restricționat.');
   document.getElementById('admin-new-email').value = '';
   document.getElementById('admin-new-password').value = '';
   document.getElementById('add-user-modal').style.display = 'flex';
@@ -1456,14 +1456,14 @@ function closeAddUserModal() {
 function adminCreateUser() {
   const email = document.getElementById('admin-new-email').value.trim().toLowerCase();
   const pass = document.getElementById('admin-new-password').value;
-  if (!email || !pass) return alert('CompleteazÄƒ toate cÃ¢mpurile!');
+  if (!email || !pass) return alert('Completează toate câmpurile!');
   if (!validateEmail(email)) return alert('Email invalid!');
-  if (localStorage.getItem('user_' + email)) return alert('Emailul existÄƒ deja!');
+  if (localStorage.getItem('user_' + email)) return alert('Emailul există deja!');
 
   // For ANY email, ask for confirmation by typing the email exactly
   window._pendingAdminNewUser = { email, pass };
   // show confirmation modal
-  document.getElementById('confirm-email-text').textContent = `ConfirmÄƒ cÄƒ adresa ${email} este un email real È™i valid. Scrie adresa completÄƒ mai jos pentru a confirma:`;
+  document.getElementById('confirm-email-text').textContent = `Confirmă că adresa ${email} este un email real și valid. Scrie adresa completă mai jos pentru a confirma:`;
   document.getElementById('confirm-email-input').value = '';
   document.getElementById('confirm-email-modal').style.display = 'flex';
 }
@@ -1477,13 +1477,13 @@ function confirmEmailCheck() {
   const typed = document.getElementById('confirm-email-input').value.trim().toLowerCase();
   const pending = window._pendingAdminNewUser;
   if (!pending) return closeConfirmEmailModal();
-  if (typed !== pending.email) return alert('Confirmarea nu s-a potrivit. Introdu adresa exactÄƒ pentru a confirma cÄƒ este un email real.');
+  if (typed !== pending.email) return alert('Confirmarea nu s-a potrivit. Introdu adresa exactă pentru a confirma că este un email real.');
 
   // create verified user
   localStorage.setItem('user_' + pending.email, pending.pass);
   const meta = { verified: true, verifiedAt: new Date().toISOString(), verifiedByAdmin: true };
   localStorage.setItem('user_meta_' + pending.email, JSON.stringify(meta));
-  alert(`âœ… Utilizatorul ${pending.email} a fost creat È™i verificat ca email real.`);
+  alert(`✅ Utilizatorul ${pending.email} a fost creat și verificat ca email real.`);
   window._pendingAdminNewUser = null;
   closeConfirmEmailModal();
   closeAddUserModal();
@@ -1491,13 +1491,13 @@ function confirmEmailCheck() {
 }
 
 function adminVerifyUser(email) {
-  if (!confirm(`ðŸ”’ Confirmi cÄƒ utilizatorul ${email} este verificat?`)) return;
+  if (!confirm(`🔒 Confirmi că utilizatorul ${email} este verificat?`)) return;
   const meta = JSON.parse(localStorage.getItem('user_meta_' + email) || '{}');
   meta.verified = true;
   meta.verifiedAt = new Date().toISOString();
   meta.verifiedByAdmin = true;
   localStorage.setItem('user_meta_' + email, JSON.stringify(meta));
-  alert(`ðŸ”’ Utilizatorul ${email} a fost marcat ca verificat.`);
+  alert(`🔒 Utilizatorul ${email} a fost marcat ca verificat.`);
   loadAdminUsers();
 }
 
@@ -1533,7 +1533,7 @@ function exportUsers() {
 
 function showAllChannels() {
   const channels = getChannels();
-  let html = `<h4>ðŸ“º Toate Canalele (${channels.length})</h4>`;
+  let html = `<h4>📺 Toate Canalele (${channels.length})</h4>`;
   
   channels.forEach(channel => {
     html += `
@@ -1549,8 +1549,8 @@ function showAllChannels() {
           </div>
         </div>
         <div class="admin-item-actions">
-          <button class="edit" onclick="editChannel('${channel.title}')">âœï¸ Edit</button>
-          <button class="delete" onclick="deleteChannel('${channel.title}')">ðŸ—‘ï¸ Delete</button>
+          <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
+          <button class="delete" onclick="deleteChannel('${channel.title}')">🗑️ Delete</button>
         </div>
       </div>
     `;
@@ -1563,7 +1563,7 @@ function showPendingChannels() {
   const pendingChannels = JSON.parse(localStorage.getItem('pending_channels') || '[]');
   const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
   
-  let html = `<h4>â³ Canale Ã®n AÈ™teptare (${pendingChannels.length + userChannels.length})</h4>`;
+  let html = `<h4>⏳ Canale în Așteptare (${pendingChannels.length + userChannels.length})</h4>`;
   
   [...pendingChannels, ...userChannels].forEach(channel => {
     html += `
@@ -1574,15 +1574,15 @@ function showPendingChannels() {
           <a href="${channel.url}" target="_blank">${channel.url}</a>
         </div>
         <div class="admin-item-actions">
-          <button class="approve" onclick="approveChannel('${channel.title}')">âœ… Approve</button>
-          <button class="reject" onclick="rejectChannel('${channel.title}')">âŒ Reject</button>
+          <button class="approve" onclick="approveChannel('${channel.title}')">✅ Approve</button>
+          <button class="reject" onclick="rejectChannel('${channel.title}')">❌ Reject</button>
         </div>
       </div>
     `;
   });
   
   if (pendingChannels.length + userChannels.length === 0) {
-    html += '<div style="text-align: center; padding: 2rem; color: #666;">Nu existÄƒ canale Ã®n aÈ™teptare.</div>';
+    html += '<div style="text-align: center; padding: 2rem; color: #666;">Nu există canale în așteptare.</div>';
   }
   
   document.getElementById('admin-channels-list').innerHTML = html;
@@ -1668,7 +1668,7 @@ function updateAdminStats() {
   document.getElementById('admin-total-views').textContent = totalViews;
   document.getElementById('admin-total-users').textContent = users.length;
   document.getElementById('admin-today-visits').textContent = todayVisits;
-  document.getElementById('admin-last-click').textContent = localStorage.getItem('admin_last_click') || 'NiciodatÄƒ';
+  document.getElementById('admin-last-click').textContent = localStorage.getItem('admin_last_click') || 'Niciodată';
   document.getElementById('admin-most-clicked').textContent = mostClickedChannel || 'Niciunul';
 }
 
@@ -1680,11 +1680,11 @@ function openChannel(url, title) {
 
 // initialize
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('ðŸŽ¯ DOM loaded, initializing app...'); // Debug
+  console.log('🎯 DOM loaded, initializing app...'); // Debug
   trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
-  console.log('âœ… App initialized'); // Debug
+  console.log('✅ App initialized'); // Debug
 });
 
 // ===========================================
@@ -1701,7 +1701,7 @@ function changeLanguage(lang) {
   // Reaplica traducerile pentru op?iunile selectorului
   updateLanguageSelectorOptions(lang);
   
-  // Reï¿½ncarca canalele pentru a aplica traducerile la categorii
+  // Re�ncarca canalele pentru a aplica traducerile la categorii
   filterChannels('all');
 
   console.log('Language changed to:', language);
@@ -1723,9 +1723,9 @@ function updateLanguageSelectorOptions(currentLang) {
   }
 }
 
-// Ini?ializeaza sistemul multilingv la ï¿½ncarcarea paginii
+// Ini?ializeaza sistemul multilingv la �ncarcarea paginii
 document.addEventListener('DOMContentLoaded', function() {
-  // Seteaza limba salvata sau romï¿½na ca default
+  // Seteaza limba salvata sau rom�na ca default
   const savedLang = getCurrentLanguage();
   const languageSelector = document.getElementById('language-selector');
   
@@ -1757,7 +1757,7 @@ function editChannel(title) {
   const channel = channels.find(ch => ch.title === title);
   
   if (!channel) {
-    alert('âŒ Canalul nu a fost gÄƒsit!');
+    alert('❌ Canalul nu a fost găsit!');
     return;
   }
   
@@ -1787,7 +1787,7 @@ function closeEditChannelModal() {
 
 function saveChannelEdit() {
   if (!currentEditingChannel) {
-    alert('âŒ Eroare: Nu existÄƒ canal selectat pentru editare!');
+    alert('❌ Eroare: Nu există canal selectat pentru editare!');
     return;
   }
   
@@ -1800,17 +1800,17 @@ function saveChannelEdit() {
   
   // Validation
   if (!title || !desc || !url) {
-    alert('âŒ CompleteazÄƒ toate cÃ¢mpurile obligatorii!');
+    alert('❌ Completează toate câmpurile obligatorii!');
     return;
   }
   
   if (!url.includes('t.me/')) {
-    alert('âŒ Link-ul trebuie sÄƒ fie un link Telegram valid (t.me/...)!');
+    alert('❌ Link-ul trebuie să fie un link Telegram valid (t.me/...)!');
     return;
   }
   
   if (selectedCategories.length === 0) {
-    alert('âŒ SelecteazÄƒ cel puÈ›in o categorie!');
+    alert('❌ Selectează cel puțin o categorie!');
     return;
   }
   
@@ -1819,7 +1819,7 @@ function saveChannelEdit() {
   const channelIndex = channels.findIndex(ch => ch.title === currentEditingChannel.title);
   
   if (channelIndex === -1) {
-    alert('âŒ Canalul nu a fost gÄƒsit Ã®n baza de date!');
+    alert('❌ Canalul nu a fost găsit în baza de date!');
     return;
   }
   
@@ -1847,7 +1847,7 @@ function saveChannelEdit() {
     loadAdminChannels();
   }
   
-  alert('âœ… Canalul a fost actualizat cu succes!');
+  alert('✅ Canalul a fost actualizat cu succes!');
 }
 
 
@@ -1860,7 +1860,7 @@ function toggleChannelPriority(title) {
   const channelIndex = channels.findIndex(ch => ch.title === title);
   
   if (channelIndex === -1) {
-    alert('âŒ Canalul nu a fost gÄƒsit!');
+    alert('❌ Canalul nu a fost găsit!');
     return;
   }
   
@@ -1875,8 +1875,8 @@ function toggleChannelPriority(title) {
   localStorage.setItem('channels', JSON.stringify(channels));
   
   // Show confirmation
-  const status = !isPriority ? 'â­ PRIORITAR' : 'ðŸ“ NORMAL';
-  alert(`âœ… Canalul "${title}" este acum ${status}!`);
+  const status = !isPriority ? '⭐ PRIORITAR' : '📍 NORMAL';
+  alert(`✅ Canalul "${title}" este acum ${status}!`);
   
   // Refresh displays
   showCategory(currentCategory || 'all');
@@ -1890,7 +1890,7 @@ function setChannelPosition(title, position) {
   const channelIndex = channels.findIndex(ch => ch.title === title);
   
   if (channelIndex === -1) {
-    alert('âŒ Canalul nu a fost gÄƒsit!');
+    alert('❌ Canalul nu a fost găsit!');
     return;
   }
   
@@ -1903,7 +1903,7 @@ function setChannelPosition(title, position) {
   // Save to localStorage
   localStorage.setItem('channels', JSON.stringify(channels));
   
-  alert(`âœ… Canalul "${title}" va fi afiÈ™at pe poziÈ›ia ${validPosition}!`);
+  alert(`✅ Canalul "${title}" va fi afișat pe poziția ${validPosition}!`);
   
   // Refresh displays
   showCategory(currentCategory || 'all');
@@ -1915,10 +1915,10 @@ function setChannelPosition(title, position) {
 function showChannelPositionModal(title) {
   const channels = getChannels();
   const position = prompt(
-    `ðŸ”¢ IntroduceÈ›i poziÈ›ia pentru canalul "${title}":\n\n` +
-    `PoziÈ›ii disponibile: 1 - ${channels.length}\n` +
-    `1 = Prima poziÈ›ie (cel mai vizibil)\n` +
-    `${channels.length} = Ultima poziÈ›ie`,
+    `🔢 Introduceți poziția pentru canalul "${title}":\n\n` +
+    `Poziții disponibile: 1 - ${channels.length}\n` +
+    `1 = Prima poziție (cel mai vizibil)\n` +
+    `${channels.length} = Ultima poziție`,
     '1'
   );
   
@@ -1926,7 +1926,7 @@ function showChannelPositionModal(title) {
   
   const numPosition = parseInt(position);
   if (isNaN(numPosition) || numPosition < 1) {
-    alert('âŒ IntroduceÈ›i un numÄƒr valid mai mare ca 0!');
+    alert('❌ Introduceți un număr valid mai mare ca 0!');
     return;
   }
   
@@ -1982,17 +1982,17 @@ function getSortedChannels(channels, category) {
 // === HOMEPAGE FEATURED CHANNELS ===
 // HOMEPAGE FEATURED CHANNELS MANAGEMENT
 
-// FuncÈ›ie pentru a obÈ›ine canalele featured pentru prima paginÄƒ
+// Funcție pentru a obține canalele featured pentru prima pagină
 function getHomepageFeaturedChannels() {
   const featuredIds = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
   const allChannels = getChannels();
   
-  // DacÄƒ nu sunt setate canale featured, returneazÄƒ primele 6
+  // Dacă nu sunt setate canale featured, returnează primele 6
   if (featuredIds.length === 0) {
-    return defaultChannels.slice(0, 6);
+    return allChannels.slice(0, 6);
   }
   
-  // ReturneazÄƒ canalele featured Ã®n ordinea setatÄƒ
+  // Returnează canalele featured în ordinea setată
   const featuredChannels = [];
   for (let id of featuredIds) {
     const channel = allChannels.find(c => c.title === id);
@@ -2001,43 +2001,43 @@ function getHomepageFeaturedChannels() {
     }
   }
   
-  // DacÄƒ nu avem 6, completeazÄƒ cu alte canale
+  // Dacă nu avem 6, completează cu alte canale
   if (featuredChannels.length < 6) {
-    const remainingChannels = defaultChannels.filter(c => !featuredIds.includes(c.title));
+    const remainingChannels = allChannels.filter(c => !featuredIds.includes(c.title));
     featuredChannels.push(...remainingChannels.slice(0, 6 - featuredChannels.length));
   }
   
   return featuredChannels.slice(0, 6);
 }
 
-// FuncÈ›ie pentru a seta canalele featured pentru prima paginÄƒ
+// Funcție pentru a seta canalele featured pentru prima pagină
 function setHomepageFeaturedChannels(channelTitles) {
   localStorage.setItem('homepage_featured', JSON.stringify(channelTitles));
-  // Refresh prima paginÄƒ
+  // Refresh prima pagină
   if (currentCategory === 'all') {
     showCategory('all');
   }
 }
 
-// FuncÈ›ie pentru admin sÄƒ gestioneze canalele de pe prima paginÄƒ
+// Funcție pentru admin să gestioneze canalele de pe prima pagină
 function showHomepageManager() {
-  const allChannels = defaultChannels;
+  const allChannels = getChannels();
   const currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
   
   if (allChannels.length === 0) {
-    alert('âŒ Nu existÄƒ canale disponibile!');
+    alert('❌ Nu există canale disponibile!');
     return;
   }
   
   let modalHTML = `
     <div id="homepage-manager-modal" class="modal" style="display: flex;">
       <div class="modal-content" style="max-width: 600px; width: 90%;">
-        <h3>ðŸ  Gestionare Prima PaginÄƒ</h3>
-        <p style="color: #666; margin-bottom: 1rem;">SelecteazÄƒ 6 canale care vor apÄƒrea pe prima paginÄƒ (Ã®nainte de login):</p>
+        <h3>🏠 Gestionare Prima Pagină</h3>
+        <p style="color: #666; margin-bottom: 1rem;">Selectează 6 canale care vor apărea pe prima pagină (înainte de login):</p>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
           <div>
-            <h4>ðŸ“‹ Canale Disponibile:</h4>
+            <h4>📋 Canale Disponibile:</h4>
             <div id="available-channels" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 0.5rem; border-radius: 0.5rem;">
               ${allChannels.map(channel => `
                 <div class="channel-select-item" data-title="${channel.title}" style="padding: 0.5rem; border-bottom: 1px solid #eee; cursor: pointer; ${currentFeatured.includes(channel.title) ? 'background: #e3f2fd;' : ''}">
@@ -2049,7 +2049,7 @@ function showHomepageManager() {
           </div>
           
           <div>
-            <h4>â­ Prima PaginÄƒ (${currentFeatured.length}/6):</h4>
+            <h4>⭐ Prima Pagină (${currentFeatured.length}/6):</h4>
             <div id="featured-channels" style="min-height: 300px; border: 1px solid #ddd; padding: 0.5rem; border-radius: 0.5rem; background: #f8f9fa;">
               ${currentFeatured.map((title, index) => {
                 const channel = allChannels.find(c => c.title === title);
@@ -2060,7 +2060,7 @@ function showHomepageManager() {
                         <strong>${index + 1}. ${channel.title}</strong><br>
                         <small style="color: #666;">${channel.desc}</small>
                       </div>
-                      <button onclick="removeFeaturedChannel('${title}')" style="background: #f44336; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 0.2rem; cursor: pointer;">âœ•</button>
+                      <button onclick="removeFeaturedChannel('${title}')" style="background: #f44336; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 0.2rem; cursor: pointer;">✕</button>
                     </div>
                   </div>
                 ` : '';
@@ -2070,8 +2070,8 @@ function showHomepageManager() {
         </div>
         
         <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
-          <button onclick="closeHomepageManager()" style="background: #95a5a6; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">AnuleazÄƒ</button>
-          <button onclick="saveHomepageFeatured()" style="background: #4caf50; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">ðŸ’¾ SalveazÄƒ</button>
+          <button onclick="closeHomepageManager()" style="background: #95a5a6; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">Anulează</button>
+          <button onclick="saveHomepageFeatured()" style="background: #4caf50; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">💾 Salvează</button>
         </div>
       </div>
     </div>
@@ -2099,12 +2099,12 @@ function addToFeatured(title) {
   const currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
   
   if (currentFeatured.includes(title)) {
-    alert('âŒ Canalul este deja pe prima paginÄƒ!');
+    alert('❌ Canalul este deja pe prima pagină!');
     return;
   }
   
   if (currentFeatured.length >= 6) {
-    alert('âŒ PoÈ›i avea maximum 6 canale pe prima paginÄƒ!');
+    alert('❌ Poți avea maximum 6 canale pe prima pagină!');
     return;
   }
   
@@ -2126,8 +2126,8 @@ function removeFeaturedChannel(title) {
 
 function saveHomepageFeatured() {
   closeHomepageManager();
-  showCategory('all'); // Refresh prima paginÄƒ
-  alert('âœ… Prima paginÄƒ a fost actualizatÄƒ cu success!');
+  showCategory('all'); // Refresh prima pagină
+  alert('✅ Prima pagină a fost actualizată cu success!');
 }
 
 function closeHomepageManager() {
@@ -2136,317 +2136,158 @@ function closeHomepageManager() {
     modal.remove();
   }
 }
+// === HOMEPAGE FEATURED CHANNELS MANAGEMENT ===
 
-/ /   H O M E P A G E   F E A T U R E D   C H A N N E L S   M A N A G E M E N T 
- 
- 
- 
- / /   F u n c � : i e   p e n t r u   a   o b � : i n e   c a n a l e l e   f e a t u r e d   p e n t r u   p r i m a   p a g i n � �
- 
- f u n c t i o n   g e t H o m e p a g e F e a t u r e d C h a n n e l s ( )   { 
- 
-     c o n s t   f e a t u r e d I d s   =   J S O N . p a r s e ( l o c a l S t o r a g e . g e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' )   | |   ' [ ] ' ) ; 
- 
-     c o n s t   a l l C h a n n e l s   =   g e t C h a n n e l s ( ) ; 
- 
-     
- 
-     / /   D a c � �  n u   s u n t   s e t a t e   c a n a l e   f e a t u r e d ,   r e t u r n e a z � �  p r i m e l e   6 
- 
-     i f   ( f e a t u r e d I d s . l e n g t h   = = =   0 )   { 
- 
-         r e t u r n   a l l C h a n n e l s . s l i c e ( 0 ,   6 ) ; 
- 
-     } 
- 
-     
- 
-     / /   R e t u r n e a z � �  c a n a l e l e   f e a t u r e d   � � n   o r d i n e a   s e t a t � �
- 
-     c o n s t   f e a t u r e d C h a n n e l s   =   [ ] ; 
- 
-     f o r   ( l e t   i d   o f   f e a t u r e d I d s )   { 
- 
-         c o n s t   c h a n n e l   =   a l l C h a n n e l s . f i n d ( c   = >   c . t i t l e   = = =   i d ) ; 
- 
-         i f   ( c h a n n e l )   { 
- 
-             f e a t u r e d C h a n n e l s . p u s h ( c h a n n e l ) ; 
- 
-         } 
- 
-     } 
- 
-     
- 
-     / /   D a c � �  n u   a v e m   6 ,   c o m p l e t e a z � �  c u   a l t e   c a n a l e 
- 
-     i f   ( f e a t u r e d C h a n n e l s . l e n g t h   <   6 )   { 
- 
-         c o n s t   r e m a i n i n g C h a n n e l s   =   a l l C h a n n e l s . f i l t e r ( c   = >   ! f e a t u r e d I d s . i n c l u d e s ( c . t i t l e ) ) ; 
- 
-         f e a t u r e d C h a n n e l s . p u s h ( . . . r e m a i n i n g C h a n n e l s . s l i c e ( 0 ,   6   -   f e a t u r e d C h a n n e l s . l e n g t h ) ) ; 
- 
-     } 
- 
-     
- 
-     r e t u r n   f e a t u r e d C h a n n e l s . s l i c e ( 0 ,   6 ) ; 
- 
- } 
- 
- 
- 
- / /   F u n c � : i e   p e n t r u   a   s e t a   c a n a l e l e   f e a t u r e d   p e n t r u   p r i m a   p a g i n � �
- 
- f u n c t i o n   s e t H o m e p a g e F e a t u r e d C h a n n e l s ( c h a n n e l T i t l e s )   { 
- 
-     l o c a l S t o r a g e . s e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' ,   J S O N . s t r i n g i f y ( c h a n n e l T i t l e s ) ) ; 
- 
-     / /   R e f r e s h   p r i m a   p a g i n � �
- 
-     i f   ( c u r r e n t C a t e g o r y   = = =   ' a l l ' )   { 
- 
-         s h o w C a t e g o r y ( ' a l l ' ) ; 
- 
-     } 
- 
- } 
- 
- 
- 
- / /   F u n c � : i e   p e n t r u   a d m i n   s � �  g e s t i o n e z e   c a n a l e l e   d e   p e   p r i m a   p a g i n � �
- 
- f u n c t i o n   s h o w H o m e p a g e M a n a g e r ( )   { 
- 
-     c o n s t   a l l C h a n n e l s   =   g e t C h a n n e l s ( ) ; 
- 
-     c o n s t   c u r r e n t F e a t u r e d   =   J S O N . p a r s e ( l o c a l S t o r a g e . g e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' )   | |   ' [ ] ' ) ; 
- 
-     
- 
-     i f   ( a l l C h a n n e l s . l e n g t h   = = =   0 )   { 
- 
-         a l e r t ( ' � � R  N u   e x i s t � �  c a n a l e   d i s p o n i b i l e ! ' ) ; 
- 
-         r e t u r n ; 
- 
-     } 
- 
-     
- 
-     l e t   m o d a l H T M L   =   ` 
- 
-         < d i v   i d = " h o m e p a g e - m a n a g e r - m o d a l "   c l a s s = " m o d a l "   s t y l e = " d i s p l a y :   f l e x ; " > 
- 
-             < d i v   c l a s s = " m o d a l - c o n t e n t "   s t y l e = " m a x - w i d t h :   6 0 0 p x ;   w i d t h :   9 0 % ; " > 
- 
-                 < h 3 > � x� �   G e s t i o n a r e   P r i m a   P a g i n � �< / h 3 > 
- 
-                 < p   s t y l e = " c o l o r :   # 6 6 6 ;   m a r g i n - b o t t o m :   1 r e m ; " > S e l e c t e a z � �  6   c a n a l e   c a r e   v o r   a p � �r e a   p e   p r i m a   p a g i n � �  ( � � n a i n t e   d e   l o g i n ) : < / p > 
- 
-                 
- 
-                 < d i v   s t y l e = " d i s p l a y :   g r i d ;   g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 f r ;   g a p :   1 r e m ;   m a r g i n - b o t t o m :   1 r e m ; " > 
- 
-                     < d i v > 
- 
-                         < h 4 > � x 9   C a n a l e   D i s p o n i b i l e : < / h 4 > 
- 
-                         < d i v   i d = " a v a i l a b l e - c h a n n e l s "   s t y l e = " m a x - h e i g h t :   3 0 0 p x ;   o v e r f l o w - y :   a u t o ;   b o r d e r :   1 p x   s o l i d   # d d d ;   p a d d i n g :   0 . 5 r e m ;   b o r d e r - r a d i u s :   0 . 5 r e m ; " > 
- 
-                             $ { a l l C h a n n e l s . m a p ( c h a n n e l   = >   ` 
- 
-                                 < d i v   c l a s s = " c h a n n e l - s e l e c t - i t e m "   d a t a - t i t l e = " $ { c h a n n e l . t i t l e } "   s t y l e = " p a d d i n g :   0 . 5 r e m ;   b o r d e r - b o t t o m :   1 p x   s o l i d   # e e e ;   c u r s o r :   p o i n t e r ;   $ { c u r r e n t F e a t u r e d . i n c l u d e s ( c h a n n e l . t i t l e )   ?   ' b a c k g r o u n d :   # e 3 f 2 f d ; '   :   ' ' } " > 
- 
-                                     < s t r o n g > $ { c h a n n e l . t i t l e } < / s t r o n g > < b r > 
- 
-                                     < s m a l l   s t y l e = " c o l o r :   # 6 6 6 ; " > $ { c h a n n e l . d e s c } < / s m a l l > 
- 
-                                 < / d i v > 
- 
-                             ` ) . j o i n ( ' ' ) } 
- 
-                         < / d i v > 
- 
-                     < / d i v > 
- 
-                     
- 
-                     < d i v > 
- 
-                         < h 4 > � � �   P r i m a   P a g i n � �  ( $ { c u r r e n t F e a t u r e d . l e n g t h } / 6 ) : < / h 4 > 
- 
-                         < d i v   i d = " f e a t u r e d - c h a n n e l s "   s t y l e = " m i n - h e i g h t :   3 0 0 p x ;   b o r d e r :   1 p x   s o l i d   # d d d ;   p a d d i n g :   0 . 5 r e m ;   b o r d e r - r a d i u s :   0 . 5 r e m ;   b a c k g r o u n d :   # f 8 f 9 f a ; " > 
- 
-                             $ { c u r r e n t F e a t u r e d . m a p ( ( t i t l e ,   i n d e x )   = >   { 
- 
-                                 c o n s t   c h a n n e l   =   a l l C h a n n e l s . f i n d ( c   = >   c . t i t l e   = = =   t i t l e ) ; 
- 
-                                 r e t u r n   c h a n n e l   ?   ` 
- 
-                                     < d i v   c l a s s = " f e a t u r e d - i t e m "   d a t a - t i t l e = " $ { t i t l e } "   s t y l e = " p a d d i n g :   0 . 5 r e m ;   m a r g i n - b o t t o m :   0 . 5 r e m ;   b a c k g r o u n d :   w h i t e ;   b o r d e r - r a d i u s :   0 . 3 r e m ;   b o r d e r - l e f t :   3 p x   s o l i d   # 4 c a f 5 0 ; " > 
- 
-                                         < d i v   s t y l e = " d i s p l a y :   f l e x ;   j u s t i f y - c o n t e n t :   b e t w e e n ;   a l i g n - i t e m s :   c e n t e r ; " > 
- 
-                                             < d i v   s t y l e = " f l e x :   1 ; " > 
- 
-                                                 < s t r o n g > $ { i n d e x   +   1 } .   $ { c h a n n e l . t i t l e } < / s t r o n g > < b r > 
- 
-                                                 < s m a l l   s t y l e = " c o l o r :   # 6 6 6 ; " > $ { c h a n n e l . d e s c } < / s m a l l > 
- 
-                                             < / d i v > 
- 
-                                             < b u t t o n   o n c l i c k = " r e m o v e F e a t u r e d C h a n n e l ( ' $ { t i t l e } ' ) "   s t y l e = " b a c k g r o u n d :   # f 4 4 3 3 6 ;   c o l o r :   w h i t e ;   b o r d e r :   n o n e ;   p a d d i n g :   0 . 2 r e m   0 . 5 r e m ;   b o r d e r - r a d i u s :   0 . 2 r e m ;   c u r s o r :   p o i n t e r ; " > � S" < / b u t t o n > 
- 
-                                         < / d i v > 
- 
-                                     < / d i v > 
- 
-                                 `   :   ' ' ; 
- 
-                             } ) . j o i n ( ' ' ) } 
- 
-                         < / d i v > 
- 
-                     < / d i v > 
- 
-                 < / d i v > 
- 
-                 
- 
-                 < d i v   s t y l e = " d i s p l a y :   f l e x ;   g a p :   0 . 5 r e m ;   j u s t i f y - c o n t e n t :   f l e x - e n d ; " > 
- 
-                     < b u t t o n   o n c l i c k = " c l o s e H o m e p a g e M a n a g e r ( ) "   s t y l e = " b a c k g r o u n d :   # 9 5 a 5 a 6 ;   c o l o r :   w h i t e ;   p a d d i n g :   0 . 8 r e m   1 . 5 r e m ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   0 . 5 r e m ;   c u r s o r :   p o i n t e r ; " > A n u l e a z � �< / b u t t o n > 
- 
-                     < b u t t o n   o n c l i c k = " s a v e H o m e p a g e F e a t u r e d ( ) "   s t y l e = " b a c k g r o u n d :   # 4 c a f 5 0 ;   c o l o r :   w h i t e ;   p a d d i n g :   0 . 8 r e m   1 . 5 r e m ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   0 . 5 r e m ;   c u r s o r :   p o i n t e r ; " > � x �   S a l v e a z � �< / b u t t o n > 
- 
-                 < / d i v > 
- 
-             < / d i v > 
- 
-         < / d i v > 
- 
-     ` ; 
- 
-     
- 
-     / /   R e m o v e   e x i s t i n g   m o d a l   i f   a n y 
- 
-     c o n s t   e x i s t i n g M o d a l   =   d o c u m e n t . g e t E l e m e n t B y I d ( ' h o m e p a g e - m a n a g e r - m o d a l ' ) ; 
- 
-     i f   ( e x i s t i n g M o d a l )   { 
- 
-         e x i s t i n g M o d a l . r e m o v e ( ) ; 
- 
-     } 
- 
-     
- 
-     / /   A d d   m o d a l   t o   b o d y 
- 
-     d o c u m e n t . b o d y . i n s e r t A d j a c e n t H T M L ( ' b e f o r e e n d ' ,   m o d a l H T M L ) ; 
- 
-     
- 
-     / /   A d d   c l i c k   h a n d l e r s   f o r   a v a i l a b l e   c h a n n e l s 
- 
-     d o c u m e n t . q u e r y S e l e c t o r A l l ( ' . c h a n n e l - s e l e c t - i t e m ' ) . f o r E a c h ( i t e m   = >   { 
- 
-         i t e m . a d d E v e n t L i s t e n e r ( ' c l i c k ' ,   f u n c t i o n ( )   { 
- 
-             c o n s t   t i t l e   =   t h i s . d a t a s e t . t i t l e ; 
- 
-             a d d T o F e a t u r e d ( t i t l e ) ; 
- 
-         } ) ; 
- 
-     } ) ; 
- 
- } 
- 
- 
- 
- f u n c t i o n   a d d T o F e a t u r e d ( t i t l e )   { 
- 
-     c o n s t   c u r r e n t F e a t u r e d   =   J S O N . p a r s e ( l o c a l S t o r a g e . g e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' )   | |   ' [ ] ' ) ; 
- 
-     
- 
-     i f   ( c u r r e n t F e a t u r e d . i n c l u d e s ( t i t l e ) )   { 
- 
-         a l e r t ( ' � � R  C a n a l u l   e s t e   d e j a   p e   p r i m a   p a g i n � �! ' ) ; 
- 
-         r e t u r n ; 
- 
-     } 
- 
-     
- 
-     i f   ( c u r r e n t F e a t u r e d . l e n g t h   > =   6 )   { 
- 
-         a l e r t ( ' � � R  P o � : i   a v e a   m a x i m u m   6   c a n a l e   p e   p r i m a   p a g i n � �! ' ) ; 
- 
-         r e t u r n ; 
- 
-     } 
- 
-     
- 
-     c u r r e n t F e a t u r e d . p u s h ( t i t l e ) ; 
- 
-     l o c a l S t o r a g e . s e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' ,   J S O N . s t r i n g i f y ( c u r r e n t F e a t u r e d ) ) ; 
- 
-     
- 
-     / /   R e f r e s h   m o d a l 
- 
-     s h o w H o m e p a g e M a n a g e r ( ) ; 
- 
- } 
- 
- 
- 
- f u n c t i o n   r e m o v e F e a t u r e d C h a n n e l ( t i t l e )   { 
- 
-     l e t   c u r r e n t F e a t u r e d   =   J S O N . p a r s e ( l o c a l S t o r a g e . g e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' )   | |   ' [ ] ' ) ; 
- 
-     c u r r e n t F e a t u r e d   =   c u r r e n t F e a t u r e d . f i l t e r ( t   = >   t   ! = =   t i t l e ) ; 
- 
-     l o c a l S t o r a g e . s e t I t e m ( ' h o m e p a g e _ f e a t u r e d ' ,   J S O N . s t r i n g i f y ( c u r r e n t F e a t u r e d ) ) ; 
- 
-     
- 
-     / /   R e f r e s h   m o d a l 
- 
-     s h o w H o m e p a g e M a n a g e r ( ) ; 
- 
- } 
- 
- 
- 
- f u n c t i o n   s a v e H o m e p a g e F e a t u r e d ( )   { 
- 
-     c l o s e H o m e p a g e M a n a g e r ( ) ; 
- 
-     s h o w C a t e g o r y ( ' a l l ' ) ;   / /   R e f r e s h   p r i m a   p a g i n � �
- 
-     a l e r t ( ' � S&   P r i m a   p a g i n � �  a   f o s t   a c t u a l i z a t � �  c u   s u c c e s s ! ' ) ; 
- 
- } 
- 
- 
- 
- f u n c t i o n   c l o s e H o m e p a g e M a n a g e r ( )   { 
- 
-     c o n s t   m o d a l   =   d o c u m e n t . g e t E l e m e n t B y I d ( ' h o m e p a g e - m a n a g e r - m o d a l ' ) ; 
- 
-     i f   ( m o d a l )   { 
- 
-         m o d a l . r e m o v e ( ) ; 
- 
-     } 
- 
- } 
- 
- 
+// Functie pentru a obtine canalele featured pentru prima pagina
+function getHomepageFeaturedChannels() {
+  const featuredIds = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
+  
+  // Daca nu sunt setate canale featured, returneaza primele 6 din defaultChannels
+  if (featuredIds.length === 0) {
+    return defaultChannels.slice(0, 6);
+  }
+
+  // Returneaza canalele featured in ordinea setata
+  const featuredChannels = [];
+  for (let id of featuredIds) {
+    const channel = defaultChannels.find(c => c.title === id);
+    if (channel) {
+      featuredChannels.push(channel);
+    }
+  }
+
+  // Daca nu avem 6, completeaza cu alte canale
+  if (featuredChannels.length < 6) {
+    const remainingChannels = defaultChannels.filter(c => !featuredIds.includes(c.title));
+    featuredChannels.push(...remainingChannels.slice(0, 6 - featuredChannels.length));
+  }
+
+  return featuredChannels.slice(0, 6);
+}
+
+// Functie pentru a seta canalele featured pentru prima pagina
+function setHomepageFeaturedChannels(channelTitles) {
+  localStorage.setItem('homepage_featured', JSON.stringify(channelTitles));
+  // Refresh prima pagina
+  if (currentCategory === 'all') {
+    showCategory('all');
+  }
+}
+
+// Functie pentru admin sa gestioneze canalele de pe prima pagina
+function showHomepageManager() {
+  const allChannels = defaultChannels;
+  const currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
+  
+  if (allChannels.length === 0) {
+    alert('Nu exista canale disponibile!');
+    return;
+  }
+
+  let modalHTML = `
+    <div id="homepage-manager-modal" class="modal" style="display: flex;">
+      <div class="modal-content" style="max-width: 600px; width: 90%;">
+        <h3>ðŸ  Gestionare Prima Pagina</h3>
+        <p style="color: #666; margin-bottom: 1rem;">Selecteaza 6 canale care vor aparea pe prima pagina (inainte de login):</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <h4>ðŸ“‹ Canale Disponibile:</h4>
+            <div id="available-channels" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 0.5rem; border-radius: 0.5rem;">
+              ${allChannels.map(channel => `
+                <div class="channel-select-item" data-title="${channel.title}" style="padding: 0.5rem; border-bottom: 1px solid #eee; cursor: pointer; ${currentFeatured.includes(channel.title) ? 'background: #e3f2fd;' : ''}">
+                  <strong>${channel.title}</strong><br>
+                  <small style="color: #666;">${channel.desc}</small>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div>
+            <h4>â­ Prima Pagina (${currentFeatured.length}/6):</h4>
+            <div id="featured-channels" style="min-height: 300px; border: 1px solid #ddd; padding: 0.5rem; border-radius: 0.5rem; background: #f8f9fa;">
+              ${currentFeatured.map((title, index) => {
+                const channel = allChannels.find(c => c.title === title);
+                return channel ? `
+                  <div class="featured-item" data-title="${title}" style="padding: 0.5rem; margin-bottom: 0.5rem; background: white; border-radius: 0.3rem; border-left: 3px solid #4caf50;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <div style="flex: 1;">
+                        <strong>${index + 1}. ${channel.title}</strong><br>
+                        <small style="color: #666;">${channel.desc}</small>
+                      </div>
+                      <button onclick="removeFeaturedChannel('${title}')" style="background: #f44336; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 0.2rem; cursor: pointer;">âœ•</button>
+                    </div>
+                  </div>
+                ` : '';
+              }).join('')}
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+          <button onclick="closeHomepageManager()" style="background: #95a5a6; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">Anuleaza</button>
+          <button onclick="saveHomepageFeatured()" style="background: #4caf50; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">ðŸ’¾ Salveaza</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Remove existing modal if any
+  const existingModal = document.getElementById('homepage-manager-modal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  // Add modal to body
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+  // Add click handlers for available channels
+  document.querySelectorAll('.channel-select-item').forEach(item => {
+    item.addEventListener('click', function() {
+      const title = this.dataset.title;
+      addToFeatured(title);
+    });
+  });
+}
+
+function addToFeatured(title) {
+  const currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
+  
+  if (currentFeatured.includes(title)) {
+    alert('Canalul este deja pe prima pagina!');
+    return;
+  }
+
+  if (currentFeatured.length >= 6) {
+    alert('Poti avea maximum 6 canale pe prima pagina!');
+    return;
+  }
+
+  currentFeatured.push(title);
+  localStorage.setItem('homepage_featured', JSON.stringify(currentFeatured));
+
+  // Refresh modal
+  showHomepageManager();
+}
+
+function removeFeaturedChannel(title) {
+  let currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
+  currentFeatured = currentFeatured.filter(t => t !== title);
+  localStorage.setItem('homepage_featured', JSON.stringify(currentFeatured));
+
+  // Refresh modal
+  showHomepageManager();
+}
+
+function saveHomepageFeatured() {
+  closeHomepageManager();
+  showCategory('all'); // Refresh prima pagina
+  alert('âœ… Prima pagina a fost actualizata cu succes!');
+}
+
+function closeHomepageManager() {
+  const modal = document.getElementById('homepage-manager-modal');
+  if (modal) {
+    modal.remove();
+  }
+}
