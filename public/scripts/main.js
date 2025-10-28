@@ -952,13 +952,17 @@ function renderChannelsByCategory() {
 
   // For 'all' display first 6 channels directly from defaultChannels
   if (currentCategory === 'all') {
+    console.log('🏠 Displaying homepage channels'); // Debug
     const grid = document.createElement('div');
     grid.className = 'channels-grid';
     const toShow = getHomepageFeaturedChannels(); // Use featured channels function
+    console.log('📺 Channels to show:', toShow.length, toShow.map(c => c.title)); // Debug
     if (toShow.length === 0) {
+      console.log('❌ No channels to show!'); // Debug
       list.innerHTML = '<p style="text-align:center;">Nu există canale de afișat.</p>';
       return;
     }
+    console.log('✅ About to render', toShow.length, 'channels'); // Debug
     toShow.forEach(channel => {
       const canDelete = logged && channel.owner === logged;
       const card = document.createElement('div');
@@ -1704,11 +1708,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Functie pentru a obtine canalele featured pentru prima pagina
 function getHomepageFeaturedChannels() {
+  console.log('🏠 getHomepageFeaturedChannels called'); // Debug
   const featuredIds = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
+  console.log('📋 Featured IDs from storage:', featuredIds); // Debug
   
   // Daca nu sunt setate canale featured, returneaza primele 6 din defaultChannels
   if (featuredIds.length === 0) {
-    return defaultChannels.slice(0, 6);
+    console.log('🎯 No featured channels set, returning first 6 from defaultChannels'); // Debug
+    const first6 = defaultChannels.slice(0, 6);
+    console.log('📺 Returning channels:', first6.map(c => c.title)); // Debug
+    return first6;
   }
 
   // Returneaza canalele featured in ordinea setata
