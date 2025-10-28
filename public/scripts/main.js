@@ -922,7 +922,9 @@ function renderChannelsByCategory() {
   if (!list) {
     console.error('❌ channels-list element not found!');
     return;
-  }  list.innerHTML = '';
+  }
+  
+  list.innerHTML = '';
   const channels = getChannels();
   console.log('📋 Total channels:', channels.length); // Debug
   
