@@ -1,5 +1,4 @@
 ﻿console.log('🚀 JavaScript loaded successfully!'); // Debug
-console.log('defaultChannels length:', defaultChannels.length);
 
 // Default channels (category is an array)
 const defaultChannels = [
@@ -830,6 +829,8 @@ const defaultChannels = [
   }
 ];
 
+console.log('📺 defaultChannels loaded:', defaultChannels.length, 'channels'); // Debug
+
 // Continue adding more channels to reach 50 for each category...
 
 function getChannels() {
@@ -888,14 +889,14 @@ function showCategory(category) {
   console.log('📺 Showing category:', category); // Debug
   currentCategory = category;
   updateActiveCategoryButtons();
-  
+
   // Debug - verificăm canalele
   const channels = getChannels();
   console.log('🔍 Total channels:', channels.length);
   console.log('🔍 First 3 channels:', channels.slice(0, 3));
-  renderChannelsByCategory();
+  console.log('🔍 Category being shown:', category);
   
-  // Change background based on category
+  renderChannelsByCategory();  // Change background based on category
   const body = document.body;
   // Remove all category classes
   body.className = body.className.replace(/\b(crypto|gaming|adult|stiri|retete|tehnologie|promo)-bg\b/g, '');
@@ -915,14 +916,13 @@ function updateActiveCategoryButtons() {
 
 function renderChannelsByCategory() {
   console.log('🔄 Rendering channels for category:', currentCategory); // Debug
-  
+
   const list = document.getElementById('channels-list');
+  console.log('🎯 Found channels-list element:', !!list); // Debug
   if (!list) {
     console.error('❌ channels-list element not found!');
     return;
-  }
-  
-  list.innerHTML = '';
+  }  list.innerHTML = '';
   const channels = getChannels();
   console.log('📋 Total channels:', channels.length); // Debug
   
