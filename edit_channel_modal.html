@@ -1,0 +1,24 @@
+  <!-- Edit Channel Modal -->
+  <div id="edit-channel-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>✏️ Editează Canal</h3>
+      <input type="text" id="edit-channel-title" placeholder="🏷️ Titlu canal" />
+      <input type="text" id="edit-channel-desc" placeholder="📝 Descriere" />
+      <input type="url" id="edit-channel-url" placeholder="🔗 Link Telegram" />
+      <input type="url" id="edit-channel-logo" placeholder="🖼️ Link logo (opțional)" />
+      <select id="edit-channel-category" multiple size="7">
+        <option value="crypto">💰 Crypto</option>
+        <option value="gaming">🎮 Gaming</option>
+        <option value="adult">🔞 ADULT (+18)</option>
+        <option value="stiri">📰 Știri</option>
+        <option value="retete">🍳 Rețete</option>
+        <option value="tehnologie">💻 Tehnologie</option>
+        <option value="promo">🎁 Promo</option>
+      </select>
+      <div style="margin-top:1rem; display:flex; gap:0.5rem; justify-content:flex-end;">
+        <button onclick="closeEditChannelModal()" style="background:#95a5a6;">Anulează</button>
+        <button onclick="saveChannelEdit()" style="background:#2ecc71;">💾 Salvează</button>
+      </div>
+      <p style="font-size:0.85rem; color:#666; margin-top:0.5rem;">💡 Ține apăsat Ctrl pentru a selecta mai multe categorii.</p>
+    </div>
+  </div>

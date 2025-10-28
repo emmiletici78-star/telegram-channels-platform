@@ -1,0 +1,28 @@
+/* Homepage Manager Modal Styles */
+.channel-select-item:hover {
+  background: #f0f0f0 !important;
+}
+
+.featured-item {
+  position: relative;
+}
+
+.featured-item button:hover {
+  background: #d32f2f !important;
+  transform: scale(1.1);
+}
+
+#homepage-manager-modal .modal-content {
+  animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

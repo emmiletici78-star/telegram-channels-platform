@@ -1,5 +1,4 @@
 console.log('🚀 JavaScript loaded successfully!'); // Debug
-console.log('defaultChannels length:', defaultChannels.length);
 
 // Default channels (category is an array)
 const defaultChannels = [
@@ -833,8 +832,8 @@ const defaultChannels = [
 // Continue adding more channels to reach 50 for each category...
 
 function getChannels() {
-  // Returnează direct defaultChannels - simplu și funcțional
-  return defaultChannels;
+  // Always return the updated defaultChannels instead of localStorage
+  return defaultChannels.slice();
 }
 function saveChannels(channels) {
   localStorage.setItem('channels', JSON.stringify(channels));
@@ -854,10 +853,9 @@ function addChannel() {
   if (!owner) return alert('Trebuie să fii logat pentru a adăuga canal!');
   if (category.length === 0) return alert('Selectează cel puțin o categorie!');
 
-  // Salvează doar în user_channels pentru a evita duplicatele
-  const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
-  userChannels.unshift({ title, desc, url, logo, owner, category });
-  localStorage.setItem('user_channels', JSON.stringify(userChannels));
+  const channels = getChannels();
+  channels.unshift({ title, desc, url, logo, owner, category });
+  saveChannels(channels);
   showCategory(currentCategory);
   // clear form
   document.getElementById('channel-title').value = '';
@@ -888,11 +886,6 @@ function showCategory(category) {
   console.log('📺 Showing category:', category); // Debug
   currentCategory = category;
   updateActiveCategoryButtons();
-  
-  // Debug - verificăm canalele
-  const channels = getChannels();
-  console.log('🔍 Total channels:', channels.length);
-  console.log('🔍 First 3 channels:', channels.slice(0, 3));
   renderChannelsByCategory();
   
   // Change background based on category
@@ -948,13 +941,13 @@ function renderChannelsByCategory() {
     if (logged && c.owner === logged) userChannels.push(c);
     else otherChannels.push(c);
   });
-  const sorted = getSortedChannels(filtered, category);
+  const sorted = [...userChannels, ...otherChannels];
 
-  // For 'all' display first 6 channels directly from defaultChannels
+  // For 'all' display first 6 in grid 3x2
   if (currentCategory === 'all') {
     const grid = document.createElement('div');
     grid.className = 'channels-grid';
-    const toShow = defaultChannels.slice(0, 6);
+    const toShow = sorted.slice(0, 6);
     if (toShow.length === 0) {
       list.innerHTML = '<p style="text-align:center;">Nu există canale de afișat.</p>';
       return;
@@ -999,8 +992,6 @@ function renderChannelsByCategory() {
     `;
     list.appendChild(card);
   });
-  
-  console.log('🎯 renderChannelsByCategory finished - channels rendered:', sorted.length);
 }
 
 // --- Auth ---
@@ -1008,7 +999,7 @@ function register() {
   const email = document.getElementById('reg-email').value.trim().toLowerCase();
   const pass = document.getElementById('reg-password').value;
   if (!email || !pass) return alert('Completează toate câmpurile!');
-  if (!validateEmail(email)) return alert('❌ Email invalid!\n\n✅ Folosește un email REAL:\n• nume.prenume@gmail.com\n• contact@yahoo.com\n• admin@company.ro\n\n❌ NU acceptăm:\n• 1111@gmail.com (doar cifre)\n• test@fake.com (domenii fake)');
+  if (!validateEmail(email)) return alert('Email invalid!');
   if (localStorage.getItem('user_' + email)) return alert('Emailul există deja!');
   localStorage.setItem('user_' + email, pass);
   // store metadata for the user (verified flag)
@@ -1083,47 +1074,7 @@ function showUser() {
   showCategory(currentCategory);
 }
 function validateEmail(email) {
-  // Verifică format complet de email valid
-  const basicFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!basicFormat) return false;
-  
-  const [localPart, domain] = email.split('@');
-  const domainLower = domain.toLowerCase();
-  
-  // Nu permite doar cifre în partea locală (1111@gmail.com)
-  if (/^\d+$/.test(localPart)) {
-    return false;
-  }
-  
-  // Nu permite domenii fake
-  const fakeDomains = ['fake', 'test', 'example', '123', 'temp', 'demo', 'localhost'];
-  for (let fakeDomain of fakeDomains) {
-    if (domainLower.includes(fakeDomain)) {
-      return false;
-    }
-  }
-  
-  // Lista de domenii acceptate (reale și cunoscute)
-  const validDomains = [
-    'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
-    'icloud.com', 'protonmail.com', 'aol.com', 'mail.com',
-    'yahoo.ro', 'gmail.ro', 'outlook.ro', 'hotmail.ro',
-    'company.com', 'business.ro', 'firma.com', 'work.com'
-  ];
-  
-  // Verifică dacă domeniul este în lista acceptată SAU are format corporativ valid
-  const isCorporateEmail = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domainLower) && 
-                          !domainLower.includes('test') && 
-                          !domainLower.includes('fake') &&
-                          domainLower.includes('.') &&
-                          domainLower.split('.').length >= 2;
-                          
-  const isValidDomain = validDomains.includes(domainLower) || isCorporateEmail;
-  
-  // Partea locală trebuie să aibă cel puțin 3 caractere și să nu fie doar cifre
-  const isValidLocalPart = localPart.length >= 3 && !/^\d+$/.test(localPart);
-  
-  return isValidDomain && isValidLocalPart;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // Admin Functions
@@ -1701,10 +1652,10 @@ function changeLanguage(lang) {
   // Reaplica traducerile pentru op?iunile selectorului
   updateLanguageSelectorOptions(lang);
   
-  // Re�ncarca canalele pentru a aplica traducerile la categorii
+  // Re�ncarca canalele pentru a aplica traducerile la categorii
   filterChannels('all');
-
-  console.log('Language changed to:', language);
+  
+  console.log(\ Language changed to: \\);
 }
 
 // Func?ia pentru actualizarea op?iunilor selectorului de limba
@@ -1723,9 +1674,9 @@ function updateLanguageSelectorOptions(currentLang) {
   }
 }
 
-// Ini?ializeaza sistemul multilingv la �ncarcarea paginii
+// Ini?ializeaza sistemul multilingv la �ncarcarea paginii
 document.addEventListener('DOMContentLoaded', function() {
-  // Seteaza limba salvata sau rom�na ca default
+  // Seteaza limba salvata sau rom�na ca default
   const savedLang = getCurrentLanguage();
   const languageSelector = document.getElementById('language-selector');
   
@@ -1737,7 +1688,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Aplica traducerile
   applyTranslations(savedLang);
   
-  console.log('Initialized with language:', currentLanguage);
+  console.log(\ Initialized with language: \\);
 });
 
 // Func?ie helper pentru ob?inerea textului tradus
@@ -1746,393 +1697,3 @@ function t(key, lang = getCurrentLanguage()) {
   return translations_obj[key] || key;
 }
 
-
-
-// === EDIT CHANNEL FUNCTIONALITY ===
-// Global variable to store the channel being edited
-let currentEditingChannel = null;
-
-function editChannel(title) {
-  const channels = getChannels();
-  const channel = channels.find(ch => ch.title === title);
-  
-  if (!channel) {
-    alert('❌ Canalul nu a fost găsit!');
-    return;
-  }
-  
-  // Store the channel being edited
-  currentEditingChannel = channel;
-  
-  // Populate the edit form
-  document.getElementById('edit-channel-title').value = channel.title;
-  document.getElementById('edit-channel-desc').value = channel.desc;
-  document.getElementById('edit-channel-url').value = channel.url;
-  document.getElementById('edit-channel-logo').value = channel.logo || '';
-  
-  // Select the categories
-  const categorySelect = document.getElementById('edit-channel-category');
-  for (let option of categorySelect.options) {
-    option.selected = channel.category.includes(option.value);
-  }
-  
-  // Show the modal
-  document.getElementById('edit-channel-modal').style.display = 'flex';
-}
-
-function closeEditChannelModal() {
-  document.getElementById('edit-channel-modal').style.display = 'none';
-  currentEditingChannel = null;
-}
-
-function saveChannelEdit() {
-  if (!currentEditingChannel) {
-    alert('❌ Eroare: Nu există canal selectat pentru editare!');
-    return;
-  }
-  
-  const title = document.getElementById('edit-channel-title').value.trim();
-  const desc = document.getElementById('edit-channel-desc').value.trim();
-  const url = document.getElementById('edit-channel-url').value.trim();
-  const logo = document.getElementById('edit-channel-logo').value.trim();
-  const categorySelect = document.getElementById('edit-channel-category');
-  const selectedCategories = Array.from(categorySelect.selectedOptions).map(opt => opt.value);
-  
-  // Validation
-  if (!title || !desc || !url) {
-    alert('❌ Completează toate câmpurile obligatorii!');
-    return;
-  }
-  
-  if (!url.includes('t.me/')) {
-    alert('❌ Link-ul trebuie să fie un link Telegram valid (t.me/...)!');
-    return;
-  }
-  
-  if (selectedCategories.length === 0) {
-    alert('❌ Selectează cel puțin o categorie!');
-    return;
-  }
-  
-  // Get all channels
-  const channels = getChannels();
-  const channelIndex = channels.findIndex(ch => ch.title === currentEditingChannel.title);
-  
-  if (channelIndex === -1) {
-    alert('❌ Canalul nu a fost găsit în baza de date!');
-    return;
-  }
-  
-  // Update the channel
-  channels[channelIndex] = {
-    ...channels[channelIndex],
-    title: title,
-    desc: desc,
-    url: url,
-    logo: logo || channels[channelIndex].logo,
-    category: selectedCategories
-  };
-  
-  // Save to localStorage
-  localStorage.setItem('channels', JSON.stringify(channels));
-  
-  // Close modal and refresh view
-  closeEditChannelModal();
-  
-  // Refresh the channels display
-  showCategory(currentCategory || 'all');
-  
-  // If admin panel is open, refresh it too
-  if (document.getElementById('admin-panel').style.display !== 'none') {
-    loadAdminChannels();
-  }
-  
-  alert('✅ Canalul a fost actualizat cu succes!');
-}
-
-
-
-// === CHANNEL PRIORITY MANAGEMENT ===
-// Channel Priority/Featured Management Functions
-
-function toggleChannelPriority(title) {
-  const channels = getChannels();
-  const channelIndex = channels.findIndex(ch => ch.title === title);
-  
-  if (channelIndex === -1) {
-    alert('❌ Canalul nu a fost găsit!');
-    return;
-  }
-  
-  const channel = channels[channelIndex];
-  const isPriority = channel.priority || false;
-  
-  // Toggle priority status
-  channels[channelIndex].priority = !isPriority;
-  channels[channelIndex].priorityDate = new Date().toISOString();
-  
-  // Save to localStorage
-  localStorage.setItem('channels', JSON.stringify(channels));
-  
-  // Show confirmation
-  const status = !isPriority ? '⭐ PRIORITAR' : '📍 NORMAL';
-  alert(`✅ Canalul "${title}" este acum ${status}!`);
-  
-  // Refresh displays
-  showCategory(currentCategory || 'all');
-  if (document.getElementById('admin-panel').style.display !== 'none') {
-    loadAdminChannels();
-  }
-}
-
-function setChannelPosition(title, position) {
-  const channels = getChannels();
-  const channelIndex = channels.findIndex(ch => ch.title === title);
-  
-  if (channelIndex === -1) {
-    alert('❌ Canalul nu a fost găsit!');
-    return;
-  }
-  
-  const validPosition = Math.max(1, Math.min(position, channels.length));
-  
-  // Set custom position
-  channels[channelIndex].customPosition = validPosition;
-  channels[channelIndex].positionDate = new Date().toISOString();
-  
-  // Save to localStorage
-  localStorage.setItem('channels', JSON.stringify(channels));
-  
-  alert(`✅ Canalul "${title}" va fi afișat pe poziția ${validPosition}!`);
-  
-  // Refresh displays
-  showCategory(currentCategory || 'all');
-  if (document.getElementById('admin-panel').style.display !== 'none') {
-    loadAdminChannels();
-  }
-}
-
-function showChannelPositionModal(title) {
-  const channels = getChannels();
-  const position = prompt(
-    `🔢 Introduceți poziția pentru canalul "${title}":\n\n` +
-    `Poziții disponibile: 1 - ${channels.length}\n` +
-    `1 = Prima poziție (cel mai vizibil)\n` +
-    `${channels.length} = Ultima poziție`,
-    '1'
-  );
-  
-  if (position === null) return; // Cancel
-  
-  const numPosition = parseInt(position);
-  if (isNaN(numPosition) || numPosition < 1) {
-    alert('❌ Introduceți un număr valid mai mare ca 0!');
-    return;
-  }
-  
-  setChannelPosition(title, numPosition);
-}
-
-// Enhanced sorting function with priority and custom positions
-function getSortedChannels(channels, category) {
-  let filtered = channels;
-  
-  // Filter by category if not 'all'
-  if (category !== 'all') {
-    filtered = channels.filter(channel => channel.category.includes(category));
-  }
-  
-  // Sort channels with priority system
-  return filtered.sort((a, b) => {
-    // 1. Priority channels first
-    const aPriority = a.priority || false;
-    const bPriority = b.priority || false;
-    
-    if (aPriority && !bPriority) return -1;
-    if (!aPriority && bPriority) return 1;
-    
-    // 2. Custom positions
-    const aPos = a.customPosition || 999;
-    const bPos = b.customPosition || 999;
-    
-    if (aPos !== bPos) return aPos - bPos;
-    
-    // 3. User's own channels first (within same priority/position)
-    const logged = localStorage.getItem('logged_user');
-    const aOwned = logged && a.owner === logged;
-    const bOwned = logged && b.owner === logged;
-    
-    if (aOwned && !bOwned) return -1;
-    if (!aOwned && bOwned) return 1;
-    
-    // 4. By priority date (newest first)
-    if (a.priorityDate && b.priorityDate) {
-      return new Date(b.priorityDate) - new Date(a.priorityDate);
-    }
-    
-    // 5. Default: keep original order
-    return 0;
-  });
-}
-
-
-
-
-
-// === HOMEPAGE FEATURED CHANNELS ===
-// HOMEPAGE FEATURED CHANNELS MANAGEMENT
-
-// Funcție pentru a obține canalele featured pentru prima pagină
-function getHomepageFeaturedChannels() {
-  const featuredIds = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
-  const allChannels = getChannels();
-  
-  // Dacă nu sunt setate canale featured, returnează primele 6
-  if (featuredIds.length === 0) {
-    return allChannels.slice(0, 6);
-  }
-  
-  // Returnează canalele featured în ordinea setată
-  const featuredChannels = [];
-  for (let id of featuredIds) {
-    const channel = allChannels.find(c => c.title === id);
-    if (channel) {
-      featuredChannels.push(channel);
-    }
-  }
-  
-  // Dacă nu avem 6, completează cu alte canale
-  if (featuredChannels.length < 6) {
-    const remainingChannels = allChannels.filter(c => !featuredIds.includes(c.title));
-    featuredChannels.push(...remainingChannels.slice(0, 6 - featuredChannels.length));
-  }
-  
-  return featuredChannels.slice(0, 6);
-}
-
-// Funcție pentru a seta canalele featured pentru prima pagină
-function setHomepageFeaturedChannels(channelTitles) {
-  localStorage.setItem('homepage_featured', JSON.stringify(channelTitles));
-  // Refresh prima pagină
-  if (currentCategory === 'all') {
-    showCategory('all');
-  }
-}
-
-// Funcție pentru admin să gestioneze canalele de pe prima pagină
-function showHomepageManager() {
-  const allChannels = getChannels();
-  const currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
-  
-  if (allChannels.length === 0) {
-    alert('❌ Nu există canale disponibile!');
-    return;
-  }
-  
-  let modalHTML = `
-    <div id="homepage-manager-modal" class="modal" style="display: flex;">
-      <div class="modal-content" style="max-width: 600px; width: 90%;">
-        <h3>🏠 Gestionare Prima Pagină</h3>
-        <p style="color: #666; margin-bottom: 1rem;">Selectează 6 canale care vor apărea pe prima pagină (înainte de login):</p>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-          <div>
-            <h4>📋 Canale Disponibile:</h4>
-            <div id="available-channels" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 0.5rem; border-radius: 0.5rem;">
-              ${allChannels.map(channel => `
-                <div class="channel-select-item" data-title="${channel.title}" style="padding: 0.5rem; border-bottom: 1px solid #eee; cursor: pointer; ${currentFeatured.includes(channel.title) ? 'background: #e3f2fd;' : ''}">
-                  <strong>${channel.title}</strong><br>
-                  <small style="color: #666;">${channel.desc}</small>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          
-          <div>
-            <h4>⭐ Prima Pagină (${currentFeatured.length}/6):</h4>
-            <div id="featured-channels" style="min-height: 300px; border: 1px solid #ddd; padding: 0.5rem; border-radius: 0.5rem; background: #f8f9fa;">
-              ${currentFeatured.map((title, index) => {
-                const channel = allChannels.find(c => c.title === title);
-                return channel ? `
-                  <div class="featured-item" data-title="${title}" style="padding: 0.5rem; margin-bottom: 0.5rem; background: white; border-radius: 0.3rem; border-left: 3px solid #4caf50;">
-                    <div style="display: flex; justify-content: between; align-items: center;">
-                      <div style="flex: 1;">
-                        <strong>${index + 1}. ${channel.title}</strong><br>
-                        <small style="color: #666;">${channel.desc}</small>
-                      </div>
-                      <button onclick="removeFeaturedChannel('${title}')" style="background: #f44336; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 0.2rem; cursor: pointer;">✕</button>
-                    </div>
-                  </div>
-                ` : '';
-              }).join('')}
-            </div>
-          </div>
-        </div>
-        
-        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
-          <button onclick="closeHomepageManager()" style="background: #95a5a6; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">Anulează</button>
-          <button onclick="saveHomepageFeatured()" style="background: #4caf50; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">💾 Salvează</button>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  // Remove existing modal if any
-  const existingModal = document.getElementById('homepage-manager-modal');
-  if (existingModal) {
-    existingModal.remove();
-  }
-  
-  // Add modal to body
-  document.body.insertAdjacentHTML('beforeend', modalHTML);
-  
-  // Add click handlers for available channels
-  document.querySelectorAll('.channel-select-item').forEach(item => {
-    item.addEventListener('click', function() {
-      const title = this.dataset.title;
-      addToFeatured(title);
-    });
-  });
-}
-
-function addToFeatured(title) {
-  const currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
-  
-  if (currentFeatured.includes(title)) {
-    alert('❌ Canalul este deja pe prima pagină!');
-    return;
-  }
-  
-  if (currentFeatured.length >= 6) {
-    alert('❌ Poți avea maximum 6 canale pe prima pagină!');
-    return;
-  }
-  
-  currentFeatured.push(title);
-  localStorage.setItem('homepage_featured', JSON.stringify(currentFeatured));
-  
-  // Refresh modal
-  showHomepageManager();
-}
-
-function removeFeaturedChannel(title) {
-  let currentFeatured = JSON.parse(localStorage.getItem('homepage_featured') || '[]');
-  currentFeatured = currentFeatured.filter(t => t !== title);
-  localStorage.setItem('homepage_featured', JSON.stringify(currentFeatured));
-  
-  // Refresh modal
-  showHomepageManager();
-}
-
-function saveHomepageFeatured() {
-  closeHomepageManager();
-  showCategory('all'); // Refresh prima pagină
-  alert('✅ Prima pagină a fost actualizată cu success!');
-}
-
-function closeHomepageManager() {
-  const modal = document.getElementById('homepage-manager-modal');
-  if (modal) {
-    modal.remove();
-  }
-}

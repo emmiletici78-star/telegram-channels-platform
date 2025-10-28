@@ -10,54 +10,65 @@
   <header>
     <div class="header-content">
       <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4e8.svg" alt="Telegram" class="telegram-logo">
-      <h1>Telegram Channel</h1>
+      <h1 data-i18n="siteTitle">Telegram Channel</h1>
+      <div class="language-selector-container">
+        <label for="language-selector" data-i18n="language">🌐 Limba</label>
+        <select id="language-selector" onchange="changeLanguage(this.value)">
+          <option value="ro" data-i18n="romanian">🇷🇴 Română</option>
+          <option value="en" data-i18n="english">🇺🇸 English</option>
+          <option value="es" data-i18n="spanish">🇪🇸 Español</option>
+          <option value="fr" data-i18n="french">🇫🇷 Français</option>
+          <option value="de" data-i18n="german">🇩🇪 Deutsch</option>
+        </select>
+      </div>
     </div>
-    <p>Descoperă și promovează cele mai interesante canale Telegram!</p>
+    <p data-i18n="siteDescription">Descoperă și promovează cele mai interesante canale Telegram!</p>
   </header>
 
   <nav id="categories-menu" class="categories-menu">
-    <button class="cat-btn" onclick="showCategory('all')">Toate</button>
-    <button class="cat-btn" onclick="showCategory('crypto')">Crypto</button>
-    <button class="cat-btn" onclick="showCategory('gaming')">Gaming</button>
-    <button class="cat-btn" onclick="showCategory('adult')">ADULT (+18)</button>
-    <button class="cat-btn" onclick="showCategory('stiri')">Știri</button>
-    <button class="cat-btn" onclick="showCategory('retete')">Rețete</button>
-    <button class="cat-btn" onclick="showCategory('tehnologie')">Tehnologie</button>
-    <button class="cat-btn" onclick="showCategory('promo')">Promo</button>
+    <button class="cat-btn" onclick="showCategory('all')" data-i18n="allCategories">Toate</button>
+    <button class="cat-btn" onclick="showCategory('crypto')" data-i18n="crypto">Crypto</button>
+    <button class="cat-btn" onclick="showCategory('gaming')" data-i18n="gaming">Gaming</button>
+    <button class="cat-btn" onclick="showCategory('adult')" data-i18n="adult">ADULT (+18)</button>
+    <button class="cat-btn" onclick="showCategory('stiri')" data-i18n="news">Știri</button>
+    <button class="cat-btn" onclick="showCategory('retete')" data-i18n="recipes">Rețete</button>
+    <button class="cat-btn" onclick="showCategory('tehnologie')" data-i18n="technology">Tehnologie</button>
+    <button class="cat-btn" onclick="showCategory('promo')" data-i18n="promo">Promo</button>
   </nav>
 
   <section id="auth-section">
     <div id="register-form">
-      <h2>🆕 Creează cont nou</h2>
-      <input type="email" id="reg-email" placeholder="📧 Adresa de email" />
-      <input type="password" id="reg-password" placeholder="🔒 Parolă sigură" />
-      <button onclick="register()">✨ Înregistrează-te gratuit</button>
+      <h2 data-i18n="createAccount">🆕 Creează cont nou</h2>
+      <p style="font-size:0.85rem; color:#666; margin-bottom:1rem;">💡 <strong>Important:</strong> Doar emailuri REALE (nume.prenume@gmail.com). NU acceptăm doar cifre!</p>
+      <input type="email" id="reg-email" data-i18n="emailPlaceholder" placeholder="📧 Ex: nume.prenume@gmail.com" />
+      <input type="password" id="reg-password" data-i18n="passwordPlaceholder" placeholder="🔒 Parolă sigură" />
+      <button onclick="register()" data-i18n="registerButton">✨ Înregistrează-te gratuit</button>
     </div>
 
     <div id="login-form">
-      <h2>🔐 Conectează-te</h2>
-      <input type="email" id="login-email" placeholder="📧 Email-ul tău" />
-      <input type="password" id="login-password" placeholder="🔒 Parola ta" />
-      <button onclick="login()">🚀 Intră în cont</button>
-      <div class="hint" style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
+      <h2 data-i18n="loginTitle">🔐 Conectează-te</h2>
+      <input type="email" id="login-email" data-i18n="loginEmail" placeholder="📧 Email-ul tău valid" />
+      <input type="password" id="login-password" data-i18n="loginPassword" placeholder="🔒 Parola ta" />
+      <button onclick="login()" data-i18n="loginButton">🚀 Intră în cont</button>
+      <div class="hint" style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;" data-i18n="adminHint">
         💡 Admin: folosește credentialele speciale pentru acces administrativ
       </div>
     </div>
 
     <div id="user-info" style="display:none;">
       <p style="font-size:1.1rem; color:var(--primary-dark); font-weight:600;">
-        👋 Bun venit, <span id="current-user" style="color:var(--primary);"></span>!
-        <span id="admin-badge" style="display:none; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.5rem;">👑 ADMIN</span>
+        <span data-i18n="welcome">👋 Bun venit, </span><span id="current-user" style="color:var(--primary);"></span>!
+        <span id="admin-badge" style="display:none; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.5rem;" data-i18n="adminBadge">👑 ADMIN</span>
       </p>
       <div id="admin-controls" style="display:none; margin-top: 1rem;">
-        <button onclick="showAdminPanel()" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; margin-right: 0.5rem;">
+        <button onclick="showAdminPanel()" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; margin-right: 0.5rem;" data-i18n="adminPanel">
           ⚙️ Panel Admin
         </button>
-        <button onclick="showUserStats()" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; margin-right: 0.5rem;">
+        <button onclick="showUserStats()" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; margin-right: 0.5rem;" data-i18n="statisticsButton">
           📊 Statistici
         </button>
       </div>
-      <button onclick="logout()" style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); margin-top:0.5rem;">
+      <button onclick="logout()" style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); margin-top:0.5rem;" data-i18n="logoutButton">
         👋 Deconectează-te
       </button>
     </div>
@@ -81,6 +92,7 @@
         <div class="admin-actions" style="margin-bottom: 1rem;">
           <button onclick="showAllChannels()" style="background: #3498db;">📋 Vezi Toate Canalele</button>
           <button onclick="showPendingChannels()" style="background: #f39c12;">⏳ Canale în Așteptare</button>
+          <button onclick="showHomepageManager()" style="background: #e74c3c;">🏠 Prima Pagină</button>
           <button onclick="exportChannels()" style="background: #27ae60;">💾 Export Date</button>
         </div>
         <div id="admin-channels-list">
@@ -193,7 +205,7 @@
   <div id="add-user-modal" class="modal" style="display:none;">
     <div class="modal-content">
       <h3>➕ Adaugă Utilizator</h3>
-      <input type="email" id="admin-new-email" placeholder="📧 Email (ex: user@gmail.com)" />
+      <input type="email" id="admin-new-email" placeholder="📧 Email valid (ex: user@gmail.com)" />
       <input type="password" id="admin-new-password" placeholder="🔒 Parolă" />
       <div style="margin-top:0.5rem; display:flex; gap:0.5rem; justify-content:flex-end;">
         <button onclick="closeAddUserModal()" style="background:#95a5a6;">Anulează</button>
@@ -218,9 +230,34 @@
   </div>
 
   <footer>
-    <p>&copy; 2025 Promo Canale Telegram</p>
+    <p data-i18n="footerText">&copy; 2025 Promo Canale Telegram</p>
   </footer>
 
+  <script src="scripts/translations.js"></script>
   <script src="scripts/main.js"></script>
+  <!-- Edit Channel Modal -->
+  <div id="edit-channel-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>✏️ Editează Canal</h3>
+      <input type="text" id="edit-channel-title" placeholder="🏷️ Titlu canal" />
+      <input type="text" id="edit-channel-desc" placeholder="📝 Descriere" />
+      <input type="url" id="edit-channel-url" placeholder="🔗 Link Telegram" />
+      <input type="url" id="edit-channel-logo" placeholder="🖼️ Link logo (opțional)" />
+      <select id="edit-channel-category" multiple size="7">
+        <option value="crypto">💰 Crypto</option>
+        <option value="gaming">🎮 Gaming</option>
+        <option value="adult">🔞 ADULT (+18)</option>
+        <option value="stiri">📰 Știri</option>
+        <option value="retete">🍳 Rețete</option>
+        <option value="tehnologie">💻 Tehnologie</option>
+        <option value="promo">🎁 Promo</option>
+      </select>
+      <div style="margin-top:1rem; display:flex; gap:0.5rem; justify-content:flex-end;">
+        <button onclick="closeEditChannelModal()" style="background:#95a5a6;">Anulează</button>
+        <button onclick="saveChannelEdit()" style="background:#2ecc71;">💾 Salvează</button>
+      </div>
+      <p style="font-size:0.85rem; color:#666; margin-top:0.5rem;">💡 Ține apăsat Ctrl pentru a selecta mai multe categorii.</p>
+    </div>
+  </div>
 </body>
 </html>
