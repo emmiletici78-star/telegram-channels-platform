@@ -1186,6 +1186,26 @@ function updateActiveCategoryButtons() {
   if (active) active.classList.add('active');
 }
 
+// Helper function to sort channels by member count
+function getSortedChannels(channels, category) {
+  return channels.sort((a, b) => {
+    // Extract member count from description
+    const getMemberCount = (desc) => {
+      const match = desc.match(/(\d+[\.,]?\d*)\s*[KMk]?\s+membri/i);
+      if (!match) return 0;
+      
+      let count = parseFloat(match[1].replace(',', '.'));
+      if (desc.toLowerCase().includes('k')) count *= 1000;
+      if (desc.toLowerCase().includes('m')) count *= 1000000;
+      
+      return count;
+    };
+    
+    // Sort by member count descending (highest first)
+    return getMemberCount(b.desc || '') - getMemberCount(a.desc || '');
+  });
+}
+
 function renderChannelsByCategory() {
   console.log('🔄 Rendering channels for category:', currentCategory); // Debug
 
@@ -1222,7 +1242,7 @@ function renderChannelsByCategory() {
     if (logged && c.owner === logged) userChannels.push(c);
     else otherChannels.push(c);
   });
-  const sorted = getSortedChannels(filtered, category);
+  const sorted = getSortedChannels(filtered, currentCategory);
 
   // For 'all' show message to select a category
   if (currentCategory === 'all') {
