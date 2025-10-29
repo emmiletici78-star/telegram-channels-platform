@@ -33,7 +33,24 @@ const translations = {
     featuredChannels: "🌟 Canale Recomandate",
     viewChannel: "Vezi canalul",
     members: "membri",
-    selectCategory: "Selectează o categorie pentru a vedea canalele. 👆<br><br>Canalele recomandate sunt afișate mai jos. 👇"
+    selectCategory: "Selectează o categorie pentru a vedea canalele. 👆<br><br>Canalele recomandate sunt afișate mai jos. 👇",
+    // Authentication forms
+    createAccount: "🆕 Creează cont nou",
+    emailPlaceholder: "📧 Ex: nume.prenume@gmail.com",
+    passwordPlaceholder: "🔒 Parolă sigură",
+    registerButton: "✨ Înregistrează-te gratuit",
+    loginTitle: "🔐 Conectează-te",
+    loginEmail: "📧 Email-ul tău valid",
+    loginPassword: "🔒 Parola ta",
+    loginButton: "🚀 Intră în cont",
+    // Categories
+    adult: "ADULT (+18)",
+    news: "Știri",
+    recipes: "Rețete",
+    technology: "Tehnologie",
+    promo: "Promo",
+    // Footer
+    footerText: "© 2025 Promo Canale Telegram"
   },
   en: {
     siteTitle: "Telegram Channel",
@@ -66,7 +83,24 @@ const translations = {
     featuredChannels: "🌟 Featured Channels",
     viewChannel: "View channel",
     members: "members",
-    selectCategory: "Select a category to see channels. 👆<br><br>Featured channels are displayed below. 👇"
+    selectCategory: "Select a category to see channels. 👆<br><br>Featured channels are displayed below. 👇",
+    // Authentication forms
+    createAccount: "🆕 Create new account",
+    emailPlaceholder: "📧 Ex: name.surname@gmail.com",
+    passwordPlaceholder: "🔒 Strong password",
+    registerButton: "✨ Sign up for free",
+    loginTitle: "🔐 Log in",
+    loginEmail: "📧 Your valid email",
+    loginPassword: "🔒 Your password",
+    loginButton: "🚀 Sign in",
+    // Categories
+    adult: "ADULT (+18)",
+    news: "News",
+    recipes: "Recipes",
+    technology: "Technology",
+    promo: "Promo",
+    // Footer
+    footerText: "© 2025 Telegram Channels Promo"
   },
   es: {
     siteTitle: "Canal de Telegram",
@@ -99,7 +133,24 @@ const translations = {
     featuredChannels: "🌟 Canales Destacados",
     viewChannel: "Ver canal",
     members: "miembros",
-    selectCategory: "Selecciona una categoría para ver canales. 👆<br><br>Los canales destacados se muestran abajo. 👇"
+    selectCategory: "Selecciona una categoría para ver canales. 👆<br><br>Los canales destacados se muestran abajo. 👇",
+    // Authentication forms
+    createAccount: "🆕 Crear cuenta nueva",
+    emailPlaceholder: "📧 Ej: nombre.apellido@gmail.com",
+    passwordPlaceholder: "🔒 Contraseña segura",
+    registerButton: "✨ Regístrate gratis",
+    loginTitle: "🔐 Iniciar sesión",
+    loginEmail: "📧 Tu email válido",
+    loginPassword: "🔒 Tu contraseña",
+    loginButton: "🚀 Entrar",
+    // Categories
+    adult: "ADULTO (+18)",
+    news: "Noticias",
+    recipes: "Recetas",
+    technology: "Tecnología",
+    promo: "Promoción",
+    // Footer
+    footerText: "© 2025 Promoción Canales Telegram"
   },
   fr: {
     siteTitle: "Canal Telegram",
@@ -132,7 +183,24 @@ const translations = {
     featuredChannels: "🌟 Chaînes Vedettes",
     viewChannel: "Voir la chaîne",
     members: "membres",
-    selectCategory: "Sélectionnez une catégorie pour voir les chaînes. 👆<br><br>Les chaînes vedettes sont affichées ci-dessous. 👇"
+    selectCategory: "Sélectionnez une catégorie pour voir les chaînes. 👆<br><br>Les chaînes vedettes sont affichées ci-dessous. 👇",
+    // Authentication forms
+    createAccount: "🆕 Créer un nouveau compte",
+    emailPlaceholder: "📧 Ex: nom.prenom@gmail.com",
+    passwordPlaceholder: "🔒 Mot de passe fort",
+    registerButton: "✨ S'inscrire gratuitement",
+    loginTitle: "🔐 Se connecter",
+    loginEmail: "📧 Votre email valide",
+    loginPassword: "🔒 Votre mot de passe",
+    loginButton: "🚀 Se connecter",
+    // Categories
+    adult: "ADULTE (+18)",
+    news: "Actualités",
+    recipes: "Recettes",
+    technology: "Technologie",
+    promo: "Promotion",
+    // Footer
+    footerText: "© 2025 Promotion Chaînes Telegram"
   },
   de: {
     siteTitle: "Telegram Kanal",
@@ -165,7 +233,24 @@ const translations = {
     featuredChannels: "🌟 Empfohlene Kanäle",
     viewChannel: "Kanal ansehen",
     members: "Mitglieder",
-    selectCategory: "Wählen Sie eine Kategorie, um Kanäle zu sehen. 👆<br><br>Empfohlene Kanäle werden unten angezeigt. 👇"
+    selectCategory: "Wählen Sie eine Kategorie, um Kanäle zu sehen. 👆<br><br>Empfohlene Kanäle werden unten angezeigt. 👇",
+    // Authentication forms
+    createAccount: "🆕 Neues Konto erstellen",
+    emailPlaceholder: "📧 Z.B: name.nachname@gmail.com",
+    passwordPlaceholder: "🔒 Starkes Passwort",
+    registerButton: "✨ Kostenlos registrieren",
+    loginTitle: "🔐 Anmelden",
+    loginEmail: "📧 Ihre gültige E-Mail",
+    loginPassword: "🔒 Ihr Passwort",
+    loginButton: "🚀 Einloggen",
+    // Categories
+    adult: "ERWACHSENE (+18)",
+    news: "Nachrichten",
+    recipes: "Rezepte",
+    technology: "Technologie",
+    promo: "Werbung",
+    // Footer
+    footerText: "© 2025 Telegram Kanäle Werbung"
   }
 };
 
@@ -176,40 +261,20 @@ let currentLanguage = localStorage.getItem('language') || 'ro';
 function changeLanguage(lang) {
   console.log('🌐 Changing language to:', lang);
   
-  // Simple direct approach - no complex dependencies
+  // Update current language
   currentLanguage = lang;
   localStorage.setItem('language', lang);
   
-  // Update basic elements directly
-  const titleEl = document.querySelector('[data-i18n="siteTitle"]');
-  const descEl = document.querySelector('[data-i18n="siteDescription"]');
-  const langLabel = document.querySelector('[data-i18n="language"]');
+  // Update all UI elements using the translation system
+  updateUI();
   
-  if (lang === 'en') {
-    if (titleEl) titleEl.textContent = 'Telegram Channel';
-    if (descEl) descEl.textContent = 'Discover and promote the most interesting Telegram channels!';
-    if (langLabel) langLabel.textContent = '🌐 Language';
-    document.title = 'Telegram Channel - English';
-  } else if (lang === 'es') {
-    if (titleEl) titleEl.textContent = 'Canal de Telegram';
-    if (descEl) descEl.textContent = '¡Descubre y promueve los canales de Telegram más interesantes!';
-    if (langLabel) langLabel.textContent = '🌐 Idioma';
-    document.title = 'Canal de Telegram - Español';
-  } else if (lang === 'fr') {
-    if (titleEl) titleEl.textContent = 'Canal Telegram';
-    if (descEl) descEl.textContent = 'Découvrez et promouvez les chaînes Telegram les plus intéressantes!';
-    if (langLabel) langLabel.textContent = '🌐 Langue';
-    document.title = 'Canal Telegram - Français';
-  } else if (lang === 'de') {
-    if (titleEl) titleEl.textContent = 'Telegram Kanal';
-    if (descEl) descEl.textContent = 'Entdecke und bewirb die interessantesten Telegram-Kanäle!';
-    if (langLabel) langLabel.textContent = '🌐 Sprache';
-    document.title = 'Telegram Kanal - Deutsch';
-  } else { // Romanian (default)
-    if (titleEl) titleEl.textContent = 'Telegram Channel';
-    if (descEl) descEl.textContent = 'Descoperă și promovează cele mai interesante canale Telegram!';
-    if (langLabel) langLabel.textContent = '🌐 Limba';
-    document.title = 'Telegram Channel - Română';
+  // Update document title
+  const t = translations[currentLanguage];
+  if (t && t.siteTitle) {
+    document.title = t.siteTitle + ' - ' + t[currentLanguage === 'ro' ? 'romanian' : 
+                                              currentLanguage === 'en' ? 'english' :
+                                              currentLanguage === 'es' ? 'spanish' :
+                                              currentLanguage === 'fr' ? 'french' : 'german'];
   }
   
   console.log('✅ Language changed to:', lang);
@@ -243,6 +308,14 @@ function updateUI() {
   
   // Update language selector
   document.getElementById('language-selector').value = currentLanguage;
+  
+  // Update input placeholders
+  document.querySelectorAll('input[data-i18n]').forEach(input => {
+    const key = input.getAttribute('data-i18n');
+    if (t[key]) {
+      input.placeholder = t[key];
+    }
+  });
   
   // Update featured channels section title
   const featuredTitle = document.querySelector('#featured-channels-bottom h2');
