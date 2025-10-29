@@ -1678,6 +1678,8 @@ document.addEventListener('DOMContentLoaded', function() {
   trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
+  
+  console.log('🚀 About to call displayFeaturedChannelsBottom...'); // Debug
   displayFeaturedChannelsBottom(); // Afișează canalele featured în partea de jos
   console.log('✅ App initialized'); // Debug
 });
@@ -1836,12 +1838,19 @@ function closeHomepageManager() {
 // === FEATURED CHANNELS BOTTOM SECTION ===
 function displayFeaturedChannelsBottom() {
   console.log('🌟 Displaying featured channels at bottom');
+  console.log('🔍 Looking for featured-channels-grid element...');
   
   const featuredGrid = document.getElementById('featured-channels-grid');
+  console.log('📍 Featured grid element:', featuredGrid);
+  
   if (!featuredGrid) {
     console.log('❌ Featured channels grid not found');
+    console.log('🔍 Available elements with id:', document.querySelectorAll('[id]'));
     return;
   }
+  
+  console.log('✅ Featured grid found!');
+  console.log('📊 defaultChannels length:', defaultChannels.length);
   
   // Afișează primele 6 canale din defaultChannels
   const featuredChannels = defaultChannels.slice(0, 6);
