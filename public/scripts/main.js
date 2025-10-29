@@ -957,25 +957,31 @@ function renderChannelsByCategory() {
     console.log('🏠 Displaying homepage channels'); // Debug
     const grid = document.createElement('div');
     grid.className = 'channels-grid';
-    const toShow = getHomepageFeaturedChannels(); // Use featured channels function
-    console.log('📺 Channels to show:', toShow.length, toShow.map(c => c.title)); // Debug
+    
+    // Afișează primele 6 canale din defaultChannels pentru acum
+    const toShow = defaultChannels.slice(0, 6);
+    console.log('📺 Channels to show:', toShow.length, toShow.map(c => c.name)); // Debug
+    
     if (toShow.length === 0) {
       console.log('❌ No channels to show!'); // Debug
       list.innerHTML = '<p style="text-align:center;">Nu există canale de afișat.</p>';
       return;
     }
+    
     console.log('✅ About to render', toShow.length, 'channels'); // Debug
     toShow.forEach(channel => {
-      const canDelete = logged && channel.owner === logged;
       const card = document.createElement('div');
       card.className = 'channel-card';
       card.innerHTML = `
-        <img class="channel-logo" src="${channel.logo || 'https://cdn-icons-png.flaticon.com/512/2111/2111646.png'}" alt="${channel.title}">
+        <img class="channel-logo" src="https://cdn-icons-png.flaticon.com/512/825/825519.png" alt="${channel.name}">
         <div class="channel-info">
-          <div class="channel-title">${channel.title}</div>
-          <div class="channel-desc">${channel.desc}</div>
-          <a class="channel-link" onclick="openChannel('${channel.url}', '${channel.title}'); return false;" href="#">Vezi canalul</a>
-          ${canDelete ? `<button class="delete-btn" onclick="deleteChannel(${channel.idxGlobal})">Șterge</button>` : ''}
+          <div class="channel-title">${channel.name}</div>
+          <div class="channel-desc">${channel.description}</div>
+          <div class="channel-meta">
+            <span class="channel-subscribers">${channel.subscribers} membri</span>
+            <span class="channel-category">${channel.category}</span>
+          </div>
+          <a class="channel-link" href="${channel.link}" target="_blank">Vezi canalul</a>
         </div>
       `;
       grid.appendChild(card);
