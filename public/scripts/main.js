@@ -50,7 +50,9 @@ const translations = {
     technology: "Tehnologie",
     promo: "Promo",
     // Footer
-    footerText: "© 2025 Promo Canale Telegram"
+    footerText: "© 2025 Promo Canale Telegram",
+    // Email warning
+    emailWarning: "💡 Important: Doar emailuri REALE (nume.prenume@gmail.com). NU acceptăm doar cifre!"
   },
   en: {
     siteTitle: "Telegram Channel",
@@ -100,7 +102,9 @@ const translations = {
     technology: "Technology",
     promo: "Promo",
     // Footer
-    footerText: "© 2025 Telegram Channels Promo"
+    footerText: "© 2025 Telegram Channels Promo",
+    // Email warning
+    emailWarning: "💡 Important: Only REAL emails (name.surname@gmail.com). We do NOT accept numbers only!"
   },
   es: {
     siteTitle: "Canal de Telegram",
@@ -150,7 +154,9 @@ const translations = {
     technology: "Tecnología",
     promo: "Promoción",
     // Footer
-    footerText: "© 2025 Promoción Canales Telegram"
+    footerText: "© 2025 Promoción Canales Telegram",
+    // Email warning
+    emailWarning: "💡 Importante: Solo emails REALES (nombre.apellido@gmail.com). ¡NO aceptamos solo números!"
   },
   fr: {
     siteTitle: "Canal Telegram",
@@ -200,7 +206,9 @@ const translations = {
     technology: "Technologie",
     promo: "Promotion",
     // Footer
-    footerText: "© 2025 Promotion Chaînes Telegram"
+    footerText: "© 2025 Promotion Chaînes Telegram",
+    // Email warning
+    emailWarning: "💡 Important: Seulement des emails RÉELS (nom.prenom@gmail.com). Nous n'acceptons PAS que des chiffres!"
   },
   de: {
     siteTitle: "Telegram Kanal",
@@ -250,7 +258,9 @@ const translations = {
     technology: "Technologie",
     promo: "Werbung",
     // Footer
-    footerText: "© 2025 Telegram Kanäle Werbung"
+    footerText: "© 2025 Telegram Kanäle Werbung",
+    // Email warning
+    emailWarning: "💡 Wichtig: Nur ECHTE E-Mails (name.nachname@gmail.com). Wir akzeptieren KEINE reinen Zahlen!"
   }
 };
 
