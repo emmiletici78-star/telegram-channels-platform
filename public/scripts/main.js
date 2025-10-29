@@ -3,7 +3,7 @@
 // === INTERNATIONALIZATION SYSTEM ===
 const translations = {
   ro: {
-    siteTitle: "Telegram Channel",
+    siteTitle: "Telegram Channels",
     siteDescription: "Descoperă și promovează cele mai interesante canale Telegram!",
     language: "🌐 Limba",
     romanian: "🇷🇴 Română",
@@ -66,7 +66,7 @@ const translations = {
     logoutButton: "👋 Deconectează-te"
   },
   en: {
-    siteTitle: "Telegram Channel",
+    siteTitle: "Telegram Channels",
     siteDescription: "Discover and promote the most interesting Telegram channels!",
     language: "🌐 Language",
     romanian: "🇷🇴 Română",
@@ -129,7 +129,7 @@ const translations = {
     logoutButton: "👋 Logout"
   },
   es: {
-    siteTitle: "Canal de Telegram",
+    siteTitle: "Canales de Telegram",
     siteDescription: "¡Descubre y promueve los canales de Telegram más interesantes!",
     language: "🌐 Idioma",
     romanian: "🇷🇴 Română",
@@ -192,7 +192,7 @@ const translations = {
     logoutButton: "👋 Cerrar sesión"
   },
   fr: {
-    siteTitle: "Canal Telegram",
+    siteTitle: "Chaînes Telegram",
     siteDescription: "Découvrez et promouvez les chaînes Telegram les plus intéressantes!",
     language: "🌐 Langue",
     romanian: "🇷🇴 Română",
@@ -255,7 +255,7 @@ const translations = {
     logoutButton: "👋 Se déconnecter"
   },
   de: {
-    siteTitle: "Telegram Kanal",
+    siteTitle: "Telegram Kanäle",
     siteDescription: "Entdecke und bewirb die interessantesten Telegram-Kanäle!",
     language: "🌐 Sprache",
     romanian: "🇷🇴 Română",
