@@ -952,41 +952,9 @@ function renderChannelsByCategory() {
   });
   const sorted = getSortedChannels(filtered, category);
 
-  // For 'all' display first 6 channels directly from defaultChannels
+  // For 'all' show message to select a category
   if (currentCategory === 'all') {
-    console.log('🏠 Displaying homepage channels'); // Debug
-    const grid = document.createElement('div');
-    grid.className = 'channels-grid';
-    
-    // Afișează primele 6 canale din defaultChannels pentru acum
-    const toShow = defaultChannels.slice(0, 6);
-    console.log('📺 Channels to show:', toShow.length, toShow.map(c => c.name)); // Debug
-    
-    if (toShow.length === 0) {
-      console.log('❌ No channels to show!'); // Debug
-      list.innerHTML = '<p style="text-align:center;">Nu există canale de afișat.</p>';
-      return;
-    }
-    
-    console.log('✅ About to render', toShow.length, 'channels'); // Debug
-    toShow.forEach(channel => {
-      const card = document.createElement('div');
-      card.className = 'channel-card';
-      card.innerHTML = `
-        <img class="channel-logo" src="https://cdn-icons-png.flaticon.com/512/825/825519.png" alt="${channel.name}">
-        <div class="channel-info">
-          <div class="channel-title">${channel.name}</div>
-          <div class="channel-desc">${channel.description}</div>
-          <div class="channel-meta">
-            <span class="channel-subscribers">${channel.subscribers} membri</span>
-            <span class="channel-category">${channel.category}</span>
-          </div>
-          <a class="channel-link" href="${channel.link}" target="_blank">Vezi canalul</a>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-    list.appendChild(grid);
+    list.innerHTML = '<p style="text-align:center; padding: 3rem; font-size: 1.2rem; color: #666;">Selectează o categorie pentru a vedea canalele. 👆<br><br>Canalele recomandate sunt afișate mai jos. 👇</p>';
     return;
   }
 
@@ -1710,6 +1678,7 @@ document.addEventListener('DOMContentLoaded', function() {
   trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
+  displayFeaturedChannelsBottom(); // Afișează canalele featured în partea de jos
   console.log('✅ App initialized'); // Debug
 });
 // === HOMEPAGE FEATURED CHANNELS MANAGEMENT ===
@@ -1862,4 +1831,42 @@ function closeHomepageManager() {
   if (modal) {
     modal.remove();
   }
+}
+
+// === FEATURED CHANNELS BOTTOM SECTION ===
+function displayFeaturedChannelsBottom() {
+  console.log('🌟 Displaying featured channels at bottom');
+  
+  const featuredGrid = document.getElementById('featured-channels-grid');
+  if (!featuredGrid) {
+    console.log('❌ Featured channels grid not found');
+    return;
+  }
+  
+  // Afișează primele 6 canale din defaultChannels
+  const featuredChannels = defaultChannels.slice(0, 6);
+  console.log('📺 Featured channels to show:', featuredChannels.length);
+  
+  if (featuredChannels.length === 0) {
+    featuredGrid.innerHTML = '<p style="text-align:center; color: white;">Nu există canale de afișat.</p>';
+    return;
+  }
+  
+  const channelsHtml = featuredChannels.map(channel => `
+    <div class="channel-card">
+      <img class="channel-logo" src="https://cdn-icons-png.flaticon.com/512/825/825519.png" alt="${channel.name}">
+      <div class="channel-info">
+        <div class="channel-title">${channel.name}</div>
+        <div class="channel-desc">${channel.description}</div>
+        <div class="channel-meta">
+          <span class="channel-subscribers">${channel.subscribers} membri</span>
+          <span class="channel-category">${channel.category}</span>
+        </div>
+        <a class="channel-link" href="${channel.link}" target="_blank">Vezi canalul</a>
+      </div>
+    </div>
+  `).join('');
+  
+  featuredGrid.innerHTML = channelsHtml;
+  console.log('✅ Featured channels displayed successfully');
 }
