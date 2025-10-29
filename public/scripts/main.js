@@ -175,19 +175,27 @@ let currentLanguage = localStorage.getItem('language') || 'ro';
 // Change language function
 function changeLanguage(lang) {
   console.log('🌐 Changing language to:', lang);
+  console.log('🔍 Available translations:', Object.keys(translations));
   currentLanguage = lang;
   localStorage.setItem('language', lang);
+  console.log('💾 Language saved to localStorage');
   updateUI();
+  console.log('✅ Language change completed');
 }
 
 // Update UI with current language
 function updateUI() {
   console.log('🔄 Updating UI for language:', currentLanguage);
   const t = translations[currentLanguage];
+  console.log('📖 Translation object:', t ? 'Found' : 'NOT FOUND');
   
   // Update all elements with data-i18n attribute
-  document.querySelectorAll('[data-i18n]').forEach(element => {
+  const elementsWithI18n = document.querySelectorAll('[data-i18n]');
+  console.log('🎯 Found elements with data-i18n:', elementsWithI18n.length);
+  
+  elementsWithI18n.forEach(element => {
     const key = element.getAttribute('data-i18n');
+    console.log(`🔧 Updating ${key}: "${element.textContent}" -> "${t[key] || 'NOT FOUND'}"`);
     if (t[key]) {
       element.textContent = t[key];
     }
@@ -1908,6 +1916,11 @@ function openChannel(url, title) {
 // initialize
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🎯 DOM loaded, initializing app...'); // Debug
+  
+  // Test if changeLanguage function is accessible
+  console.log('🔍 changeLanguage function:', typeof changeLanguage);
+  console.log('🌐 Making changeLanguage globally accessible...');
+  window.changeLanguage = changeLanguage;
   
   // Initialize language system
   updateUI();
