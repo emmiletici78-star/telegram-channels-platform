@@ -1980,6 +1980,10 @@ function getHomepageFeaturedChannels() {
   // Daca nu sunt setate canale featured, returneaza primele 6 din defaultChannels
   if (featuredIds.length === 0) {
     console.log('🎯 No featured channels set, returning first 6 from defaultChannels'); // Debug
+    if (typeof defaultChannels === 'undefined') {
+      console.log('❌ defaultChannels not yet defined, returning empty array');
+      return [];
+    }
     const first6 = defaultChannels.slice(0, 6);
     console.log('📺 Returning channels:', first6.map(c => c.title)); // Debug
     return first6;
@@ -2139,6 +2143,12 @@ function displayFeaturedChannelsBottom() {
   console.log('📊 defaultChannels length:', defaultChannels.length);
   
   // Afișează primele 6 canale din defaultChannels
+  if (typeof defaultChannels === 'undefined') {
+    console.log('❌ defaultChannels not yet defined, showing message');
+    featuredGrid.innerHTML = '<p style="text-align:center; color: white;">Se încarcă canalele...</p>';
+    return;
+  }
+  
   const featuredChannels = defaultChannels.slice(0, 6);
   console.log('📺 Featured channels to show:', featuredChannels.length);
   
