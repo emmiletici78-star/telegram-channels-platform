@@ -1679,8 +1679,12 @@ document.addEventListener('DOMContentLoaded', function() {
   showUser();
   showCategory('all'); // Show all channels on load
   
-  console.log('🚀 About to call displayFeaturedChannelsBottom...'); // Debug
-  displayFeaturedChannelsBottom(); // Afișează canalele featured în partea de jos
+  // Așteaptă un pic pentru ca DOM-ul să fie complet gata
+  setTimeout(() => {
+    console.log('🚀 About to call displayFeaturedChannelsBottom...'); // Debug
+    displayFeaturedChannelsBottom(); // Afișează canalele featured în partea de jos
+  }, 100);
+  
   console.log('✅ App initialized'); // Debug
 });
 // === HOMEPAGE FEATURED CHANNELS MANAGEMENT ===
@@ -1861,6 +1865,8 @@ function displayFeaturedChannelsBottom() {
     return;
   }
   
+  console.log('🔥 Creating HTML for channels:', featuredChannels.map(c => c.name));
+  
   const channelsHtml = featuredChannels.map(channel => `
     <div class="channel-card">
       <img class="channel-logo" src="https://cdn-icons-png.flaticon.com/512/825/825519.png" alt="${channel.name}">
@@ -1876,6 +1882,11 @@ function displayFeaturedChannelsBottom() {
     </div>
   `).join('');
   
+  console.log('📝 Generated HTML length:', channelsHtml.length);
+  console.log('🎯 Setting innerHTML...');
+  
   featuredGrid.innerHTML = channelsHtml;
+  
   console.log('✅ Featured channels displayed successfully');
+  console.log('🔍 Final grid children count:', featuredGrid.children.length);
 }
