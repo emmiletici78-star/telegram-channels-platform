@@ -1,5 +1,237 @@
 ﻿console.log('🚀 JavaScript loaded successfully!'); // Debug
 
+// === INTERNATIONALIZATION SYSTEM ===
+const translations = {
+  ro: {
+    siteTitle: "Telegram Channel",
+    siteDescription: "Descoperă și promovează cele mai interesante canale Telegram!",
+    language: "🌐 Limba",
+    romanian: "🇷🇴 Română",
+    english: "🇺🇸 English", 
+    spanish: "🇪🇸 Español",
+    french: "🇫🇷 Français",
+    german: "🇩🇪 Deutsch",
+    allCategories: "Toate",
+    crypto: "💰 Crypto",
+    gaming: "🎮 Gaming",
+    tech: "💻 Tech",
+    news: "📰 Știri",
+    entertainment: "🎭 Divertisment",
+    education: "📚 Educație",
+    business: "💼 Business",
+    health: "🏥 Sănătate",
+    sports: "⚽ Sport",
+    travel: "✈️ Călătorii",
+    food: "🍽️ Mâncare",
+    music: "🎵 Muzică",
+    movies: "🎬 Filme",
+    books: "📖 Cărți",
+    science: "🔬 Știință",
+    addChannel: "Adaugă Canal",
+    login: "Logare",
+    logout: "Ieșire",
+    featuredChannels: "🌟 Canale Recomandate",
+    viewChannel: "Vezi canalul",
+    members: "membri",
+    selectCategory: "Selectează o categorie pentru a vedea canalele. 👆<br><br>Canalele recomandate sunt afișate mai jos. 👇"
+  },
+  en: {
+    siteTitle: "Telegram Channel",
+    siteDescription: "Discover and promote the most interesting Telegram channels!",
+    language: "🌐 Language",
+    romanian: "🇷🇴 Română",
+    english: "🇺🇸 English",
+    spanish: "🇪🇸 Español", 
+    french: "🇫🇷 Français",
+    german: "🇩🇪 Deutsch",
+    allCategories: "All",
+    crypto: "💰 Crypto",
+    gaming: "🎮 Gaming", 
+    tech: "💻 Tech",
+    news: "📰 News",
+    entertainment: "🎭 Entertainment",
+    education: "📚 Education",
+    business: "💼 Business",
+    health: "🏥 Health",
+    sports: "⚽ Sports",
+    travel: "✈️ Travel",
+    food: "🍽️ Food",
+    music: "🎵 Music",
+    movies: "🎬 Movies",
+    books: "📖 Books",
+    science: "🔬 Science",
+    addChannel: "Add Channel",
+    login: "Login",
+    logout: "Logout",
+    featuredChannels: "🌟 Featured Channels",
+    viewChannel: "View channel",
+    members: "members",
+    selectCategory: "Select a category to see channels. 👆<br><br>Featured channels are displayed below. 👇"
+  },
+  es: {
+    siteTitle: "Canal de Telegram",
+    siteDescription: "¡Descubre y promueve los canales de Telegram más interesantes!",
+    language: "🌐 Idioma",
+    romanian: "🇷🇴 Română",
+    english: "🇺🇸 English",
+    spanish: "🇪🇸 Español",
+    french: "🇫🇷 Français", 
+    german: "🇩🇪 Deutsch",
+    allCategories: "Todos",
+    crypto: "💰 Cripto",
+    gaming: "🎮 Juegos",
+    tech: "💻 Tecnología",
+    news: "📰 Noticias",
+    entertainment: "🎭 Entretenimiento",
+    education: "📚 Educación",
+    business: "💼 Negocios",
+    health: "🏥 Salud",
+    sports: "⚽ Deportes",
+    travel: "✈️ Viajes",
+    food: "🍽️ Comida",
+    music: "🎵 Música",
+    movies: "🎬 Películas",
+    books: "📖 Libros",
+    science: "🔬 Ciencia",
+    addChannel: "Agregar Canal",
+    login: "Iniciar Sesión",
+    logout: "Cerrar Sesión",
+    featuredChannels: "🌟 Canales Destacados",
+    viewChannel: "Ver canal",
+    members: "miembros",
+    selectCategory: "Selecciona una categoría para ver canales. 👆<br><br>Los canales destacados se muestran abajo. 👇"
+  },
+  fr: {
+    siteTitle: "Canal Telegram",
+    siteDescription: "Découvrez et promouvez les chaînes Telegram les plus intéressantes!",
+    language: "🌐 Langue",
+    romanian: "🇷🇴 Română",
+    english: "🇺🇸 English",
+    spanish: "🇪🇸 Español",
+    french: "🇫🇷 Français",
+    german: "🇩🇪 Deutsch",
+    allCategories: "Tous",
+    crypto: "💰 Crypto",
+    gaming: "🎮 Jeux",
+    tech: "💻 Tech",
+    news: "📰 Actualités",
+    entertainment: "🎭 Divertissement",
+    education: "📚 Éducation",
+    business: "💼 Affaires",
+    health: "🏥 Santé",
+    sports: "⚽ Sports",
+    travel: "✈️ Voyage",
+    food: "🍽️ Nourriture",
+    music: "🎵 Musique",
+    movies: "🎬 Films",
+    books: "📖 Livres",
+    science: "🔬 Science",
+    addChannel: "Ajouter Canal",
+    login: "Connexion",
+    logout: "Déconnexion",
+    featuredChannels: "🌟 Chaînes Vedettes",
+    viewChannel: "Voir la chaîne",
+    members: "membres",
+    selectCategory: "Sélectionnez une catégorie pour voir les chaînes. 👆<br><br>Les chaînes vedettes sont affichées ci-dessous. 👇"
+  },
+  de: {
+    siteTitle: "Telegram Kanal",
+    siteDescription: "Entdecke und bewirb die interessantesten Telegram-Kanäle!",
+    language: "🌐 Sprache",
+    romanian: "🇷🇴 Română",
+    english: "🇺🇸 English",
+    spanish: "🇪🇸 Español",
+    french: "🇫🇷 Français",
+    german: "🇩🇪 Deutsch",
+    allCategories: "Alle",
+    crypto: "💰 Krypto",
+    gaming: "🎮 Gaming",
+    tech: "💻 Technik",
+    news: "📰 Nachrichten",
+    entertainment: "🎭 Unterhaltung",
+    education: "📚 Bildung",
+    business: "💼 Geschäft",
+    health: "🏥 Gesundheit", 
+    sports: "⚽ Sport",
+    travel: "✈️ Reisen",
+    food: "🍽️ Essen",
+    music: "🎵 Musik",
+    movies: "🎬 Filme",
+    books: "📖 Bücher",
+    science: "🔬 Wissenschaft",
+    addChannel: "Kanal Hinzufügen",
+    login: "Anmelden",
+    logout: "Abmelden",
+    featuredChannels: "🌟 Empfohlene Kanäle",
+    viewChannel: "Kanal ansehen",
+    members: "Mitglieder",
+    selectCategory: "Wählen Sie eine Kategorie, um Kanäle zu sehen. 👆<br><br>Empfohlene Kanäle werden unten angezeigt. 👇"
+  }
+};
+
+// Current language
+let currentLanguage = localStorage.getItem('language') || 'ro';
+
+// Change language function
+function changeLanguage(lang) {
+  console.log('🌐 Changing language to:', lang);
+  currentLanguage = lang;
+  localStorage.setItem('language', lang);
+  updateUI();
+}
+
+// Update UI with current language
+function updateUI() {
+  console.log('🔄 Updating UI for language:', currentLanguage);
+  const t = translations[currentLanguage];
+  
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (t[key]) {
+      element.textContent = t[key];
+    }
+  });
+  
+  // Update select options
+  document.querySelectorAll('select option[data-i18n]').forEach(option => {
+    const key = option.getAttribute('data-i18n');
+    if (t[key]) {
+      option.textContent = t[key];
+    }
+  });
+  
+  // Update language selector
+  document.getElementById('language-selector').value = currentLanguage;
+  
+  // Update featured channels section title
+  const featuredTitle = document.querySelector('#featured-channels-bottom h2');
+  if (featuredTitle) {
+    featuredTitle.textContent = t.featuredChannels;
+  }
+  
+  // Update featured channels "members" text
+  document.querySelectorAll('.channel-subscribers').forEach(element => {
+    const text = element.textContent;
+    const number = text.replace(/\s+membri|\s+members|\s+miembros|\s+membres|\s+Mitglieder/g, '');
+    element.textContent = `${number} ${t.members}`;
+  });
+  
+  // Update category message
+  updateCategoryMessage();
+  
+  console.log('✅ UI updated successfully');
+}
+
+// Update category selection message
+function updateCategoryMessage() {
+  const channelsList = document.getElementById('channels-list');
+  if (channelsList && channelsList.innerHTML.includes('Selectează o categorie')) {
+    const t = translations[currentLanguage];
+    channelsList.innerHTML = `<p style="text-align:center; padding: 3rem; font-size: 1.2rem; color: #666;">${t.selectCategory}</p>`;
+  }
+}
+
 // Default channels (category is an array)
 const defaultChannels = [
   // CRYPTO CHANNELS (38) - Real channels with massive member counts
@@ -954,7 +1186,8 @@ function renderChannelsByCategory() {
 
   // For 'all' show message to select a category
   if (currentCategory === 'all') {
-    list.innerHTML = '<p style="text-align:center; padding: 3rem; font-size: 1.2rem; color: #666;">Selectează o categorie pentru a vedea canalele. 👆<br><br>Canalele recomandate sunt afișate mai jos. 👇</p>';
+    const t = translations[currentLanguage];
+    list.innerHTML = `<p style="text-align:center; padding: 3rem; font-size: 1.2rem; color: #666;">${t.selectCategory}</p>`;
     return;
   }
 
@@ -1675,6 +1908,10 @@ function openChannel(url, title) {
 // initialize
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🎯 DOM loaded, initializing app...'); // Debug
+  
+  // Initialize language system
+  updateUI();
+  
   trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
