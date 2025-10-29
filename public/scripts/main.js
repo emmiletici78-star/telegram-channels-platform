@@ -1326,8 +1326,40 @@ function updateActiveCategoryButtons() {
 
 // Helper function to sort channels by member count
 function getSortedChannels(channels, category) {
+  // Încarcă setările custom pentru canale
+  const loadChannelSettings = (title) => {
+    const saved = localStorage.getItem('channelSettings_' + title);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch(e) {
+        return {};
+      }
+    }
+    return {};
+  };
+
   return channels.sort((a, b) => {
-    // Extract member count from description
+    // Încarcă setările pentru ambele canale
+    const settingsA = loadChannelSettings(a.title);
+    const settingsB = loadChannelSettings(b.title);
+    
+    const priorityA = settingsA.priority || a.priority || 0;
+    const priorityB = settingsB.priority || b.priority || 0;
+    const sponsoredA = settingsA.sponsored || a.sponsored || false;
+    const sponsoredB = settingsB.sponsored || b.sponsored || false;
+    
+    // 1. Prioritate: canalele cu prioritate mai mare apar primele
+    if (priorityA !== priorityB) {
+      return priorityB - priorityA;
+    }
+    
+    // 2. Sponsorizate: canalele sponsorizate apar înaintea celor normale
+    if (sponsoredA !== sponsoredB) {
+      return sponsoredB ? 1 : -1;
+    }
+    
+    // 3. Fallback: sortare după numărul de membri
     const getMemberCount = (desc) => {
       const match = desc.match(/(\d+[\.,]?\d*)\s*[KMk]?\s+membri/i);
       if (!match) return 0;
@@ -1339,7 +1371,6 @@ function getSortedChannels(channels, category) {
       return count;
     };
     
-    // Sort by member count descending (highest first)
     return getMemberCount(b.desc || '') - getMemberCount(a.desc || '');
   });
 }
@@ -1610,16 +1641,33 @@ function loadAdminChannels() {
   // Show default channels
   html += '<div style="margin-bottom: 1rem;"><strong>Canale Implicite:</strong></div>';
   channels.slice(0, 10).forEach(channel => {
+    // Încarcă setările custom
+    const savedSettings = localStorage.getItem('channelSettings_' + channel.title);
+    let settings = {};
+    if (savedSettings) {
+      try {
+        settings = JSON.parse(savedSettings);
+      } catch(e) {}
+    }
+    
+    const priority = settings.priority || channel.priority || 0;
+    const sponsored = settings.sponsored || channel.sponsored || false;
+    const pricePerMonth = settings.pricePerMonth || channel.pricePerMonth || 0;
+    
     html += `
-      <div class="admin-channel-item">
+      <div class="admin-channel-item" style="${priority > 0 || sponsored ? 'border-left: 4px solid #f39c12;' : ''}">
         <div class="admin-item-info">
-          <strong>${channel.title}</strong><br>
+          <strong>${channel.title}</strong>
+          ${sponsored ? '<span style="background: #e74c3c; color: white; padding: 0.1rem 0.4rem; border-radius: 0.3rem; font-size: 0.7rem; margin-left: 0.5rem;">💎 SPONSORIZAT</span>' : ''}
+          ${priority > 0 ? '<span style="background: #f39c12; color: white; padding: 0.1rem 0.4rem; border-radius: 0.3rem; font-size: 0.7rem; margin-left: 0.3rem;">🏆 P' + priority + '</span>' : ''}
+          <br>
           <small>${channel.desc}</small><br>
           <a href="${channel.url}" target="_blank">${channel.url}</a>
           <div style="margin-top: 0.3rem;">
             <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
               ${channel.category.join(', ')}
             </span>
+            ${pricePerMonth > 0 ? '<span style="background: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.3rem;">💰 ' + pricePerMonth + ' RON/lună</span>' : ''}
           </div>
         </div>
         <div class="admin-item-actions">
@@ -1818,11 +1866,104 @@ function rejectChannel(title) {
 }
 
 function editChannel(title) {
-  alert(`✏️ Editarea canalului "${title}" va fi implementată în curând!`);
+  // Găsim canalul în defaultChannels
+  const channel = defaultChannels.find(ch => ch.title === title);
+  if (!channel) {
+    alert(`❌ Canalul "${title}" nu a fost găsit!`);
+    return;
+  }
+
+  // Crează modal pentru editare
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8); z-index: 10000;
+    display: flex; align-items: center; justify-content: center;
+  `;
+  
+  const currentPriority = channel.priority || 0;
+  const isSponsored = channel.sponsored || false;
+  const currentPricePerMonth = channel.pricePerMonth || 0;
+  
+  modal.innerHTML = `
+    <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 500px; width: 90%;">
+      <h3>✏️ Editează Canalul: ${title}</h3>
+      
+      <div style="margin: 1rem 0;">
+        <label><strong>🏆 Prioritate (0-100):</strong></label><br>
+        <input type="number" id="channel-priority" value="${currentPriority}" min="0" max="100" 
+               style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 0.5rem;">
+        <small style="color: #666;">0 = normal, 100 = cel mai sus în căutări</small>
+      </div>
+      
+      <div style="margin: 1rem 0;">
+        <label><strong>💎 Status Sponsorizat:</strong></label><br>
+        <input type="checkbox" id="channel-sponsored" ${isSponsored ? 'checked' : ''}>
+        <label for="channel-sponsored">Canal sponsorizat/plătit</label>
+      </div>
+      
+      <div style="margin: 1rem 0;">
+        <label><strong>💰 Preț lunar (RON):</strong></label><br>
+        <input type="number" id="channel-price" value="${currentPricePerMonth}" min="0" step="10"
+               style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 0.5rem;">
+        <small style="color: #666;">Pentru tracking câștiguri din sponsorizări</small>
+      </div>
+      
+      <div style="margin-top: 2rem; text-align: center;">
+        <button onclick="saveChannelChanges('${title}')" 
+                style="background: #27ae60; color: white; padding: 0.8rem 2rem; border: none; border-radius: 0.5rem; margin: 0.5rem; cursor: pointer;">
+          ✅ Salvează
+        </button>
+        <button onclick="closeEditModal()" 
+                style="background: #95a5a6; color: white; padding: 0.8rem 2rem; border: none; border-radius: 0.5rem; margin: 0.5rem; cursor: pointer;">
+          ❌ Anulează
+        </button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  window.currentEditModal = modal;
+}
+
+function saveChannelChanges(title) {
+  const priority = parseInt(document.getElementById('channel-priority').value) || 0;
+  const sponsored = document.getElementById('channel-sponsored').checked;
+  const pricePerMonth = parseInt(document.getElementById('channel-price').value) || 0;
+  
+  // Găsim canalul și actualizăm proprietățile
+  const channel = defaultChannels.find(ch => ch.title === title);
+  if (channel) {
+    channel.priority = priority;
+    channel.sponsored = sponsored;
+    channel.pricePerMonth = pricePerMonth;
+    
+    // Salvăm în localStorage pentru persistență
+    localStorage.setItem('channelSettings_' + title, JSON.stringify({
+      priority: priority,
+      sponsored: sponsored,
+      pricePerMonth: pricePerMonth,
+      lastUpdated: new Date().toISOString()
+    }));
+    
+    alert(`✅ Canalul "${title}" a fost actualizat cu succes!\n\n🏆 Prioritate: ${priority}\n💎 Sponsorizat: ${sponsored ? 'DA' : 'NU'}\n💰 Preț lunar: ${pricePerMonth} RON`);
+    
+    closeEditModal();
+    loadAdminChannels(); // Reîncarcă lista
+  }
+}
+
+function closeEditModal() {
+  if (window.currentEditModal) {
+    document.body.removeChild(window.currentEditModal);
+    window.currentEditModal = null;
+  }
 }
 
 function deleteChannel(title) {
   if (confirm(`🗑️ Sigur vrei să ștergi canalul "${title}"?`)) {
+    // Șterge și setările custom
+    localStorage.removeItem('channelSettings_' + title);
     alert(`🗑️ Canalul "${title}" a fost șters!`);
     loadAdminChannels();
   }
@@ -2115,6 +2256,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize language system
   updateUI();
   
+  // Initialize channel priority settings
+  initializeChannelSettings();
+  
   trackPageView(); // Track page view
   showUser();
   showCategory('all'); // Show all channels on load
@@ -2339,4 +2483,28 @@ function displayFeaturedChannelsBottom() {
   
   console.log('✅ Featured channels displayed successfully');
   console.log('🔍 Final grid children count:', featuredGrid.children.length);
+}
+
+// Initialize channel priority and sponsorship settings
+function initializeChannelSettings() {
+  console.log('🏆 Initializing channel priority settings...');
+  
+  // Aplică setările salvate pentru canale
+  defaultChannels.forEach(channel => {
+    const savedSettings = localStorage.getItem('channelSettings_' + channel.title);
+    if (savedSettings) {
+      try {
+        const settings = JSON.parse(savedSettings);
+        channel.priority = settings.priority || 0;
+        channel.sponsored = settings.sponsored || false;
+        channel.pricePerMonth = settings.pricePerMonth || 0;
+        
+        console.log(`📊 Loaded settings for ${channel.title}: Priority=${channel.priority}, Sponsored=${channel.sponsored}, Price=${channel.pricePerMonth} RON`);
+      } catch(e) {
+        console.error(`❌ Error loading settings for ${channel.title}:`, e);
+      }
+    }
+  });
+  
+  console.log('✅ Channel settings initialized successfully');
 }
