@@ -60,7 +60,10 @@ const translations = {
     channelUrlPlaceholder: "🔗 Link Telegram (https://t.me/numele-canalului)",
     channelLogoPlaceholder: "🖼️ Link logo/imagine (opțional)",
     addChannelButton: "🚀 Adaugă canalul",
-    categoryHint: "💡 Sfat: Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii pentru canalul tău."
+    categoryHint: "💡 Sfat: Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii pentru canalul tău.",
+    // User info section
+    welcome: "👋 Bun venit, ",
+    logoutButton: "👋 Deconectează-te"
   },
   en: {
     siteTitle: "Telegram Channel",
@@ -120,7 +123,10 @@ const translations = {
     channelUrlPlaceholder: "🔗 Telegram link (https://t.me/channel-name)",
     channelLogoPlaceholder: "🖼️ Logo/image link (optional)",
     addChannelButton: "🚀 Add channel",
-    categoryHint: "💡 Tip: Hold Ctrl (or Cmd on Mac) to select multiple categories for your channel."
+    categoryHint: "💡 Tip: Hold Ctrl (or Cmd on Mac) to select multiple categories for your channel.",
+    // User info section
+    welcome: "👋 Welcome, ",
+    logoutButton: "👋 Logout"
   },
   es: {
     siteTitle: "Canal de Telegram",
@@ -180,7 +186,10 @@ const translations = {
     channelUrlPlaceholder: "🔗 Enlace de Telegram (https://t.me/nombre-canal)",
     channelLogoPlaceholder: "🖼️ Enlace del logo/imagen (opcional)",
     addChannelButton: "🚀 Agregar canal",
-    categoryHint: "💡 Consejo: Mantén presionado Ctrl (o Cmd en Mac) para seleccionar múltiples categorías para tu canal."
+    categoryHint: "💡 Consejo: Mantén presionado Ctrl (o Cmd en Mac) para seleccionar múltiples categorías para tu canal.",
+    // User info section
+    welcome: "👋 Bienvenido, ",
+    logoutButton: "👋 Cerrar sesión"
   },
   fr: {
     siteTitle: "Canal Telegram",
@@ -240,7 +249,10 @@ const translations = {
     channelUrlPlaceholder: "🔗 Lien Telegram (https://t.me/nom-canal)",
     channelLogoPlaceholder: "🖼️ Lien logo/image (optionnel)",
     addChannelButton: "🚀 Ajouter le canal",
-    categoryHint: "💡 Astuce: Maintenez Ctrl (ou Cmd sur Mac) pour sélectionner plusieurs catégories pour votre canal."
+    categoryHint: "💡 Astuce: Maintenez Ctrl (ou Cmd sur Mac) pour sélectionner plusieurs catégories pour votre canal.",
+    // User info section
+    welcome: "👋 Bienvenue, ",
+    logoutButton: "👋 Se déconnecter"
   },
   de: {
     siteTitle: "Telegram Kanal",
@@ -300,7 +312,10 @@ const translations = {
     channelUrlPlaceholder: "🔗 Telegram Link (https://t.me/kanal-name)",
     channelLogoPlaceholder: "🖼️ Logo/Bild Link (optional)",
     addChannelButton: "🚀 Kanal hinzufügen",
-    categoryHint: "💡 Tipp: Halten Sie Strg (oder Cmd auf Mac) gedrückt, um mehrere Kategorien für Ihren Kanal auszuwählen."
+    categoryHint: "💡 Tipp: Halten Sie Strg (oder Cmd auf Mac) gedrückt, um mehrere Kategorien für Ihren Kanal auszuwählen.",
+    // User info section
+    welcome: "👋 Willkommen, ",
+    logoutButton: "👋 Abmelden"
   }
 };
 
