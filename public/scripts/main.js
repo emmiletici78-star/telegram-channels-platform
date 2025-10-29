@@ -175,12 +175,44 @@ let currentLanguage = localStorage.getItem('language') || 'ro';
 // Change language function
 function changeLanguage(lang) {
   console.log('🌐 Changing language to:', lang);
-  console.log('🔍 Available translations:', Object.keys(translations));
+  
+  // Simple direct approach - no complex dependencies
   currentLanguage = lang;
   localStorage.setItem('language', lang);
-  console.log('💾 Language saved to localStorage');
-  updateUI();
-  console.log('✅ Language change completed');
+  
+  // Update basic elements directly
+  const titleEl = document.querySelector('[data-i18n="siteTitle"]');
+  const descEl = document.querySelector('[data-i18n="siteDescription"]');
+  const langLabel = document.querySelector('[data-i18n="language"]');
+  
+  if (lang === 'en') {
+    if (titleEl) titleEl.textContent = 'Telegram Channel';
+    if (descEl) descEl.textContent = 'Discover and promote the most interesting Telegram channels!';
+    if (langLabel) langLabel.textContent = '🌐 Language';
+    document.title = 'Telegram Channel - English';
+  } else if (lang === 'es') {
+    if (titleEl) titleEl.textContent = 'Canal de Telegram';
+    if (descEl) descEl.textContent = '¡Descubre y promueve los canales de Telegram más interesantes!';
+    if (langLabel) langLabel.textContent = '🌐 Idioma';
+    document.title = 'Canal de Telegram - Español';
+  } else if (lang === 'fr') {
+    if (titleEl) titleEl.textContent = 'Canal Telegram';
+    if (descEl) descEl.textContent = 'Découvrez et promouvez les chaînes Telegram les plus intéressantes!';
+    if (langLabel) langLabel.textContent = '🌐 Langue';
+    document.title = 'Canal Telegram - Français';
+  } else if (lang === 'de') {
+    if (titleEl) titleEl.textContent = 'Telegram Kanal';
+    if (descEl) descEl.textContent = 'Entdecke und bewirb die interessantesten Telegram-Kanäle!';
+    if (langLabel) langLabel.textContent = '🌐 Sprache';
+    document.title = 'Telegram Kanal - Deutsch';
+  } else { // Romanian (default)
+    if (titleEl) titleEl.textContent = 'Telegram Channel';
+    if (descEl) descEl.textContent = 'Descoperă și promovează cele mai interesante canale Telegram!';
+    if (langLabel) langLabel.textContent = '🌐 Limba';
+    document.title = 'Telegram Channel - Română';
+  }
+  
+  console.log('✅ Language changed to:', lang);
 }
 
 // Update UI with current language
