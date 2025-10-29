@@ -166,22 +166,22 @@
     </section>
 
     <section id="add-channel-section" style="display:none; margin-bottom:1.5rem;">
-      <h2>✨ Adaugă canal Telegram</h2>
-      <input type="text" id="channel-title" placeholder="🏷️ Titlu canal (ex: Crypto România)" />
-      <input type="text" id="channel-desc" placeholder="📝 Descriere scurtă și atractivă" />
-      <input type="url" id="channel-url" placeholder="🔗 Link Telegram (https://t.me/numele-canalului)" />
-      <input type="url" id="channel-logo" placeholder="🖼️ Link logo/imagine (opțional)" />
+      <h2 data-i18n="addChannelTitle">✨ Adaugă canal Telegram</h2>
+      <input type="text" id="channel-title" data-i18n="channelTitlePlaceholder" placeholder="🏷️ Titlu canal (ex: Crypto România)" />
+      <input type="text" id="channel-desc" data-i18n="channelDescPlaceholder" placeholder="📝 Descriere scurtă și atractivă" />
+      <input type="url" id="channel-url" data-i18n="channelUrlPlaceholder" placeholder="🔗 Link Telegram (https://t.me/numele-canalului)" />
+      <input type="url" id="channel-logo" data-i18n="channelLogoPlaceholder" placeholder="🖼️ Link logo/imagine (opțional)" />
       <select id="channel-category" multiple size="7">
-        <option value="crypto">💰 Crypto</option>
-        <option value="gaming">🎮 Gaming</option>
-        <option value="adult">🔞 ADULT (+18)</option>
-        <option value="stiri">📰 Știri</option>
-        <option value="retete">🍳 Rețete</option>
-        <option value="tehnologie">💻 Tehnologie</option>
-        <option value="promo">🎁 Promo</option>
+        <option value="crypto" data-i18n="crypto">💰 Crypto</option>
+        <option value="gaming" data-i18n="gaming">🎮 Gaming</option>
+        <option value="adult" data-i18n="adult">🔞 ADULT (+18)</option>
+        <option value="stiri" data-i18n="news">📰 Știri</option>
+        <option value="retete" data-i18n="recipes">🍳 Rețete</option>
+        <option value="tehnologie" data-i18n="technology">💻 Tehnologie</option>
+        <option value="promo" data-i18n="promo">🎁 Promo</option>
       </select>
-      <button onclick="addChannel()">🚀 Adaugă canalul</button>
-      <div class="hint">
+      <button onclick="addChannel()" data-i18n="addChannelButton">🚀 Adaugă canalul</button>
+      <div class="hint" data-i18n="categoryHint">
         💡 <strong>Sfat:</strong> Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii pentru canalul tău.
       </div>
     </section>

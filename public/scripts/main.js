@@ -52,7 +52,15 @@ const translations = {
     // Footer
     footerText: "© 2025 Promo Canale Telegram",
     // Email warning
-    emailWarning: "💡 Important: Doar emailuri REALE (nume.prenume@gmail.com). NU acceptăm doar cifre!"
+    emailWarning: "💡 Important: Doar emailuri REALE (nume.prenume@gmail.com). NU acceptăm doar cifre!",
+    // Add channel section
+    addChannelTitle: "✨ Adaugă canal Telegram",
+    channelTitlePlaceholder: "🏷️ Titlu canal (ex: Crypto România)",
+    channelDescPlaceholder: "📝 Descriere scurtă și atractivă",
+    channelUrlPlaceholder: "🔗 Link Telegram (https://t.me/numele-canalului)",
+    channelLogoPlaceholder: "🖼️ Link logo/imagine (opțional)",
+    addChannelButton: "🚀 Adaugă canalul",
+    categoryHint: "💡 Sfat: Ține apăsat Ctrl (sau Cmd pe Mac) pentru a selecta mai multe categorii pentru canalul tău."
   },
   en: {
     siteTitle: "Telegram Channel",
@@ -104,7 +112,15 @@ const translations = {
     // Footer
     footerText: "© 2025 Telegram Channels Promo",
     // Email warning
-    emailWarning: "💡 Important: Only REAL emails (name.surname@gmail.com). We do NOT accept numbers only!"
+    emailWarning: "💡 Important: Only REAL emails (name.surname@gmail.com). We do NOT accept numbers only!",
+    // Add channel section
+    addChannelTitle: "✨ Add Telegram Channel",
+    channelTitlePlaceholder: "🏷️ Channel title (ex: Crypto Romania)",
+    channelDescPlaceholder: "📝 Short and attractive description",
+    channelUrlPlaceholder: "🔗 Telegram link (https://t.me/channel-name)",
+    channelLogoPlaceholder: "🖼️ Logo/image link (optional)",
+    addChannelButton: "🚀 Add channel",
+    categoryHint: "💡 Tip: Hold Ctrl (or Cmd on Mac) to select multiple categories for your channel."
   },
   es: {
     siteTitle: "Canal de Telegram",
@@ -156,7 +172,15 @@ const translations = {
     // Footer
     footerText: "© 2025 Promoción Canales Telegram",
     // Email warning
-    emailWarning: "💡 Importante: Solo emails REALES (nombre.apellido@gmail.com). ¡NO aceptamos solo números!"
+    emailWarning: "💡 Importante: Solo emails REALES (nombre.apellido@gmail.com). ¡NO aceptamos solo números!",
+    // Add channel section
+    addChannelTitle: "✨ Agregar Canal de Telegram",
+    channelTitlePlaceholder: "🏷️ Título del canal (ej: Crypto España)",
+    channelDescPlaceholder: "📝 Descripción corta y atractiva",
+    channelUrlPlaceholder: "🔗 Enlace de Telegram (https://t.me/nombre-canal)",
+    channelLogoPlaceholder: "🖼️ Enlace del logo/imagen (opcional)",
+    addChannelButton: "🚀 Agregar canal",
+    categoryHint: "💡 Consejo: Mantén presionado Ctrl (o Cmd en Mac) para seleccionar múltiples categorías para tu canal."
   },
   fr: {
     siteTitle: "Canal Telegram",
@@ -208,7 +232,15 @@ const translations = {
     // Footer
     footerText: "© 2025 Promotion Chaînes Telegram",
     // Email warning
-    emailWarning: "💡 Important: Seulement des emails RÉELS (nom.prenom@gmail.com). Nous n'acceptons PAS que des chiffres!"
+    emailWarning: "💡 Important: Seulement des emails RÉELS (nom.prenom@gmail.com). Nous n'acceptons PAS que des chiffres!",
+    // Add channel section
+    addChannelTitle: "✨ Ajouter Canal Telegram",
+    channelTitlePlaceholder: "🏷️ Titre du canal (ex: Crypto France)",
+    channelDescPlaceholder: "📝 Description courte et attrayante",
+    channelUrlPlaceholder: "🔗 Lien Telegram (https://t.me/nom-canal)",
+    channelLogoPlaceholder: "🖼️ Lien logo/image (optionnel)",
+    addChannelButton: "🚀 Ajouter le canal",
+    categoryHint: "💡 Astuce: Maintenez Ctrl (ou Cmd sur Mac) pour sélectionner plusieurs catégories pour votre canal."
   },
   de: {
     siteTitle: "Telegram Kanal",
@@ -260,7 +292,15 @@ const translations = {
     // Footer
     footerText: "© 2025 Telegram Kanäle Werbung",
     // Email warning
-    emailWarning: "💡 Wichtig: Nur ECHTE E-Mails (name.nachname@gmail.com). Wir akzeptieren KEINE reinen Zahlen!"
+    emailWarning: "💡 Wichtig: Nur ECHTE E-Mails (name.nachname@gmail.com). Wir akzeptieren KEINE reinen Zahlen!",
+    // Add channel section
+    addChannelTitle: "✨ Telegram Kanal Hinzufügen",
+    channelTitlePlaceholder: "🏷️ Kanaltitel (z.B: Crypto Deutschland)",
+    channelDescPlaceholder: "📝 Kurze und attraktive Beschreibung",
+    channelUrlPlaceholder: "🔗 Telegram Link (https://t.me/kanal-name)",
+    channelLogoPlaceholder: "🖼️ Logo/Bild Link (optional)",
+    addChannelButton: "🚀 Kanal hinzufügen",
+    categoryHint: "💡 Tipp: Halten Sie Strg (oder Cmd auf Mac) gedrückt, um mehrere Kategorien für Ihren Kanal auszuwählen."
   }
 };
 
