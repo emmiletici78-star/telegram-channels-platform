@@ -111,6 +111,7 @@
         <button class="admin-tab-btn active" onclick="showAdminTab('channels')">📺 Gestiune Canale</button>
         <button class="admin-tab-btn" onclick="showAdminTab('users')">👥 Utilizatori</button>
         <button class="admin-tab-btn" onclick="showAdminTab('stats')">📊 Statistici</button>
+        <button class="admin-tab-btn" onclick="showAdminTab('premium-test')">💰 Test Promovări</button>
         <button class="admin-tab-btn" onclick="showAdminTab('settings')">⚙️ Setări</button>
       </div>
 
@@ -146,6 +147,78 @@
         <h3>📊 Statistici Platform</h3>
         <div id="admin-statistics">
           <!-- Statistics will be populated here -->
+        </div>
+      </div>
+
+      <!-- Premium Test Tab -->
+      <div id="admin-premium-test-tab" class="admin-tab-content" style="display:none;">
+        <h3>💰 Test Complet Promovări Premium</h3>
+        <p style="background: #fff3cd; padding: 1rem; border-radius: 8px; color: #856404; margin-bottom: 1rem;">
+          🧪 <strong>Secțiune de Test Admin:</strong> Aici poți testa toate funcțiile premium fără plată reală!
+        </p>
+        
+        <div class="premium-test-actions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+          
+          <!-- Quick Premium Upgrade -->
+          <div class="test-card" style="background: white; padding: 1.5rem; border-radius: 10px; border: 2px solid #28a745;">
+            <h4>🚀 Upgrade Rapid</h4>
+            <p>Promovează instantaneu orice canal la Premium/VIP</p>
+            <select id="admin-channel-select" style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
+              <option value="">Selectează canal...</option>
+            </select>
+            <div style="display: flex; gap: 0.5rem;">
+              <button onclick="adminUpgradeChannel('basic')" style="background: #28a745; color: white; flex: 1;">📈 Basic</button>
+              <button onclick="adminUpgradeChannel('premium')" style="background: #ffc107; color: #333; flex: 1;">⭐ Premium</button>
+              <button onclick="adminUpgradeChannel('vip')" style="background: #6f42c1; color: white; flex: 1;">👑 VIP</button>
+            </div>
+          </div>
+
+          <!-- Test Payment Flow -->
+          <div class="test-card" style="background: white; padding: 1.5rem; border-radius: 10px; border: 2px solid #007bff;">
+            <h4>💳 Test Plăți</h4>
+            <p>Testează întregul flux de plată fără costuri</p>
+            <button onclick="testPaymentFlow('basic', 20)" style="background: #28a745; color: white; width: 100%; margin-bottom: 0.5rem;">Test Basic €20</button>
+            <button onclick="testPaymentFlow('premium', 40)" style="background: #ffc107; color: #333; width: 100%; margin-bottom: 0.5rem;">Test Premium €40</button>
+            <button onclick="testPaymentFlow('vip', 80)" style="background: #6f42c1; color: white; width: 100%;">Test VIP €80</button>
+          </div>
+
+          <!-- Badge Testing -->
+          <div class="test-card" style="background: white; padding: 1.5rem; border-radius: 10px; border: 2px solid #dc3545;">
+            <h4>🏷️ Test Badge-uri</h4>
+            <p>Vezi cum arată badge-urile premium</p>
+            <button onclick="showAllBadges()" style="background: #dc3545; color: white; width: 100%; margin-bottom: 0.5rem;">👀 Afișează Toate Badge-urile</button>
+            <button onclick="refreshChannelDisplay()" style="background: #6c757d; color: white; width: 100%;">🔄 Refresh Afișare</button>
+          </div>
+
+          <!-- Statistics Dashboard -->
+          <div class="test-card" style="background: white; padding: 1.5rem; border-radius: 10px; border: 2px solid #fd7e14;">
+            <h4>📊 Statistici Live</h4>
+            <p>Monitorizează promovările în timp real</p>
+            <div id="premium-stats" style="font-size: 0.9rem; color: #666;">
+              <div>📈 Basic: <span id="basic-count">0</span> canale</div>
+              <div>⭐ Premium: <span id="premium-count">0</span> canale</div>
+              <div>👑 VIP: <span id="vip-count">0</span> canale</div>
+              <div>💰 Venit estimat: <span id="revenue-estimate">0€</span>/lună</div>
+            </div>
+            <button onclick="updatePremiumStats()" style="background: #fd7e14; color: white; width: 100%; margin-top: 0.5rem;">📊 Update Stats</button>
+          </div>
+
+        </div>
+
+        <!-- Test Results Display -->
+        <div id="admin-test-results" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; max-height: 300px; overflow-y: auto;">
+          <h5>📋 Rezultate Teste:</h5>
+          <div id="test-log" style="font-family: monospace; font-size: 0.85rem; color: #333;">
+            <div style="color: #28a745;">✅ Sistem de teste premium inițializat...</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button onclick="resetAllPremium()" style="background: #dc3545; color: white;">🗑️ Reset Toate Premium</button>
+          <button onclick="simulateRevenueMonth()" style="background: #28a745; color: white;">💰 Simulează Venit Lunar</button>
+          <button onclick="exportPremiumData()" style="background: #007bff; color: white;">📤 Export Date Premium</button>
+          <button onclick="clearTestLog()" style="background: #6c757d; color: white;">🧹 Curăță Log</button>
         </div>
       </div>
 

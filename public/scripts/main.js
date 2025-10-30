@@ -2918,3 +2918,300 @@ Object.keys(premiumTranslations).forEach(lang => {
     Object.assign(translations[lang], premiumTranslations[lang]);
   }
 });
+
+// === ADMIN PREMIUM TESTING SYSTEM ===
+
+// Function to populate admin channel select
+function populateAdminChannelSelect() {
+  const select = document.getElementById('admin-channel-select');
+  if (!select) return;
+  
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  select.innerHTML = '<option value="">Selectează canal...</option>';
+  
+  channels.forEach((channel, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    const premiumText = channel.premiumType ?  [] : '';
+    option.textContent = ${channel.title} ( membri);
+    select.appendChild(option);
+  });
+}
+
+// Function to upgrade channel directly as admin
+function adminUpgradeChannel(packageType) {
+  const select = document.getElementById('admin-channel-select');
+  const channelIndex = select.value;
+  
+  if (!channelIndex && channelIndex !== '0') {
+    logTest(' Te rog selectează un canal!', 'error');
+    return;
+  }
+  
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  const channel = channels[channelIndex];
+  
+  if (!channel) {
+    logTest(' Canal nu a fost găsit!', 'error');
+    return;
+  }
+  
+  // Upgrade channel
+  const oldType = channel.premiumType || 'none';
+  channel.premiumType = packageType;
+  channel.premiumExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+  channel.priority = packageType === 'vip' ? 100 : packageType === 'premium' ? 75 : 50;
+  channel.sponsored = packageType !== 'basic';
+  
+  // Set pricing
+  const prices = { basic: 20, premium: 40, vip: 80 };
+  channel.pricePerMonth = prices[packageType];
+  
+  // Save changes
+  localStorage.setItem('channels', JSON.stringify(channels));
+  
+  logTest( Canal "" upgradeat de la  la , 'success');
+  logTest( Preț: €/lună, Prioritate: , 'info');
+  
+  // Refresh displays
+  populateAdminChannelSelect();
+  updatePremiumStats();
+  displayPremiumBadges();
+  refreshChannelDisplay();
+}
+
+// Function to test payment flow
+function testPaymentFlow(packageType, price) {
+  logTest( Inițiez test plată pentru pachetul  - €, 'info');
+  
+  // Simulate the payment process
+  setTimeout(() => {
+    logTest( Simulez redirecționare către Stripe pentru €..., 'info');
+    
+    setTimeout(() => {
+      logTest( Plata de € procesată cu succes! (SIMULARE), 'success');
+      logTest( Canal upgradeat la  pentru 30 zile, 'success');
+      
+      // Actually upgrade a test channel if available
+      const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+      if (channels.length > 0) {
+        const testChannel = channels[0]; // Use first channel for testing
+        adminUpgradeChannel(packageType);
+      }
+      
+    }, 1500);
+  }, 1000);
+}
+
+// Function to show all premium badges
+function showAllBadges() {
+  logTest(' Afișez toate tipurile de badge-uri premium:', 'info');
+  
+  const badgeExamples = [
+    { type: 'basic', text: ' PROMOVAT', color: '#28a745' },
+    { type: 'premium', text: ' PREMIUM', color: '#ffc107' },
+    { type: 'vip', text: ' VIP', color: '#6f42c1' }
+  ];
+  
+  badgeExamples.forEach(badge => {
+    logTest(<span style="background: ; color: white; padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem;"></span> - Badge , 'info');
+  });
+  
+  // Add badges to existing channels for demo
+  setTimeout(() => {
+    displayPremiumBadges();
+    logTest(' Badge-uri aplicate pe canalele existente', 'success');
+  }, 500);
+}
+
+// Function to refresh channel display
+function refreshChannelDisplay() {
+  logTest(' Reîmprospătez afișarea canalelor...', 'info');
+  
+  // Re-sort and display channels
+  if (typeof displayChannels === 'function') {
+    displayChannels('all');
+  }
+  
+  // Refresh premium badges
+  setTimeout(() => {
+    displayPremiumBadges();
+    logTest(' Afișare reîmprospătată cu success', 'success');
+  }, 500);
+}
+
+// Function to update premium statistics
+function updatePremiumStats() {
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  
+  let basicCount = 0, premiumCount = 0, vipCount = 0;
+  let totalRevenue = 0;
+  
+  channels.forEach(channel => {
+    if (channel.premiumType && new Date(channel.premiumExpiry) > new Date()) {
+      const prices = { basic: 20, premium: 40, vip: 80 };
+      
+      switch(channel.premiumType) {
+        case 'basic':
+          basicCount++;
+          totalRevenue += 20;
+          break;
+        case 'premium':
+          premiumCount++;
+          totalRevenue += 40;
+          break;
+        case 'vip':
+          vipCount++;
+          totalRevenue += 80;
+          break;
+      }
+    }
+  });
+  
+  // Update display
+  document.getElementById('basic-count').textContent = basicCount;
+  document.getElementById('premium-count').textContent = premiumCount;
+  document.getElementById('vip-count').textContent = vipCount;
+  document.getElementById('revenue-estimate').textContent = totalRevenue;
+  
+  logTest( Statistici actualizate:  canale premium, €/lună, 'info');
+}
+
+// Function to reset all premium subscriptions
+function resetAllPremium() {
+  if (!confirm(' Sigur vrei să resetezi toate promovările premium? Această acțiune nu poate fi anulată!')) {
+    return;
+  }
+  
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  let resetCount = 0;
+  
+  channels.forEach(channel => {
+    if (channel.premiumType) {
+      delete channel.premiumType;
+      delete channel.premiumExpiry;
+      channel.priority = 1;
+      channel.sponsored = false;
+      channel.pricePerMonth = 0;
+      resetCount++;
+    }
+  });
+  
+  localStorage.setItem('channels', JSON.stringify(channels));
+  
+  logTest(  canale resetate la starea normală, 'warning');
+  
+  // Refresh all displays
+  populateAdminChannelSelect();
+  updatePremiumStats();
+  refreshChannelDisplay();
+}
+
+// Function to simulate monthly revenue
+function simulateRevenueMonth() {
+  logTest(' Simulez statistici de venit pentru o lună completă...', 'info');
+  
+  const scenarios = [
+    { day: 5, action: '3 canale upgrade la Premium', revenue: 120 },
+    { day: 12, action: '1 canal upgrade la VIP', revenue: 80 },
+    { day: 18, action: '5 canale upgrade la Basic', revenue: 100 },
+    { day: 25, action: '2 canale upgrade la Premium', revenue: 80 },
+    { day: 28, action: '1 canal renewal VIP', revenue: 80 }
+  ];
+  
+  let totalRevenue = 0;
+  
+  scenarios.forEach((scenario, index) => {
+    setTimeout(() => {
+      totalRevenue += scenario.revenue;
+      logTest( Ziua :  (+€), 'success');
+      logTest( Venit cumulat: €, 'info');
+    }, (index + 1) * 800);
+  });
+  
+  setTimeout(() => {
+    logTest( TOTAL LUNĂ: € din promovări premium!, 'success');
+    logTest( Proiecție anuală: € ( RON), 'success');
+  }, scenarios.length * 800 + 500);
+}
+
+// Function to export premium data
+function exportPremiumData() {
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  const premiumChannels = channels.filter(ch => ch.premiumType);
+  
+  const exportData = {
+    exportDate: new Date().toISOString(),
+    totalPremiumChannels: premiumChannels.length,
+    channels: premiumChannels.map(ch => ({
+      title: ch.title,
+      type: ch.premiumType,
+      price: ch.pricePerMonth,
+      expiry: ch.premiumExpiry,
+      priority: ch.priority
+    }))
+  };
+  
+  const dataStr = JSON.stringify(exportData, null, 2);
+  const dataBlob = new Blob([dataStr], {type: 'application/json'});
+  const url = URL.createObjectURL(dataBlob);
+  
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = premium-data-.json;
+  link.click();
+  
+  logTest( Date premium exportate:  canale, 'success');
+}
+
+// Function to log test actions
+function logTest(message, type = 'info') {
+  const testLog = document.getElementById('test-log');
+  if (!testLog) return;
+  
+  const timestamp = new Date().toLocaleTimeString();
+  const colors = {
+    info: '#007bff',
+    success: '#28a745', 
+    error: '#dc3545',
+    warning: '#ffc107'
+  };
+  
+  const logEntry = document.createElement('div');
+  logEntry.style.color = colors[type] || colors.info;
+  logEntry.style.marginBottom = '0.25rem';
+  logEntry.innerHTML = [] ;
+  
+  testLog.appendChild(logEntry);
+  testLog.scrollTop = testLog.scrollHeight;
+}
+
+// Function to clear test log
+function clearTestLog() {
+  const testLog = document.getElementById('test-log');
+  if (testLog) {
+    testLog.innerHTML = '<div style="color: #28a745;"> Log curățat - Gata pentru teste noi...</div>';
+  }
+}
+
+// Initialize admin premium testing when tab is shown
+function initAdminPremiumTest() {
+  populateAdminChannelSelect();
+  updatePremiumStats();
+  logTest(' Sistem de teste premium inițializat cu succes!', 'success');
+}
+
+// Add event listener for when admin panel loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize premium testing when admin tab is clicked
+  const originalShowAdminTab = window.showAdminTab;
+  window.showAdminTab = function(tabName) {
+    if (originalShowAdminTab) {
+      originalShowAdminTab(tabName);
+    }
+    
+    if (tabName === 'premium-test') {
+      setTimeout(initAdminPremiumTest, 100);
+    }
+  };
+});
