@@ -2508,3 +2508,271 @@ function initializeChannelSettings() {
   
   console.log('✅ Channel settings initialized successfully');
 }
+
+// === PREMIUM PAYMENT SYSTEM ===
+let selectedPackage = null;
+let selectedPrice = null;
+
+// Function to select a package
+function selectPackage(packageType, price) {
+  selectedPackage = packageType;
+  selectedPrice = price;
+  
+  // Show payment modal
+  document.getElementById('payment-modal').style.display = 'flex';
+  
+  // Update package display
+  const packageNames = {
+    basic: ' BASIC',
+    premium: ' PREMIUM', 
+    vip: ' VIP'
+  };
+  
+  document.getElementById('package-name-display').textContent = packageNames[packageType];
+  document.getElementById('package-price-display').textContent = price;
+  
+  // Populate channel select with user's channels
+  populateChannelSelect();
+}
+
+// Function to populate channel select dropdown
+function populateChannelSelect() {
+  const channelSelect = document.getElementById('channel-select');
+  const currentUser = localStorage.getItem('currentUser');
+  
+  if (!currentUser) {
+    channelSelect.innerHTML = '<option value="">Trebuie să fii conectat...</option>';
+    return;
+  }
+  
+  const userChannels = getUserChannels(currentUser);
+  channelSelect.innerHTML = '<option value="">Selectează un canal...</option>';
+  
+  userChannels.forEach(channel => {
+    const option = document.createElement('option');
+    option.value = channel.id;
+    option.textContent = ${channel.title} ( membri);
+    channelSelect.appendChild(option);
+  });
+  
+  if (userChannels.length === 0) {
+    channelSelect.innerHTML = '<option value="">Nu ai canale adăugate...</option>';
+  }
+}
+
+// Function to get user's channels
+function getUserChannels(userEmail) {
+  const allChannels = JSON.parse(localStorage.getItem('channels') || '[]');
+  return allChannels.filter(channel => channel.addedBy === userEmail);
+}
+
+// Function to close payment modal
+function closePaymentModal() {
+  document.getElementById('payment-modal').style.display = 'none';
+  selectedPackage = null;
+  selectedPrice = null;
+}
+
+// Payment method selection
+document.addEventListener('DOMContentLoaded', function() {
+  const paymentMethodBtns = document.querySelectorAll('.payment-method-btn');
+  
+  paymentMethodBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      paymentMethodBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+});
+
+// Handle payment form submission
+document.addEventListener('DOMContentLoaded', function() {
+  const paymentForm = document.getElementById('payment-form');
+  
+  if (paymentForm) {
+    paymentForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      processPayment();
+    });
+  }
+});
+
+// Function to process payment
+function processPayment() {
+  const channelSelect = document.getElementById('channel-select');
+  const selectedChannelId = channelSelect.value;
+  
+  if (!selectedChannelId) {
+    alert('Te rog selectează un canal pentru promovare!');
+    return;
+  }
+  
+  const activePaymentMethod = document.querySelector('.payment-method-btn.active');
+  const paymentMethod = activePaymentMethod.dataset.method;
+  
+  // Show loading state
+  const payButton = document.querySelector('.btn-pay');
+  const originalText = payButton.textContent;
+  payButton.textContent = 'Se procesează...';
+  payButton.disabled = true;
+  
+  // Simulate payment processing
+  setTimeout(() => {
+    if (paymentMethod === 'stripe') {
+      // Redirect to Stripe Checkout (this would be real Stripe integration)
+      alert(Redirecționare către Stripe pentru plata de  RON...);
+      // window.location.href = https://checkout.stripe.com/pay/...;
+    } else if (paymentMethod === 'paypal') {
+      // Redirect to PayPal (this would be real PayPal integration)
+      alert(Redirecționare către PayPal pentru plata de  RON...);
+      // window.location.href = https://paypal.com/checkout/...;
+    }
+    
+    // For demo purposes, simulate successful payment
+    simulateSuccessfulPayment(selectedChannelId);
+    
+    // Reset button
+    payButton.textContent = originalText;
+    payButton.disabled = false;
+    
+  }, 2000);
+}
+
+// Function to simulate successful payment and upgrade channel
+function simulateSuccessfulPayment(channelId) {
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  const channelIndex = channels.findIndex(c => c.id === channelId);
+  
+  if (channelIndex !== -1) {
+    // Upgrade channel to premium status
+    channels[channelIndex].premiumType = selectedPackage;
+    channels[channelIndex].premiumExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+    channels[channelIndex].priority = selectedPackage === 'vip' ? 100 : selectedPackage === 'premium' ? 75 : 50;
+    
+    // Save updated channels
+    localStorage.setItem('channels', JSON.stringify(channels));
+    
+    // Close modal and show success
+    closePaymentModal();
+    alert( Plata a fost procesată cu succes! Canalul tău este acum  pentru următoarele 30 de zile.);
+    
+    // Refresh the page to show updated channel status
+    location.reload();
+  }
+}
+
+// Function to check and display premium badges
+function displayPremiumBadges() {
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  
+  channels.forEach(channel => {
+    if (channel.premiumType && new Date(channel.premiumExpiry) > new Date()) {
+      const channelCards = document.querySelectorAll('.channel-card');
+      channelCards.forEach(card => {
+        const titleElement = card.querySelector('.channel-title');
+        if (titleElement && titleElement.textContent.includes(channel.title)) {
+          // Add premium badge
+          let badge = '';
+          switch(channel.premiumType) {
+            case 'basic':
+              badge = '<span class="premium-badge basic-badge"> PROMOVAT</span>';
+              break;
+            case 'premium':
+              badge = '<span class="premium-badge premium-badge"> PREMIUM</span>';
+              break;
+            case 'vip':
+              badge = '<span class="premium-badge vip-badge"> VIP</span>';
+              break;
+          }
+          
+          if (badge && !titleElement.innerHTML.includes('premium-badge')) {
+            titleElement.innerHTML += ' ' + badge;
+          }
+        }
+      });
+    }
+  });
+}
+
+// Initialize premium features on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Add premium badge styles to head
+  const premiumBadgeStyles = 
+    <style>
+    .premium-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      margin-left: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .basic-badge {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+    }
+    .premium-badge.premium-badge {
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      color: #333;
+    }
+    .vip-badge {
+      background: linear-gradient(135deg, #6f42c1, #8e44ad);
+      color: white;
+    }
+    </style>
+  ;
+  
+  document.head.insertAdjacentHTML('beforeend', premiumBadgeStyles);
+  
+  // Display premium badges after a short delay to ensure channels are loaded
+  setTimeout(displayPremiumBadges, 1000);
+});
+
+// TEMPORARY PREMIUM TRANSLATIONS - TO BE INTEGRATED
+const premiumTranslations = {
+  ro: {
+    promoteYourChannel: " Promovează-ți Canalul",
+    premiumDescription: "Alege pachetul potrivit pentru a-ți crește vizibilitatea",
+    basicPackage: " BASIC",
+    premiumPackage: " PREMIUM", 
+    vipPackage: " VIP",
+    perMonth: "/lună",
+    mostPopular: "CEL MAI POPULAR",
+    basicFeature1: " Prioritate medie în căutări",
+    basicFeature2: " Badge \"Promovat\"",
+    basicFeature3: " Statistici de bază",
+    basicFeature4: " Suport email",
+    chooseBasic: "Alege Basic",
+    premiumFeature1: " Prioritate MARE în căutări",
+    premiumFeature2: " Badge \"Premium\" cu stea",
+    premiumFeature3: " Apare în secțiunea \"Recomandate\"",
+    premiumFeature4: " Statistici avansate",
+    premiumFeature5: " Suport prioritar",
+    premiumFeature6: " Social media boost",
+    choosePremium: "Alege Premium",
+    vipFeature1: " PRIMUL în toate căutările",
+    vipFeature2: " Badge \"VIP\" cu coroană", 
+    vipFeature3: " Secțiune dedicată \"VIP\"",
+    vipFeature4: " Statistici complete + analytics",
+    vipFeature5: " Suport 24/7 dedicat",
+    vipFeature6: " Promovare pe social media",
+    vipFeature7: " Banner personal pe homepage",
+    chooseVip: "Alege VIP",
+    paymentSecure: " Plăți securizate prin Stripe  Anulezi oricând  Fără costuri ascunse",
+    confirmPayment: " Confirmă Plata",
+    channelToPromote: "Canal de promovat:",
+    selectChannel: "Selectează un canal...",
+    paymentMethod: "Metodă de plată:",
+    cancel: "Anulează",
+    payNow: "Plătește Acum"
+  }
+};
+
+// Extend main translations with premium translations
+Object.keys(premiumTranslations).forEach(lang => {
+  if (translations[lang]) {
+    Object.assign(translations[lang], premiumTranslations[lang]);
+  }
+});

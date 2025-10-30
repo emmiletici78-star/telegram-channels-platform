@@ -336,6 +336,125 @@
     </div>
   </div>
 
+  <!-- Premium Promotion Packages Section -->
+  <section id="premium-packages" class="premium-section">
+    <div class="premium-header">
+      <h2 data-i18n="promoteYourChannel">🚀 Promovează-ți Canalul</h2>
+      <p data-i18n="premiumDescription">Alege pachetul potrivit pentru a-ți crește vizibilitatea</p>
+    </div>
+    
+    <div class="packages-grid">
+      <!-- Basic Package -->
+      <div class="package-card basic-package">
+        <div class="package-header">
+          <h3 data-i18n="basicPackage">📈 BASIC</h3>
+          <div class="package-price">
+            <span class="price">99</span>
+            <span class="currency">RON</span>
+            <span class="period" data-i18n="perMonth">/lună</span>
+          </div>
+        </div>
+        <ul class="package-features">
+          <li data-i18n="basicFeature1">✓ Prioritate medie în căutări</li>
+          <li data-i18n="basicFeature2">✓ Badge "Promovat"</li>
+          <li data-i18n="basicFeature3">✓ Statistici de bază</li>
+          <li data-i18n="basicFeature4">✓ Suport email</li>
+        </ul>
+        <button class="package-btn basic-btn" onclick="selectPackage('basic', 99)" data-i18n="chooseBasic">Alege Basic</button>
+      </div>
+
+      <!-- Premium Package -->
+      <div class="package-card premium-package featured">
+        <div class="popular-badge" data-i18n="mostPopular">CEL MAI POPULAR</div>
+        <div class="package-header">
+          <h3 data-i18n="premiumPackage">⭐ PREMIUM</h3>
+          <div class="package-price">
+            <span class="price">199</span>
+            <span class="currency">RON</span>
+            <span class="period" data-i18n="perMonth">/lună</span>
+          </div>
+        </div>
+        <ul class="package-features">
+          <li data-i18n="premiumFeature1">✓ Prioritate MARE în căutări</li>
+          <li data-i18n="premiumFeature2">✓ Badge "Premium" cu stea</li>
+          <li data-i18n="premiumFeature3">✓ Apare în secțiunea "Recomandate"</li>
+          <li data-i18n="premiumFeature4">✓ Statistici avansate</li>
+          <li data-i18n="premiumFeature5">✓ Suport prioritar</li>
+          <li data-i18n="premiumFeature6">✓ Social media boost</li>
+        </ul>
+        <button class="package-btn premium-btn" onclick="selectPackage('premium', 199)" data-i18n="choosePremium">Alege Premium</button>
+      </div>
+
+      <!-- VIP Package -->
+      <div class="package-card vip-package">
+        <div class="package-header">
+          <h3 data-i18n="vipPackage">👑 VIP</h3>
+          <div class="package-price">
+            <span class="price">399</span>
+            <span class="currency">RON</span>
+            <span class="period" data-i18n="perMonth">/lună</span>
+          </div>
+        </div>
+        <ul class="package-features">
+          <li data-i18n="vipFeature1">✓ PRIMUL în toate căutările</li>
+          <li data-i18n="vipFeature2">✓ Badge "VIP" cu coroană</li>
+          <li data-i18n="vipFeature3">✓ Secțiune dedicată "VIP"</li>
+          <li data-i18n="vipFeature4">✓ Statistici complete + analytics</li>
+          <li data-i18n="vipFeature5">✓ Suport 24/7 dedicat</li>
+          <li data-i18n="vipFeature6">✓ Promovare pe social media</li>
+          <li data-i18n="vipFeature7">✓ Banner personal pe homepage</li>
+        </ul>
+        <button class="package-btn vip-btn" onclick="selectPackage('vip', 399)" data-i18n="chooseVip">Alege VIP</button>
+      </div>
+    </div>
+
+    <div class="payment-info">
+      <p data-i18n="paymentSecure">🔒 Plăți securizate prin Stripe • Anulezi oricând • Fără costuri ascunse</p>
+    </div>
+  </section>
+
+  <!-- Payment Modal -->
+  <div id="payment-modal" class="modal" style="display:none;">
+    <div class="modal-content payment-modal-content">
+      <h3 data-i18n="confirmPayment">💳 Confirmă Plata</h3>
+      <div id="selected-package-info">
+        <div class="package-summary">
+          <h4 id="package-name-display"></h4>
+          <div class="package-price-display">
+            <span id="package-price-display"></span>
+            <span data-i18n="perMonth"> RON/lună</span>
+          </div>
+        </div>
+      </div>
+      
+      <form id="payment-form">
+        <div class="form-group">
+          <label data-i18n="channelToPromote">Canal de promovat:</label>
+          <select id="channel-select" required>
+            <option value="" data-i18n="selectChannel">Selectează un canal...</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label data-i18n="paymentMethod">Metodă de plată:</label>
+          <div class="payment-methods">
+            <button type="button" class="payment-method-btn active" data-method="stripe">
+              💳 Card Bancar
+            </button>
+            <button type="button" class="payment-method-btn" data-method="paypal">
+              🔵 PayPal
+            </button>
+          </div>
+        </div>
+        
+        <div class="form-buttons">
+          <button type="button" onclick="closePaymentModal()" class="btn-cancel" data-i18n="cancel">Anulează</button>
+          <button type="submit" class="btn-pay" data-i18n="payNow">Plătește Acum</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <p data-i18n="footerText">&copy; 2025 Promo Canale Telegram</p>
   </footer>
