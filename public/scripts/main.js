@@ -1667,7 +1667,7 @@ function loadAdminChannels() {
             <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem;">
               ${channel.category.join(', ')}
             </span>
-            ${pricePerMonth > 0 ? '<span style="background: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.3rem;">💰 ' + pricePerMonth + ' RON/lună</span>' : ''}
+            ${pricePerMonth > 0 ? '<span style="background: #27ae60; color: white; padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.8rem; margin-left: 0.3rem;">💰 ' + pricePerMonth + ' €/lună</span>' : ''}
           </div>
         </div>
         <div class="admin-item-actions">
@@ -2620,11 +2620,11 @@ function processPayment() {
   setTimeout(() => {
     if (paymentMethod === 'stripe') {
       // Redirect to Stripe Checkout (this would be real Stripe integration)
-      alert(`Redirecționare către Stripe pentru plata de ${selectedPrice} RON...`);
+      alert(`Redirecționare către Stripe pentru plata de ${selectedPrice}€...`);
       // window.location.href = `https://checkout.stripe.com/pay/...`;
     } else if (paymentMethod === 'paypal') {
       // Redirect to PayPal (this would be real PayPal integration)
-      alert(`Redirecționare către PayPal pentru plata de ${selectedPrice} RON...`);
+      alert(`Redirecționare către PayPal pentru plata de ${selectedPrice}€...`);
       // window.location.href = `https://paypal.com/checkout/...`;
     }
     
@@ -2760,7 +2760,7 @@ const premiumTranslations = {
     vipFeature6: "✓ Promovare pe social media",
     vipFeature7: "✓ Banner personal pe homepage",
     chooseVip: "Alege VIP",
-    paymentSecure: "🔒 Plăți securizate prin Stripe • Anulezi oricând • Fără costuri ascunse",
+    paymentSecure: "🔒 Plăți securizate prin Stripe • Anulezi oricând • Prețuri europene competitive",
     confirmPayment: "💳 Confirmă Plata",
     channelToPromote: "Canal de promovat:",
     selectChannel: "Selectează un canal...",
@@ -2796,7 +2796,7 @@ const premiumTranslations = {
     vipFeature6: "✓ Social media promotion",
     vipFeature7: "✓ Personal banner on homepage",
     chooseVip: "Choose VIP",
-    paymentSecure: "🔒 Secure payments via Stripe • Cancel anytime • No hidden costs",
+    paymentSecure: "🔒 Secure payments via Stripe • Cancel anytime • Competitive European prices",
     confirmPayment: "💳 Confirm Payment",
     channelToPromote: "Channel to promote:",
     selectChannel: "Select a channel...",
@@ -2832,7 +2832,7 @@ const premiumTranslations = {
     vipFeature6: "✓ Promoción en redes sociales",
     vipFeature7: "✓ Banner personal en homepage",
     chooseVip: "Elegir VIP",
-    paymentSecure: "🔒 Pagos seguros vía Stripe • Cancela cuando quieras • Sin costos ocultos",
+    paymentSecure: "🔒 Pagos seguros vía Stripe • Cancela cuando quieras • Precios europeos competitivos",
     confirmPayment: "💳 Confirmar Pago",
     channelToPromote: "Canal a promocionar:",
     selectChannel: "Selecciona un canal...",
@@ -2868,7 +2868,7 @@ const premiumTranslations = {
     vipFeature6: "✓ Promotion sur les réseaux sociaux",
     vipFeature7: "✓ Bannière personnelle sur la homepage",
     chooseVip: "Choisir VIP",
-    paymentSecure: "🔒 Paiements sécurisés via Stripe • Annulez à tout moment • Pas de coûts cachés",
+    paymentSecure: "🔒 Paiements sécurisés via Stripe • Annulez à tout moment • Prix européens compétitifs",
     confirmPayment: "💳 Confirmer le Paiement",
     channelToPromote: "Chaîne à promouvoir:",
     selectChannel: "Sélectionnez une chaîne...",
@@ -2904,7 +2904,7 @@ const premiumTranslations = {
     vipFeature6: "✓ Social Media Promotion",
     vipFeature7: "✓ Persönliches Banner auf Homepage",
     chooseVip: "VIP Wählen",
-    paymentSecure: "🔒 Sichere Zahlungen über Stripe • Jederzeit kündbar • Keine versteckten Kosten",
+    paymentSecure: "🔒 Sichere Zahlungen über Stripe • Jederzeit kündbar • Wettbewerbsfähige europäische Preise",
     confirmPayment: "💳 Zahlung Bestätigen",
     channelToPromote: "Zu bewerbender Kanal:",
     selectChannel: "Einen Kanal auswählen...",
