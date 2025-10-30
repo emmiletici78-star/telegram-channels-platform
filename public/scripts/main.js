@@ -2551,7 +2551,7 @@ function populateChannelSelect() {
   userChannels.forEach(channel => {
     const option = document.createElement('option');
     option.value = channel.id;
-    option.textContent = ${channel.title} ( membri);
+    option.textContent = `${channel.title} (${channel.subscribers} membri)`;
     channelSelect.appendChild(option);
   });
   
@@ -2620,12 +2620,12 @@ function processPayment() {
   setTimeout(() => {
     if (paymentMethod === 'stripe') {
       // Redirect to Stripe Checkout (this would be real Stripe integration)
-      alert(Redirecționare către Stripe pentru plata de  RON...);
-      // window.location.href = https://checkout.stripe.com/pay/...;
+      alert(`Redirecționare către Stripe pentru plata de ${selectedPrice} RON...`);
+      // window.location.href = `https://checkout.stripe.com/pay/...`;
     } else if (paymentMethod === 'paypal') {
       // Redirect to PayPal (this would be real PayPal integration)
-      alert(Redirecționare către PayPal pentru plata de  RON...);
-      // window.location.href = https://paypal.com/checkout/...;
+      alert(`Redirecționare către PayPal pentru plata de ${selectedPrice} RON...`);
+      // window.location.href = `https://paypal.com/checkout/...`;
     }
     
     // For demo purposes, simulate successful payment
@@ -2654,7 +2654,7 @@ function simulateSuccessfulPayment(channelId) {
     
     // Close modal and show success
     closePaymentModal();
-    alert( Plata a fost procesată cu succes! Canalul tău este acum  pentru următoarele 30 de zile.);
+    alert(`✅ Plata a fost procesată cu succes! Canalul tău este acum ${selectedPackage.toUpperCase()} pentru următoarele 30 de zile.`);
     
     // Refresh the page to show updated channel status
     location.reload();
@@ -2697,7 +2697,7 @@ function displayPremiumBadges() {
 // Initialize premium features on page load
 document.addEventListener('DOMContentLoaded', function() {
   // Add premium badge styles to head
-  const premiumBadgeStyles = 
+  const premiumBadgeStyles = `
     <style>
     .premium-badge {
       display: inline-block;
@@ -2722,7 +2722,7 @@ document.addEventListener('DOMContentLoaded', function() {
       color: white;
     }
     </style>
-  ;
+  `;
   
   document.head.insertAdjacentHTML('beforeend', premiumBadgeStyles);
   
