@@ -1,4 +1,4 @@
-﻿console.log('🚀 JavaScript loaded successfully!'); // Debug
+﻿console.log('🚀 JavaScript loaded successfully!');
 
 // === INTERNATIONALIZATION SYSTEM ===
 const translations = {
@@ -354,50 +354,60 @@ function updateUI() {
   // Update all elements with data-i18n attribute
   const elementsWithI18n = document.querySelectorAll('[data-i18n]');
   console.log('🎯 Found elements with data-i18n:', elementsWithI18n.length);
-  
+
   elementsWithI18n.forEach(element => {
     const key = element.getAttribute('data-i18n');
-    console.log(`🔧 Updating ${key}: "${element.textContent}" -> "${t[key] || 'NOT FOUND'}"`);
-    if (t[key]) {
+    if (!t[key]) return;
+    // For input/textarea: update placeholder
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+      element.placeholder = t[key];
+    } else if (element.tagName === 'BUTTON') {
+      // For button: update textContent doar dacă nu are value explicit
+      if (!element.hasAttribute('value')) {
+        element.textContent = t[key];
+      }
+    } else if (element.tagName === 'OPTION') {
+      // For select options
+      element.textContent = t[key];
+    } else if (element.tagName === 'LABEL') {
+      element.textContent = t[key];
+    } else if (key === 'emailWarning' || key === 'selectCategory') {
+      // Pentru texte cu markup HTML (ex: emailWarning)
+      element.innerHTML = t[key];
+    } else {
+      // Default: update textContent
       element.textContent = t[key];
     }
   });
-  
-  // Update select options
-  document.querySelectorAll('select option[data-i18n]').forEach(option => {
-    const key = option.getAttribute('data-i18n');
-    if (t[key]) {
-      option.textContent = t[key];
-    }
-  });
-  
-  // Update language selector
-  document.getElementById('language-selector').value = currentLanguage;
-  
-  // Update input placeholders
-  document.querySelectorAll('input[data-i18n]').forEach(input => {
-    const key = input.getAttribute('data-i18n');
-    if (t[key]) {
-      input.placeholder = t[key];
-    }
-  });
-  
+
+  // Update language selector value
+  const langSel = document.getElementById('language-selector');
+  if (langSel) langSel.value = currentLanguage;
+
   // Update featured channels section title
   const featuredTitle = document.querySelector('#featured-channels-bottom h2');
   if (featuredTitle) {
     featuredTitle.textContent = t.featuredChannels;
   }
-  
+
   // Update featured channels "members" text
   document.querySelectorAll('.channel-subscribers').forEach(element => {
     const text = element.textContent;
     const number = text.replace(/\s+membri|\s+members|\s+miembros|\s+membres|\s+Mitglieder/g, '');
     element.textContent = `${number} ${t.members}`;
   });
-  
+
   // Update category message
   updateCategoryMessage();
-  
+
+  // Update document title
+  if (t.siteTitle) {
+    document.title = t.siteTitle + ' - ' + t[currentLanguage === 'ro' ? 'romanian' : 
+      currentLanguage === 'en' ? 'english' :
+      currentLanguage === 'es' ? 'spanish' :
+      currentLanguage === 'fr' ? 'french' : 'german'];
+  }
+
   console.log('✅ UI updated successfully');
 }
 
@@ -1244,9 +1254,34 @@ console.log('📺 defaultChannels loaded:', defaultChannels.length, 'channels');
 // Continue adding more channels to reach 50 for each category...
 
 function getChannels() {
-  // Returnează direct defaultChannels - simplu și funcțional
-  return defaultChannels;
+  const byTitle = new Map();
+  defaultChannels.forEach(ch => byTitle.set(ch.title, { ...ch }));
+
+  try {
+    const stored = JSON.parse(localStorage.getItem('channels') || '[]');
+    if (Array.isArray(stored)) {
+      stored.forEach(ch => {
+        if (ch && ch.title) byTitle.set(ch.title, ch);
+      });
+    }
+  } catch (e) {
+    console.warn('Nu s-au putut încărca canalele salvate:', e);
+  }
+
+  try {
+    const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+    if (Array.isArray(userChannels)) {
+      userChannels.forEach(ch => {
+        if (ch && ch.title) byTitle.set(ch.title, ch);
+      });
+    }
+  } catch (e) {
+    console.warn('Nu s-au putut încărca canalele utilizatorilor:', e);
+  }
+
+  return Array.from(byTitle.values());
 }
+
 function saveChannels(channels) {
   localStorage.setItem('channels', JSON.stringify(channels));
 }
@@ -1288,8 +1323,16 @@ function deleteChannel(realIdx) {
     return;
   }
   if (!confirm('Sigur vrei să ștergi acest canal?')) return;
-  channels.splice(realIdx, 1);
-  saveChannels(channels);
+
+  const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+  const nextUserChannels = userChannels.filter(c => c.title !== channel.title);
+  localStorage.setItem('user_channels', JSON.stringify(nextUserChannels));
+
+  const stored = JSON.parse(localStorage.getItem('channels') || '[]');
+  if (Array.isArray(stored) && stored.some(c => c.title === channel.title)) {
+    saveChannels(stored.filter(c => c.title !== channel.title));
+  }
+
   showCategory(currentCategory);
 }
 
@@ -1413,20 +1456,22 @@ function renderChannelsByCategory() {
   });
   const sorted = getSortedChannels(filtered, currentCategory);
 
-  // For 'all' show message to select a category
-  if (currentCategory === 'all') {
-    const t = translations[currentLanguage];
-    list.innerHTML = `<p style="text-align:center; padding: 3rem; font-size: 1.2rem; color: #666;">${t.selectCategory}</p>`;
-    return;
-  }
-
-  // For other categories - list view
   if (sorted.length === 0) {
     list.innerHTML = '<p style="text-align:center;">Nu există canale în această categorie.</p>';
     return;
   }
 
-  sorted.forEach(channel => {
+  let toRender = sorted;
+  if (currentCategory === 'all' && sorted.length > 50) {
+    const t = translations[currentLanguage] || translations.ro;
+    const hint = document.createElement('p');
+    hint.style.cssText = 'text-align:center;padding:1rem 1rem 0;font-size:1rem;color:#666;';
+    hint.innerHTML = t.selectCategory;
+    list.appendChild(hint);
+    toRender = sorted.slice(0, 50);
+  }
+
+  toRender.forEach(channel => {
     const canDelete = logged && channel.owner === logged;
     const card = document.createElement('div');
     card.className = 'channel-card';
@@ -1442,48 +1487,65 @@ function renderChannelsByCategory() {
     list.appendChild(card);
   });
   
-  console.log('🎯 renderChannelsByCategory finished - channels rendered:', sorted.length);
+  console.log('🎯 renderChannelsByCategory finished - channels rendered:', toRender.length);
 }
 
 // --- Auth ---
 function register() {
   const email = document.getElementById('reg-email').value.trim().toLowerCase();
   const pass = document.getElementById('reg-password').value;
-  if (!email || !pass) return alert('Completează toate câmpurile!');
-  if (!validateEmail(email)) return alert('❌ Email invalid!\n\n✅ Folosește un email REAL:\n• nume.prenume@gmail.com\n• contact@yahoo.com\n• admin@company.ro\n\n❌ NU acceptăm:\n• 1111@gmail.com (doar cifre)\n• test@fake.com (domenii fake)');
-  if (localStorage.getItem('user_' + email)) return alert('Emailul există deja!');
+  let debugMsg = `\n[DEBUG REGISTER]\nEmail: ${email}\nParola: ${pass}`;
+  if (!email || !pass) {
+    debugMsg += '\nStatus: Câmpuri lipsă';
+    return alert('Completează toate câmpurile!' + debugMsg);
+  }
+  if (!validateEmail(email)) {
+    debugMsg += '\nStatus: Email invalid';
+    return alert('❌ Email invalid!\n\n✅ Folosește un email REAL:\n• nume.prenume@gmail.com\n• contact@yahoo.com\n• admin@company.ro\n\n❌ NU acceptăm:\n• 1111@gmail.com (doar cifre)\n• test@fake.com (domenii fake)' + debugMsg);
+  }
+  if (localStorage.getItem('user_' + email)) {
+    debugMsg += '\nStatus: Email deja înregistrat';
+    return alert('Emailul există deja!' + debugMsg);
+  }
   localStorage.setItem('user_' + email, pass);
   // store metadata for the user (verified flag)
   const meta = { verified: false, createdAt: new Date().toISOString() };
   localStorage.setItem('user_meta_' + email, JSON.stringify(meta));
-  alert('Cont creat! Acum te poți loga.');
+  debugMsg += '\nStatus: Cont creat cu succes';
+  alert('Cont creat! Acum te poți loga.' + debugMsg);
   document.getElementById('reg-email').value = '';
   document.getElementById('reg-password').value = '';
 }
+window.register = register;
 function login() {
   const email = document.getElementById('login-email').value.trim().toLowerCase();
   const pass = document.getElementById('login-password').value;
-  
-  console.log('Login attempt:', email, pass); // Debug
-  
+
+  // DEBUG vizibil pe ecran
+  let debugMsg = `\n[DEBUG LOGIN]\nEmail: ${email}\nParola: ${pass}`;
+
   // Check for admin credentials
   if (email === 'admin@tgchannels.com' && pass === 'TgChannels2025Admin!') {
-    console.log('Admin login successful'); // Debug
+    debugMsg += '\nStatus: ADMIN OK';
     localStorage.setItem('logged_user', email);
     localStorage.setItem('is_admin', 'true');
     showUser();
-    alert('✅ Logat ca ADMIN cu succes!');
+    alert('✅ Logat ca ADMIN cu succes!' + debugMsg);
     return;
+  } else {
+    debugMsg += '\nStatus: NU e admin';
   }
-  
+
   // Check for regular user
   if (localStorage.getItem('user_' + email) === pass) {
+    debugMsg += '\nStatus: USER OK';
     localStorage.setItem('logged_user', email);
     localStorage.removeItem('is_admin');
     showUser();
-    alert('✅ Logat ca utilizator normal!');
+    alert('✅ Logat ca utilizator normal!' + debugMsg);
   } else {
-    alert('Date incorecte!');
+    debugMsg += '\nStatus: Date incorecte';
+    alert('Date incorecte!' + debugMsg);
   }
 }
 function logout() {
@@ -1514,7 +1576,7 @@ function showUser() {
   if (adminControls) adminControls.style.display = isAdmin ? 'block' : 'none';
   if (adminStatsSection) adminStatsSection.style.display = isAdmin ? 'block' : 'none';
   
-  document.getElementById('admin-panel').style.display = 'none'; // Hidden by default
+  document.getElementById('admin-panel').style.display = isAdmin ? 'block' : 'none';
   
   // Update admin stats if admin is logged in
   if (isAdmin) {
@@ -1672,7 +1734,7 @@ function loadAdminChannels() {
         </div>
         <div class="admin-item-actions">
           <button class="edit" onclick="editChannel('${channel.title}')">✏️ Edit</button>
-          <button class="delete" onclick="deleteChannel('${channel.title}')">🗑️ Delete</button>
+          <button class="delete" onclick="deleteChannelByTitle('${channel.title.replace(/'/g, "\\'")}')">🗑️ Delete</button>
         </div>
       </div>
     `;
@@ -1960,13 +2022,92 @@ function closeEditModal() {
   }
 }
 
-function deleteChannel(title) {
+function deleteChannelByTitle(title) {
   if (confirm(`🗑️ Sigur vrei să ștergi canalul "${title}"?`)) {
-    // Șterge și setările custom
     localStorage.removeItem('channelSettings_' + title);
-    alert(`🗑️ Canalul "${title}" a fost șters!`);
+
+    const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+    localStorage.setItem(
+      'user_channels',
+      JSON.stringify(userChannels.filter(c => c.title !== title))
+    );
+
+    const stored = JSON.parse(localStorage.getItem('channels') || '[]');
+    if (Array.isArray(stored)) {
+      saveChannels(stored.filter(c => c.title !== title));
+    }
+
+    alert(`🗑️ Canalul "${title}" a fost șters din listele salvate!`);
+    loadAdminChannels();
+    showCategory(currentCategory);
+  }
+}
+
+let currentEditingChannel = null;
+
+function closeEditChannelModal() {
+  const modal = document.getElementById('edit-channel-modal');
+  if (modal) modal.style.display = 'none';
+  currentEditingChannel = null;
+}
+
+function saveChannelEdit() {
+  if (!currentEditingChannel) {
+    alert('❌ Eroare: Nu există canal selectat pentru editare!');
+    return;
+  }
+
+  const title = document.getElementById('edit-channel-title').value.trim();
+  const desc = document.getElementById('edit-channel-desc').value.trim();
+  const url = document.getElementById('edit-channel-url').value.trim();
+  const logo = document.getElementById('edit-channel-logo').value.trim();
+  const categorySelect = document.getElementById('edit-channel-category');
+  const selectedCategories = Array.from(categorySelect.selectedOptions).map(opt => opt.value);
+
+  if (!title || !desc || !url) {
+    alert('❌ Completează toate câmpurile obligatorii!');
+    return;
+  }
+  if (!/^https:\/\/t\.me\//.test(url)) {
+    alert('❌ Link-ul trebuie să fie de forma https://t.me/...');
+    return;
+  }
+  if (selectedCategories.length === 0) {
+    alert('❌ Selectează cel puțin o categorie!');
+    return;
+  }
+
+  const originalTitle = currentEditingChannel.title;
+  const updated = {
+    ...currentEditingChannel,
+    title,
+    desc,
+    url,
+    logo: logo || currentEditingChannel.logo,
+    category: selectedCategories
+  };
+
+  if (currentEditingChannel.owner) {
+    const userChannels = JSON.parse(localStorage.getItem('user_channels') || '[]');
+    const idx = userChannels.findIndex(c => c.title === originalTitle);
+    if (idx >= 0) {
+      userChannels[idx] = updated;
+      localStorage.setItem('user_channels', JSON.stringify(userChannels));
+    }
+  } else {
+    const overrides = JSON.parse(localStorage.getItem('channels') || '[]');
+    const overrideIdx = overrides.findIndex(c => c.title === originalTitle);
+    if (overrideIdx >= 0) overrides[overrideIdx] = updated;
+    else overrides.push(updated);
+    saveChannels(overrides);
+  }
+
+  closeEditChannelModal();
+  showCategory(currentCategory);
+  if (document.getElementById('admin-panel')?.style.display !== 'none') {
     loadAdminChannels();
   }
+  alert('✅ Canalul a fost actualizat cu succes!');
 }
 
 function banUser(email) {
@@ -2459,22 +2600,31 @@ function displayFeaturedChannelsBottom() {
     return;
   }
   
-  console.log('🔥 Creating HTML for channels:', featuredChannels.map(c => c.name));
+  console.log('🔥 Creating HTML for channels:', featuredChannels.map(c => c.title));
   
-  const channelsHtml = featuredChannels.map(channel => `
+  const t = translations[currentLanguage] || translations.ro;
+  const channelsHtml = featuredChannels.map(channel => {
+    const categories = Array.isArray(channel.category)
+      ? channel.category.join(', ')
+      : (channel.category || '');
+    const logo = channel.logo || 'https://cdn-icons-png.flaticon.com/512/2111/2111646.png';
+    const memberMatch = (channel.desc || '').match(/([\d.,]+)\s*(?:[KMk])?\s*membri/i);
+    const members = memberMatch ? memberMatch[1] : '—';
+    return `
     <div class="channel-card">
-      <img class="channel-logo" src="https://cdn-icons-png.flaticon.com/512/825/825519.png" alt="${channel.name}">
+      <img class="channel-logo" src="${logo}" alt="${channel.title}">
       <div class="channel-info">
-        <div class="channel-title">${channel.name}</div>
-        <div class="channel-desc">${channel.description}</div>
+        <div class="channel-title">${channel.title}</div>
+        <div class="channel-desc">${channel.desc}</div>
         <div class="channel-meta">
-          <span class="channel-subscribers">${channel.subscribers} membri</span>
-          <span class="channel-category">${channel.category}</span>
+          <span class="channel-subscribers">${members} ${t.members}</span>
+          <span class="channel-category">${categories}</span>
         </div>
-        <a class="channel-link" href="${channel.link}" target="_blank">Vezi canalul</a>
+        <a class="channel-link" href="${channel.url}" target="_blank" rel="noopener">${t.viewChannel}</a>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
   
   console.log('📝 Generated HTML length:', channelsHtml.length);
   console.log('🎯 Setting innerHTML...');
@@ -2933,7 +3083,7 @@ function populateAdminChannelSelect() {
     const option = document.createElement('option');
     option.value = index;
     const premiumText = channel.premiumType ?  [] : '';
-    option.textContent = ${channel.title} ( membri);
+  option.textContent = `${channel.title} (${channel.desc.replace(/[^\d]+/g, '')} membri)`;
     select.appendChild(option);
   });
 }
@@ -2970,8 +3120,8 @@ function adminUpgradeChannel(packageType) {
   // Save changes
   localStorage.setItem('channels', JSON.stringify(channels));
   
-  logTest( Canal "" upgradeat de la  la , 'success');
-  logTest( Preț: €/lună, Prioritate: , 'info');
+  logTest(`Canal "${channel.title}" upgradeat de la ${oldType} la ${packageType}`, 'success');
+  logTest(`Preț: ${channel.pricePerMonth} €/lună, Prioritate: ${channel.priority}`, 'info');
   
   // Refresh displays
   populateAdminChannelSelect();
@@ -2982,15 +3132,15 @@ function adminUpgradeChannel(packageType) {
 
 // Function to test payment flow
 function testPaymentFlow(packageType, price) {
-  logTest( Inițiez test plată pentru pachetul  - €, 'info');
+  logTest(`Inițiez test plată pentru pachetul ${packageType} - ${price}€`, 'info');
   
   // Simulate the payment process
   setTimeout(() => {
-    logTest( Simulez redirecționare către Stripe pentru €..., 'info');
+  logTest(`Simulez redirecționare către Stripe pentru ${price}€...`, 'info');
     
     setTimeout(() => {
-      logTest( Plata de € procesată cu succes! (SIMULARE), 'success');
-      logTest( Canal upgradeat la  pentru 30 zile, 'success');
+  logTest(`Plata de ${price}€ procesată cu succes! (SIMULARE)`, 'success');
+  logTest(`Canal upgradeat la ${packageType} pentru 30 zile`, 'success');
       
       // Actually upgrade a test channel if available
       const channels = JSON.parse(localStorage.getItem('channels') || '[]');
@@ -3014,7 +3164,7 @@ function showAllBadges() {
   ];
   
   badgeExamples.forEach(badge => {
-    logTest(<span style="background: ; color: white; padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem;"></span> - Badge , 'info');
+    logTest(`<span style='background: ${badge.color}; color: white; padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem;'>${badge.text}</span> - Badge ${badge.type}`, 'info');
   });
   
   // Add badges to existing channels for demo
@@ -3074,7 +3224,7 @@ function updatePremiumStats() {
   document.getElementById('vip-count').textContent = vipCount;
   document.getElementById('revenue-estimate').textContent = totalRevenue;
   
-  logTest( Statistici actualizate:  canale premium, €/lună, 'info');
+  logTest(`Statistici actualizate: ${basicCount + premiumCount + vipCount} canale premium, ${totalRevenue} €/lună`, 'info');
 }
 
 // Function to reset all premium subscriptions
@@ -3099,7 +3249,7 @@ function resetAllPremium() {
   
   localStorage.setItem('channels', JSON.stringify(channels));
   
-  logTest(  canale resetate la starea normală, 'warning');
+  logTest(`${resetCount} canale resetate la starea normală`, 'warning');
   
   // Refresh all displays
   populateAdminChannelSelect();
@@ -3124,14 +3274,14 @@ function simulateRevenueMonth() {
   scenarios.forEach((scenario, index) => {
     setTimeout(() => {
       totalRevenue += scenario.revenue;
-      logTest( Ziua :  (+€), 'success');
-      logTest( Venit cumulat: €, 'info');
+  logTest(`Ziua ${scenario.day}: ${scenario.action} (+${scenario.revenue}€)`, 'success');
+  logTest(`Venit cumulat: ${totalRevenue}€`, 'info');
     }, (index + 1) * 800);
   });
   
   setTimeout(() => {
-    logTest( TOTAL LUNĂ: € din promovări premium!, 'success');
-    logTest( Proiecție anuală: € ( RON), 'success');
+  logTest(`TOTAL LUNĂ: ${totalRevenue}€ din promovări premium!`, 'success');
+  logTest(`Proiecție anuală: ${totalRevenue * 12}€ (~${(totalRevenue * 12 * 5).toLocaleString()} RON)`, 'success');
   }, scenarios.length * 800 + 500);
 }
 
@@ -3158,10 +3308,10 @@ function exportPremiumData() {
   
   const link = document.createElement('a');
   link.href = url;
-  link.download = premium-data-.json;
+  link.download = `premium-data-${new Date().toISOString().slice(0,10)}.json`;
   link.click();
   
-  logTest( Date premium exportate:  canale, 'success');
+  logTest(`Date premium exportate: ${premiumChannels.length} canale`, 'success');
 }
 
 // Function to log test actions
@@ -3180,7 +3330,7 @@ function logTest(message, type = 'info') {
   const logEntry = document.createElement('div');
   logEntry.style.color = colors[type] || colors.info;
   logEntry.style.marginBottom = '0.25rem';
-  logEntry.innerHTML = [] ;
+  logEntry.innerHTML = `${timestamp} — ${message}`;
   
   testLog.appendChild(logEntry);
   testLog.scrollTop = testLog.scrollHeight;
